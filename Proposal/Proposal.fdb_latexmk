@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex Proposal"] 0 "Proposal.aux" "Proposal.bbl" "Proposal" 1772650757.94671 -1
+["bibtex Proposal"] 0 "Proposal.aux" "Proposal.bbl" "Proposal" 1772657918.99042 -1
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/bibtex/bib/feupphdteses/references.bib" 1366811700 2206 985e03fb36d872d306e76cfacc160693 ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/plain.bst" 1291864736 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "Proposal.aux" 1772650756 642 f71e708f76f207a9a3adebe561a90db6 "pdflatex"
+  "Proposal.aux" 1772657917 642 f71e708f76f207a9a3adebe561a90db6 "pdflatex"
   (generated)
   "Proposal.bbl"
   "Proposal.blg"
   (rewritten before read)
-["pdflatex"] 1772650755.56075 "c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Proposal/Proposal.tex" "Proposal.pdf" "Proposal" 1772650757.9475 0
+["pdflatex"] 1772657916.38328 "c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Proposal/Proposal.tex" "Proposal.pdf" "Proposal" 1772657918.9917 0
   "C:/Users/Joshua/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1772648574 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/Joshua/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1772647969 13333970 0e67918d4f2f76e2330703e2c99fc585 ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -94,11 +94,11 @@
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/units/nicefrac.sty" 1469029150 4163 0462ee5ab265cf59dc15a41a3b883101 ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "Proposal.aux" 1772650756 642 f71e708f76f207a9a3adebe561a90db6 "pdflatex"
+  "Proposal.aux" 1772657917 642 f71e708f76f207a9a3adebe561a90db6 "pdflatex"
   "Proposal.bbl" 1772649937 52 0eba253fc001332e731e8aba3f23127b "bibtex Proposal"
-  "Proposal.out" 1772650756 448 a47c28327c3cfba67c151dbe3d054118 "pdflatex"
-  "Proposal.tex" 1772650754 5279 fcfca6cdc2b17ae0da588d4c1b55357e ""
-  "c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Proposal/Proposal.tex" 1772650754 5279 fcfca6cdc2b17ae0da588d4c1b55357e ""
+  "Proposal.out" 1772657917 448 a47c28327c3cfba67c151dbe3d054118 "pdflatex"
+  "Proposal.tex" 1772657915 7122 9769dc116303c1e12ea9c084e09c537c ""
+  "c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Proposal/Proposal.tex" 1772657915 7122 9769dc116303c1e12ea9c084e09c537c ""
   "neurips_2021.sty" 1772648396 11925 4145e102565b1e11c4b1f009af7dd86e ""
   (generated)
   "Proposal.aux"

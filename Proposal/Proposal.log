@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.4)  4 MAR 2026 13:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.4)  4 MAR 2026 15:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -486,17 +486,17 @@ Package rerunfilecheck Info: File `Proposal.out' has not changed.
 (rerunfilecheck)             Checksum: A47C28327C3CFBA67C151DBE3D054118;448.
  ) 
 Here is how much of TeX's memory you used:
- 13074 strings out of 467871
- 206597 string characters out of 5417893
- 651782 words of memory out of 5000000
- 41721 multiletter control sequences out of 15000+600000
- 648295 words of font info for 87 fonts, out of 8000000 for 9000
+ 13095 strings out of 467871
+ 206815 string characters out of 5417893
+ 655782 words of memory out of 5000000
+ 41723 multiletter control sequences out of 15000+600000
+ 649011 words of font info for 98 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,79p,1100b,457s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb>
-Output written on Proposal.pdf (2 pages, 57148 bytes).
+Output written on Proposal.pdf (2 pages, 59434 bytes).
 PDF statistics:
- 57 PDF objects out of 1000 (max. 8388607)
- 9 named destinations out of 1000 (max. 500000)
+ 60 PDF objects out of 1000 (max. 8388607)
+ 12 named destinations out of 1000 (max. 500000)
  26145 words of extra memory for PDF output out of 29859 (max. 10000000)
 

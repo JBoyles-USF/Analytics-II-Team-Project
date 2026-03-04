@@ -82,9 +82,37 @@ Keep it concise (typically 150–250 words).
 
 % Introduction (15%)
 % It should clearly state the problem being addressed and why it is important.
+% From ChatGPT: Introduce the research problem, motivation, and contributions of the paper.
 \section{Introduction}
-Introduce the research problem, motivation, and contributions of the paper.
 
+This project aims to utilize historical ball bearing manufacturing data to predict 
+defectiveness of manufactured parts and to understand which combinations of control 
+settings typically lead to defective production. The goal is to create an interpretable 
+model that accurately predicts whether a ball bearing will be classified as defective 
+after several destructive and non-destructive tests, based on a set of predictor variables.
+
+The dataset contains approximately 230,000 samples with 30 predictor variables. Each sample 
+is labeled as defective (class 1) or non-defective (class 0), which is the target variable 
+we aim to predict. By understanding the factors that contribute to defects, corrective 
+action can be taken on controllable system inputs to reduce future defects. Reduced defect 
+rates directly lower scrap, rework, resource, and labor costs in the manufacturing process.
+
+However, this problem presents several challenges: the dataset is large and high-dimensional, 
+the classes may be imbalanced (with relatively few defective samples), and manufacturing 
+processes can involve complex, nonlinear interactions between variables. Additionally, 
+interpretability is critical, as predictions must provide actionable insights for engineers 
+and management.
+
+In this project, we aim to:
+
+\begin{enumerate}
+    \item Develop an interpretable predictive model for classifying defective ball bearings.
+    \item Identify and analyze key process variables that most strongly influence defect rates.
+    \item Explore how the model’s insights can guide corrective actions to reduce defects and improve manufacturing efficiency.
+\end{enumerate}
+
+Together, these aims outline a plan to leverage historical manufacturing data for 
+actionable defect prediction and process improvement.
 
 
 % Related Work (15%)
