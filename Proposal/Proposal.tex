@@ -138,14 +138,14 @@ Building on these findings, our project systematically compares interpretable an
 \subsection*{Class Imbalance - Preferred Metrics}
 The dataset comprises 229,788 ball-bearing test records featuring 30 numerical predictors and a binary response variable. With only 458 defective samples, standard classifiers tend to favor the majority class; yielding high accuracy that can be misleading. In manufacturing, false negatives are more costly than false positives, as they can lead to diminished customer confidence, expensive product recalls, or liability lawsuits. Consequently, accuracy is not an appropriate metric. Instead, recall, precision, F1 Score, and the Area Under the Precision-Recall Curve (PR-AUC) are the primary metrics.
 
-Because the defective class represents only 0.2\% of the dataset, using Receiver Operating Characteristic Area Under Curve (ROC AUC) can overly estimate the performance. A study was conducted and proved that ROC AUC is not dependable if the true positive sample is less than 3\% of the total (Imani et al., 2024). PR AUC is preferred because it summarizes the precision and recall tradeoff across thresholds and reflects performance exclusively on the defective class, suitable for the case of missing a defect is far more consequential than flagging a non defective part. However, ROC AUC could still be considered to gauge the performance of baseline models.
+Because the defective class represents only 0.2\% of the dataset, using Receiver Operating Characteristic Area Under Curve (ROC AUC) can overly estimate the performance. A study was conducted and proved that ROC AUC is not dependable if the true positive sample is less than 3\% of the total \cite{imani2026roc}. PR AUC is preferred because it summarizes the precision and recall tradeoff across thresholds and reflects performance exclusively on the defective class, suitable for the case of missing a defect is far more consequential than flagging a non defective part. However, ROC AUC could still be considered to gauge the performance of baseline models.
 
 Using regular F1 score as a metric combines performance across all classes, which causes the majority class to dominate the result in imbalanced datasets, shown by this formula:
 $$F1_{regular} = 2 \cdot \frac{P_{overall} \cdot R_{overall}}{P_{overall} + R_{overall}}$$
 where $P_{overall}$ and $R_{overall}$ are precision and recall across both classes. Because these aggregated values are driven primarily by the majority class, a model can achieve a high regular F1 score even while performing poorly on the defective class.
 F1 per class, especially F1 minority avoids this masking effect by computing precision and recall only for the defective class:
 $$F1_{minority} = 2 \cdot \frac{P_{minority} \cdot R_{minority}}{P_{minority} + R_{minority}}$$
-The criticality of using F1 to detect the minority class in classification serves to aid in anomaly detection and identify the imbalance of the data set and its analysis (ScienceDirect, n.d.). Classification trained on imbalanced data is weak at predicting samples within the minority class. 
+The criticality of using F1 to detect the minority class in classification serves to aid in anomaly detection and identify the imbalance of the data set and its analysis \cite{sciencedirect_minority}. Classification trained on imbalanced data is weak at predicting samples within the minority class. 
 
 \subsection*{Class Imbalance - Modification on Training Data}
 To address the imbalance, four manipulation strategies are employed, each with its distinct trade-offs. Random Oversampling duplicates minority samples to improve recall, though it risks overfitting. Random Undersampling removes majority samples to balance the classes but may lead to information loss. Synthetic Minority Oversampling Technique (SMOTE) generates synthetic defective samples by interpolation to refine decision boundaries but may introduce noise if the minority class has high variance. Finally, Class-Weighted training adjusts the learning objective to penalize minority-class errors more heavily, shifting the decision boundary without altering the dataset. These methods are systematically evaluated by comparing performance metrics across the experimental design combinations.
@@ -242,7 +242,7 @@ We prioritize Recall and F1-minority to ensure rare defects are not overlooked.
 \begin{itemize}
     \item \textbf{Minority Class Sensitivity:} Prioritizing \textbf{Recall} and \textbf{F1-minority} to ensure rare defects are not overlooked.
     
-    \item \textbf{Metric Integrity:} Using \textbf{PR-AUC} to provide a truthful assessment, as \textbf{ROC-AUC} tends to be overly optimistic when the minority class is <3\% (Imani et al., 2024).
+    \item \textbf{Metric Integrity:} Using \textbf{PR-AUC} to provide a truthful assessment, as \textbf{ROC-AUC} tends to be overly optimistic when the minority class is <3\% \cite{imani2026roc}.
     
     \item \textbf{Architectural Complexity:} Quantifying the "cost" of transparency using specific indicators:
     \begin{itemize}
@@ -312,19 +312,6 @@ $90/05/05$ & & & & & & \\ \hline
 \bibliographystyle{plain}
 \begin{thebibliography}{9}
 
-\bibitem{imani2026roc}
-M.~Imani, M.~Joudaki, A.~Bagheri, and H.~R. Arabnia.
-\newblock Why {ROC-AUC} is misleading for highly imbalanced data: In-depth
-  evaluation of {MCC}, {F2-Score}, {H-Measure}, and {AUC}-based metrics across
-  diverse classifiers.
-\newblock {\em Technologies}, 14(1):54, 2026.
-
-\bibitem{sciencedirect_minority}
-ScienceDirect.
-\newblock Minority class.
-\newblock {\em ScienceDirect Topics}.
-\newblock Retrieved March 5, 2025.
-
 \bibitem{zahrani2020lasergrooving}
 E.~G. Zahrani, F.~Hojati, A.~Daneshi, B.~Azarhoushang, and J.~Wilde.
 \newblock Application of machine learning to predict the product quality and geometry in circular laser grooving process.
@@ -344,6 +331,19 @@ J.~Kafunah, M.~I. Ali, and J.~G. Breslin.
 B.~Liu, F.~Gao, and Y.~Li.
 \newblock Cost-sensitive YOLOv5 for detecting surface defects of industrial products.
 \newblock {\em Sensors}, 23:2610, 2023.
+
+\bibitem{imani2026roc}
+M.~Imani, M.~Joudaki, A.~Bagheri, and H.~R. Arabnia.
+\newblock Why {ROC-AUC} is misleading for highly imbalanced data: In-depth
+  evaluation of {MCC}, {F2-Score}, {H-Measure}, and {AUC}-based metrics across
+  diverse classifiers.
+\newblock {\em Technologies}, 14(1):54, 2026.
+
+\bibitem{sciencedirect_minority}
+ScienceDirect.
+\newblock Minority class.
+\newblock {\em ScienceDirect Topics}.
+\newblock Retrieved March 5, 2025.
 
 \end{thebibliography}
 
