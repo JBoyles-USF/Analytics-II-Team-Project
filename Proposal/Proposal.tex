@@ -119,7 +119,13 @@ actionable defect prediction and process improvement.
 % It should clearly distinguish what your proposed contribution from previous literature (e.g., a
 % 1-2 sentence summary of at least 3 closely related papers).
 \section{Related Work}
-Discuss prior research and explain how your work differs from or extends it.
+Machine learning has increasingly been applied to manufacturing systems for predictive quality monitoring and defect detection, where process and test measurements can be used to learn relationships between operating conditions and product quality outcomes. Zahrani et al.~\cite{zahrani2020lasergrooving} apply machine learning to predict groove quality and geometry in a circular laser-grooving process and show that data-driven models can capture nonlinear relationships between process parameters and final part characteristics, supporting predictive monitoring rather than purely reactive inspection.
+
+More recent studies extend this direction using stronger ensemble methods for rare-defect prediction in industrial environments. Geng et al.~\cite{geng2025ctgan_catboost} propose a framework for predicting internal cracks in continuous steel casting using CatBoost combined with synthetic tabular data generation (CTGAN), demonstrating improved detection of infrequent defect patterns in a real manufacturing context.
+
+A central challenge in manufacturing defect prediction is severe class imbalance: defective products may represent only a small fraction of observations, causing standard training and evaluation to favor the majority class and report high accuracy while missing rare failures. Kafunah et al.~\cite{kafunah2021imbalanced_fd} examine this issue in manufacturing fault detection and evaluate imbalance-aware strategies (e.g., oversampling and reweighting) to improve minority-class detection, reinforcing the importance of focusing on defect-class metrics such as precision, recall, and F1 rather than accuracy alone.
+
+Cost-sensitive learning provides a complementary approach by explicitly assigning higher penalties to misclassifying defective samples, reflecting the higher operational risk of false negatives in manufacturing. Liu et al.~\cite{liu2023cost_sensitive_yolov5} introduce a cost-sensitive defect detection framework that incorporates an explicit cost structure into the training objective to prioritize costly minority-class errors, reporting improved defect identification under imbalance. Motivated by these findings, our project systematically compares interpretable and ensemble models (logistic regression, decision trees, random forests, and boosting) under multiple imbalance-mitigation strategies, with particular emphasis on cost-sensitive random forests and minority-class performance metrics for defect detection in a highly imbalanced manufacturing dataset.
 
 
 
