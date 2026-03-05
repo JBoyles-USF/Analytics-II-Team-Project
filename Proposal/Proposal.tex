@@ -123,61 +123,140 @@ Discuss prior research and explain how your work differs from or extends it.
 
 
 
-% Model/Method (25%)
-% 1. It should contain the description of your research idea. You can use equations or sketches
-% to help explain the idea.
+\section*{Model and Method}
 
-% 2. It should contain a list of to-dos (having some time estimation could be helpful) that could
-% in principle make you finish the project. Here’s an example:
-% • Extended literature search and finishing related work section (3 hours)
-% • Finding appropriate datasets and converting them to same format (2 hours)
-% • Downloading xxx baseline and reproducing results of prior work (4 hours)
-% • Implementing the proposed model (4 hours)
-% • Running baselines on datasets and tweaking designs and or hyperparameters (4 hours)
-% • Making figures and tables (2 hours)
-% • Writing the project report (4 hours)
+\subsection*{Class Imbalance - Preferred Metrics}
+The dataset comprises 229,788 ball-bearing test records featuring 30 numerical predictors and a binary response variable. With only 458 defective samples, standard classifiers tend to favor the majority class, yielding high accuracy that can be misleading. In manufacturing, false negatives are more costly than false positives, as they can lead to diminished customer confidence, expensive product recalls, or liability lawsuits. 
 
-% You should almost always start from simple ideas and gradually add the complexity since
-% a research idea typically has to FAIL many times until it works. It is highly likely that the
-% project doesn’t go as planned. Therefore, with simple ideas, you could have the flexibility to
-% tweak and a higher chance of obtaining some conclusions in the end.
-\section{Model/Method}
-Describe your model, algorithm, or methodology.
+Consequently, accuracy is not an appropriate metric. Instead, recall, precision, F1 Score, and the Area Under the Precision-Recall Curve (PR-AUC) are the primary metrics. Because the defective class represents only 0.2\% of the dataset, using ROC AUC can overly estimate performance. A study proved ROC AUC is not dependable if the true positive sample is less than 3\% of the total (Imani et al., 2024). PR-AUC is preferred because it reflects performance exclusively on the defective class.
 
-Example equation:
-\begin{equation}
-    y = f(x; \theta)
-\end{equation}
+Using a regular F1 score can allow the majority class to dominate the result:
+$$F1_{regular} = 2 \cdot \frac{P_{overall} \cdot R_{overall}}{P_{overall} + R_{overall}}$$
+$F1_{minority}$ avoids this masking effect by computing metrics only for the defective class:
+$$F1_{minority} = 2 \cdot \frac{P_{minority} \cdot R_{minority}}{P_{minority} + R_{minority}}$$
 
-The dataset exhibits a severe class imbalance which is one of the challenges being faced.
-Out of the 229,788 observations, only 458 are defective, while 229,330 are non-defective.
-As illustrated in figure 1 below, this disparity often causes classifiers to favor the majority class.
-This can result in misleadingly high accuracy that masks manufacturing defects. Given that false negatives (missing a defect)
-are significantly more costly than false positives, precision and recall are the primary metrics for evaluating this process. 
+\subsection*{Class Imbalance - Modification on Training Data}
+To address the imbalance, four strategies are employed:
+\begin{itemize}
+    \item \textbf{Random Oversampling:} Duplicates minority samples to improve recall, but risks overfitting.
+    \item \textbf{Random Undersampling:} Removes majority samples to balance classes but may lead to information loss.
+    \item \textbf{SMOTE:} Generates synthetic defective samples by interpolation to refine decision boundaries.
+    \item \textbf{Class-Weighted training:} Adjusts the learning objective to penalize minority-class errors more heavily.
+\end{itemize}
 
-The modeling pipeline incorporates four class imbalance handling strategies:
+\subsection*{Model Considerations}
+We evaluate four primary models: Logistic Regression, Decision Tree, Random Forest, and AdaBoost/XGBoost.
 
-\begin{enumerate}
-    \item Random Oversampling.
-    \item Random Undersampling
-    \item Synthetic Minority Oversampling Technique (SMOTE)
-    \item Class weighted Training
-\end{enumerate}
-%Experiments Design (20%)The model
-% It should contain a list of to-do experiments (e.g., each experiment takes one subsection). One
-% should clearly describe reasons of the experiments. One should also put placeholder figures and
-% tables (with specifically designed axes, rows, columns, and so on). At last, one should write
-% down the goal and expected outcome of specific experiments.
+\subsubsection*{Logistic Regression}
+Logistic Regression models the probability that a bearing is defective:
+$$P(defective|x) = \sigma(\beta_{0} + \beta^{\top}x) = \frac{1}{1 + e^{-(\beta_{0} + \beta^{\top}x)}}$$
+Each coefficient $\beta_{j}$ represents the change in the log-odds of a defect associated with a one-unit increase in reading $j$.
 
-% Typically, in machine learning and related areas, one should have at least one main experiment
-% on a convincingly large real-world dataset to show that your proposed model/method
-% empirically works better than prior work. Moreover, one usually adds other experiments on
-% real-world datasets to analyze how important a specific model/method design is, i.e., the so-
-% called ablation study. One can also design special synthetic experiments to showcase the
-% benefits of the proposed model/method under certain (possibly extreme) conditions.
-\section{Experiments Design}
-Describe the experimental setup, datasets, evaluation metrics, and results.
-Include figures and tables as needed.
+\subsubsection*{Decision Trees}
+Decision Trees provide transparency through logical binary splits. Purity is measured using Gini Impurity:
+$$Gini(S) = \sum_{k \in \{0,1\}} p_{k}(1 - p_{k})$$
+A split into child nodes $S_{L}$ and $S_{R}$ is evaluated by the reduction in impurity:
+$$\Delta = Gini(S) - \left(\frac{|S_{L}|}{|S|}Gini(S_{L}) + \frac{|S_{R}|}{|S|}Gini(S_{R})\right)$$
+
+\subsubsection*{Random Forest}
+Random Forest aggregates many trees trained on bootstrap samples. The final prediction is obtained by majority vote:
+$$\hat{y} = mode\{\hat{y}^{(1)}, \hat{y}^{(2)}, \dots, \hat{y}^{(N)}\}$$
+To address imbalance, the \textit{Balanced Random Forest} variant is used, where each tree is trained on a balanced bootstrap sample to improve recall.
+
+\subsubsection*{Boosting}
+AdaBoost builds an ensemble of weak learners by reweighing training samples. Misclassified samples have their weights $w_{j}^{i}$ increased. The classifier's importance weight is:
+$$\alpha_{t} = \frac{1}{2} \ln\left(\frac{1 - \epsilon_{t}}{\epsilon_{t}}\right)$$
+Sample weights are updated as follows:
+$$w_{j}^{i+1} = \frac{w_{j}^{l}}{Z_{i}} \times \begin{cases} e^{-\alpha_{i}}, & C_{i}(x_{j}) = y_{j} \\ e^{\alpha_{i}}, & C_{i}(x_{j}) \neq y_{j} \end{cases}$$
+
+\subsection*{Experimental Design}
+The phase is structured into three components: Model Benchmark, Class Imbalance Strategy Ablation, and Data Split Comparison.
+
+\subsubsection*{Main Benchmark Analysis}
+We prioritize Recall and F1-minority to ensure rare defects are not overlooked.
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|l|c|c|c|c|l|c|c|}
+\hline
+\textbf{Model Family} & \textbf{Recall} & \textbf{F1-Min.} & \textbf{PR-AUC} & \textbf{ROC-AUC} & \textbf{Complexity Indicator} & \textbf{FN} & \textbf{FP} \\ \hline
+Logistic Regression & & & & & \# Coefficients & & \\ \hline
+Decision Tree & & & & & Tree Depth & & \\ \hline
+Balanced RF & & & & & \# Trees / Depth & & \\ \hline
+XGBoost/LightGBM & & & & & \# Estimators & & \\ \hline
+\end{tabular}}
+\caption{Benchmark Results Placeholder}
+\end{table}
+
+\subsubsection*{Data Split Comparison}
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+\textbf{Split Ratio} & \textbf{Recall} & \textbf{Precision} & \textbf{F1-Minority} & \textbf{PR-AUC} & \textbf{FN} & \textbf{FP} \\ \hline
+$70/15/15$ & & & & & & \\ \hline
+$80/10/10$ & & & & & & \\ \hline
+$90/05/05$ & & & & & & \\ \hline
+\end{tabular}
+\caption{Model Stability Across Split Ratios}
+\end{table}
+
+\subsection*{Appendix: Python Implementation}
+\begin{small}
+\begin{verbatim}
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from imblearn.pipeline import Pipeline
+from imblearn.over_sampling import SMOTE
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
+from sklearn.metrics import classification_report, average_precision_score
+import shap
+
+# --- PART 1: STRATIFIED DATA SPLIT ---
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, stratify=y, random_state=42)
+
+# --- PART 2: MODEL INITIALIZATION ---
+models = {
+    "Logistic_Regression": LogisticRegression(class_weight='balanced', max_iter=1000),
+    "Decision_Tree": DecisionTreeClassifier(class_weight='balanced'),
+    "Random_Forest": RandomForestClassifier(n_estimators=100, class_weight='balanced_subsample'),
+    "AdaBoost": AdaBoostClassifier(n_estimators=100)
+}
+
+# --- PART 3: PIPELINE EXECUTION ---
+for name, model in models.items():
+    pipeline = Pipeline([('sampler', SMOTE(random_state=42)), ('classifier', model)])
+    pipeline.fit(X_train, y_train)
+    y_pred = pipeline.predict(X_test)
+    y_probs = pipeline.predict_proba(X_test)[:, 1]
+    print(f"REPORT FOR {name}:")
+    print(classification_report(y_test, y_pred))
+    print(f"PR-AUC Score: {average_precision_score(y_test, y_probs):.4f}\n")
+\end{verbatim}
+\end{small}
+
+\subsection*{Project Progress Tracking}
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{|c|l|c|c|c|}
+\hline
+\textbf{\#} & \textbf{Task Description} & \textbf{Est. Hours} & \textbf{Act. Hours} & \textbf{Status} \\ \hline
+1 & Data Loading \& Inspection & 1-2 & & \\ \hline
+2 & Exploratory Data Analysis (EDA) & 4-6 & & \\ \hline
+3 & Stratified Data Partitioning & 1-2 & & \\ \hline
+4 & Imbalance Handling Implementation & 3-5 & & \\ \hline
+5 & Baseline Model Training & 4-6 & & \\ \hline
+6 & Advanced Model Training (Ensembles) & 8-12 & & \\ \hline
+7 & Performance Evaluation \& Metrics & 3-5 & & \\ \hline
+8 & Ablation Study Comparison & 6-8 & & \\ \hline
+9 & SHAP \& Interpretability Analysis & 4-6 & & \\ \hline
+\end{tabular}
+\end{table}
 
 \bibliographystyle{plain}
 \bibliography{references}
