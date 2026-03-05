@@ -119,17 +119,21 @@ actionable defect prediction and process improvement.
 % It should clearly distinguish what your proposed contribution from previous literature (e.g., a
 % 1-2 sentence summary of at least 3 closely related papers).
 \section{Related Work}
-Machine learning has increasingly been applied to manufacturing systems for predictive quality monitoring and defect detection, where process and test measurements can be used to learn relationships between operating conditions and product quality outcomes. Zahrani et al.~\cite{zahrani2020lasergrooving} apply machine learning to predict groove quality and geometry in a circular laser-grooving process and show that data-driven models can capture nonlinear relationships between process parameters and final part characteristics, supporting predictive monitoring rather than purely reactive inspection.
+Machine learning has increasingly been applied to manufacturing systems for predictive quality monitoring and defect detection. Prior research shows that industrial process and test data can be used to learn relationships between operating conditions and product quality outcomes.
 
-More recent studies extend this direction using stronger ensemble methods for rare-defect prediction in industrial environments. Geng et al.~\cite{geng2025ctgan_catboost} propose a framework for predicting internal cracks in continuous steel casting using CatBoost combined with synthetic tabular data generation (CTGAN), demonstrating improved detection of infrequent defect patterns in a real manufacturing context.
+Zahrani et al.\ apply machine learning models to predict product quality and groove geometry in a circular laser-grooving manufacturing process. Their results show that data-driven models can capture nonlinear relationships between process parameters and final part characteristics, supporting predictive monitoring rather than purely reactive inspection \cite{zahrani2020lasergrooving}.
 
-A central challenge in manufacturing defect prediction is severe class imbalance: defective products may represent only a small fraction of observations, causing standard training and evaluation to favor the majority class and report high accuracy while missing rare failures. Kafunah et al.~\cite{kafunah2021imbalanced_fd} examine this issue in manufacturing fault detection and evaluate imbalance-aware strategies (e.g., oversampling and reweighting) to improve minority-class detection, reinforcing the importance of focusing on defect-class metrics such as precision, recall, and F1 rather than accuracy alone.
+More recent studies extend this direction using stronger ensemble methods for rare-defect prediction in industrial environments. Geng et al.\ propose a framework for predicting internal cracks in continuous steel casting using CatBoost combined with synthetic data generation, demonstrating improved detection of infrequent defect patterns in a real manufacturing context \cite{geng2025ctgan}.
 
-Cost-sensitive learning provides a complementary approach by explicitly assigning higher penalties to misclassifying defective samples, reflecting the higher operational risk of false negatives in manufacturing. Liu et al.~\cite{liu2023cost_sensitive_yolov5} introduce a cost-sensitive defect detection framework that incorporates an explicit cost structure into the training objective to prioritize costly minority-class errors, reporting improved defect identification under imbalance. Motivated by these findings, our project systematically compares interpretable and ensemble models (logistic regression, decision trees, random forests, and boosting) under multiple imbalance-mitigation strategies, with particular emphasis on cost-sensitive random forests and minority-class performance metrics for defect detection in a highly imbalanced manufacturing dataset.
+A central challenge in manufacturing defect prediction is severe class imbalance. Defective products may represent only a small fraction of observations, causing standard training and evaluation to favor the majority class and report high accuracy while missing rare failures. Kafunah et al.\ examine this issue in fault detection and evaluate imbalance-aware strategies such as oversampling and reweighting to improve minority-class detection, highlighting the importance of focusing on defect-class metrics such as precision, recall, and F1 rather than accuracy alone \cite{kafunah2021imbalanced}.
+
+Cost-sensitive learning provides a complementary approach by explicitly assigning higher penalties to misclassifying defective samples, reflecting the higher operational risk of false negatives in manufacturing. Liu et al.\ introduce a cost-sensitive defect detection framework that modifies the training objective using an explicit cost structure to prioritize costly minority-class errors, and they report improved defect identification under imbalance \cite{liu2023costsensitiveyolov5}.
+
+Building on these findings, our project systematically compares interpretable and ensemble models, including logistic regression, decision trees, random forests, and boosting under multiple imbalance-mitigation strategies. We emphasize cost-sensitive random forests and minority-class performance metrics to evaluate model effectiveness for defect detection in a highly imbalanced manufacturing dataset.
 
 
 
-\section*{Model and Method}
+\section{Model and Method}
 
 \subsection*{Class Imbalance - Preferred Metrics}
 The dataset comprises 229,788 ball-bearing test records featuring 30 numerical predictors and a binary response variable. With only 458 defective samples, standard classifiers tend to favor the majority class; yielding high accuracy that can be misleading. In manufacturing, false negatives are more costly than false positives, as they can lead to diminished customer confidence, expensive product recalls, or liability lawsuits. Consequently, accuracy is not an appropriate metric. Instead, recall, precision, F1 Score, and the Area Under the Precision-Recall Curve (PR-AUC) are the primary metrics.
@@ -320,6 +324,26 @@ ScienceDirect.
 \newblock Minority class.
 \newblock {\em ScienceDirect Topics}.
 \newblock Retrieved March 5, 2025.
+
+\bibitem{zahrani2020lasergrooving}
+E.~G. Zahrani, F.~Hojati, A.~Daneshi, B.~Azarhoushang, and J.~Wilde.
+\newblock Application of machine learning to predict the product quality and geometry in circular laser grooving process.
+\newblock {\em Procedia CIRP}, 94:474--480, 2020.
+
+\bibitem{geng2025ctgan}
+M.~Geng, H.~Ma, S.~Liu, Z.~Zhou, L.~Xing, Y.~Ai, and W.~Zhang.
+\newblock A data-driven approach for internal crack prediction in continuous casting of HSLA steels using CTGAN and CatBoost.
+\newblock {\em Materials}, 18:3599, 2025.
+
+\bibitem{kafunah2021imbalanced}
+J.~Kafunah, M.~I. Ali, and J.~G. Breslin.
+\newblock Handling imbalanced datasets for robust deep neural network-based fault detection in manufacturing systems.
+\newblock {\em Applied Sciences}, 11:9783, 2021.
+
+\bibitem{liu2023costsensitiveyolov5}
+B.~Liu, F.~Gao, and Y.~Li.
+\newblock Cost-sensitive YOLOv5 for detecting surface defects of industrial products.
+\newblock {\em Sensors}, 23:2610, 2023.
 
 \end{thebibliography}
 
