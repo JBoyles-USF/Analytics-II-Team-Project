@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.4)  5 MAR 2026 18:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.4)  5 MAR 2026 18:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -490,11 +490,11 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-Overfull \hbox (4.04196pt too wide) in paragraph at lines 400--400
+Overfull \hbox (4.04196pt too wide) in paragraph at lines 407--407
 []\T1/cmtt/m/n/9 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, stratify=y,[] 
  []
 
-[9] (Proposal.aux)
+[9] [10] (Proposal.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
@@ -503,17 +503,17 @@ Package rerunfilecheck Info: File `Proposal.out' has not changed.
 (rerunfilecheck)             Checksum: BA114D75FAD0E492544F0F75D3BC9458;338.
  ) 
 Here is how much of TeX's memory you used:
- 13364 strings out of 467871
- 210087 string characters out of 5417893
- 666895 words of memory out of 5000000
+ 13366 strings out of 467871
+ 210105 string characters out of 5417893
+ 664897 words of memory out of 5000000
  41807 multiletter control sequences out of 15000+600000
  664152 words of font info for 202 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,9n,79p,1100b,536s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Joshua\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0900.pk><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Proposal.pdf (9 pages, 230532 bytes).
+Output written on Proposal.pdf (10 pages, 231189 bytes).
 PDF statistics:
- 265 PDF objects out of 1000 (max. 8388607)
- 52 named destinations out of 1000 (max. 500000)
+ 270 PDF objects out of 1000 (max. 8388607)
+ 54 named destinations out of 1000 (max. 500000)
  37913 words of extra memory for PDF output out of 42996 (max. 10000000)
 

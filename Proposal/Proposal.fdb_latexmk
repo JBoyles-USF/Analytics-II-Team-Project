@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1772753632.97593 "c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Proposal/Proposal.tex" "Proposal.pdf" "Proposal" 1772753634.97213 0
+["pdflatex"] 1772753976.683 "c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Proposal/Proposal.tex" "Proposal.pdf" "Proposal" 1772753979.37326 0
   "C:/Users/Joshua/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1772648574 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/Joshua/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ectt0900.pk" 1772749365 17512 e1737ea3051c33df5377d442f3793aa6 ""
   "C:/Users/Joshua/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1772647969 13333970 0e67918d4f2f76e2330703e2c99fc585 ""
@@ -112,10 +112,10 @@
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/units/nicefrac.sty" 1469029150 4163 0462ee5ab265cf59dc15a41a3b883101 ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "Proposal.aux" 1772753634 1478 4fccc46be25479d9f4964ae3146801e1 "pdflatex"
-  "Proposal.out" 1772753634 338 ba114d75fad0e492544f0f75d3bc9458 "pdflatex"
-  "Proposal.tex" 1772753632 28699 4fbd944ed60c0ce67a6f1dca0cfb58a2 ""
-  "c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Proposal/Proposal.tex" 1772753632 28699 4fbd944ed60c0ce67a6f1dca0cfb58a2 ""
+  "Proposal.aux" 1772753978 1479 472abb1f1bea40995bc804a16acd3274 "pdflatex"
+  "Proposal.out" 1772753978 338 ba114d75fad0e492544f0f75d3bc9458 "pdflatex"
+  "Proposal.tex" 1772753975 28782 f5bf966853e7db003a303f14f51d7a9d ""
+  "c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Proposal/Proposal.tex" 1772753975 28782 f5bf966853e7db003a303f14f51d7a9d ""
   "neurips_2021.sty" 1772753626 11926 d18f419fd491be5d557e02acf3e7311b ""
   (generated)
   "Proposal.aux"
