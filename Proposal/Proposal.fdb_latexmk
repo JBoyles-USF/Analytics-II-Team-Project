@@ -1,13 +1,5 @@
 # Fdb version 4
-["bibtex Proposal"] 1772744363.57404 "Proposal.aux" "Proposal.bbl" "Proposal" 1772744364.90508 0
-  "C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/bibtex/bib/feupphdteses/references.bib" 1366811700 2206 985e03fb36d872d306e76cfacc160693 ""
-  "C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/plain.bst" 1291864736 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "Proposal.aux" 1772744364 700 a188281b6022bcaa7cef43bbbd109b2f "pdflatex"
-  (generated)
-  "Proposal.bbl"
-  "Proposal.blg"
-  (rewritten before read)
-["pdflatex"] 1772744363.78393 "c:/Users/Zebbi/Documents/Local Analytics 2 Storage/Analytics-II-Team-Project/Proposal/Proposal.tex" "Proposal.pdf" "Proposal" 1772744364.90558 0
+["pdflatex"] 1772748115.87571 "c:/Users/Zebbi/Documents/Local Analytics 2 Storage/Analytics-II-Team-Project/Proposal/Proposal.tex" "Proposal.pdf" "Proposal" 1772748116.63222 0
   "C:/Users/Zebbi/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1772658286 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/Zebbi/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ectt0900.pk" 1772744087 17512 17b83f764931e3a6725688a2b8c702e9 ""
   "C:/Users/Zebbi/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1772657596 13333848 4d03c53b12a944f7f699359e14bf1923 ""
@@ -120,11 +112,10 @@
   "C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/tex/latex/units/nicefrac.sty" 1469029150 4163 0462ee5ab265cf59dc15a41a3b883101 ""
   "C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "Proposal.aux" 1772744364 700 a188281b6022bcaa7cef43bbbd109b2f "pdflatex"
-  "Proposal.bbl" 1772744363 52 0eba253fc001332e731e8aba3f23127b "bibtex Proposal"
-  "Proposal.out" 1772744364 209 df272f0f32fd9a2c3c06861121c933b4 "pdflatex"
-  "Proposal.tex" 1772744361 12113 2e27c31a0d44217d51b74b84a36f2649 ""
-  "c:/Users/Zebbi/Documents/Local Analytics 2 Storage/Analytics-II-Team-Project/Proposal/Proposal.tex" 1772744361 12113 2e27c31a0d44217d51b74b84a36f2649 ""
+  "Proposal.aux" 1772748116 963 f3020f9de8d96a4536648d50adb84ddf "pdflatex"
+  "Proposal.out" 1772748116 209 df272f0f32fd9a2c3c06861121c933b4 "pdflatex"
+  "Proposal.tex" 1772748114 25213 7d4263a1b5a8f495ef15383347fb210f ""
+  "c:/Users/Zebbi/Documents/Local Analytics 2 Storage/Analytics-II-Team-Project/Proposal/Proposal.tex" 1772748114 25213 7d4263a1b5a8f495ef15383347fb210f ""
   "neurips_2021.sty" 1772659342 11925 4145e102565b1e11c4b1f009af7dd86e ""
   (generated)
   "Proposal.aux"

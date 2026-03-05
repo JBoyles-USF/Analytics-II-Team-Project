@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.4)  5 MAR 2026 15:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.4)  5 MAR 2026 17:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -476,43 +476,21 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 ) [1
 
 
-{C:/Users/Zebbi/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}] [2]
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 141.
+{C:/Users/Zebbi/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}] [2] [3] [4]
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 218.
  (C:\Users\Zebbi\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-) [3]
+) [5] [6] [7] [8]
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-Overfull \hbox (84.34735pt too wide) in paragraph at lines 239--239
-[]\T1/cmtt/m/n/9 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, stratify=y, random_state=42)[] 
+Overfull \hbox (4.04196pt too wide) in paragraph at lines 370--370
+[]\T1/cmtt/m/n/9 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, stratify=y,[] 
  []
 
-
-Overfull \hbox (8.76581pt too wide) in paragraph at lines 239--239
-[]    \T1/cmtt/m/n/9 "Logistic_Regression": LogisticRegression(class_weight='balanced', max_iter=1000),[] 
- []
-
-
-Overfull \hbox (60.72812pt too wide) in paragraph at lines 239--239
-[]    \T1/cmtt/m/n/9 "Random_Forest": RandomForestClassifier(n_estimators=100, class_weight='balanced_subsample'),[] 
- []
-
-
-Overfull \hbox (4.04196pt too wide) in paragraph at lines 239--239
-[]    \T1/cmtt/m/n/9 pipeline = Pipeline([('sampler', SMOTE(random_state=42)), ('classifier', model)])[] 
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-(Proposal.bbl
-
-Package natbib Warning: Empty `thebibliography' environment on input line 3.
-
-) [4] [5] (Proposal.aux)
+[9] (Proposal.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -521,17 +499,17 @@ Package rerunfilecheck Info: File `Proposal.out' has not changed.
 (rerunfilecheck)             Checksum: DF272F0F32FD9A2C3C06861121C933B4;209.
  ) 
 Here is how much of TeX's memory you used:
- 13249 strings out of 467867
- 208562 string characters out of 5418335
- 670850 words of memory out of 5000000
- 41796 multiletter control sequences out of 15000+600000
- 660794 words of font info for 150 fonts, out of 8000000 for 9000
+ 13347 strings out of 467867
+ 209381 string characters out of 5418335
+ 667880 words of memory out of 5000000
+ 41799 multiletter control sequences out of 15000+600000
+ 664057 words of font info for 202 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,9n,79p,1093b,457s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,9n,79p,1093b,510s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Zebbi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0900.pk><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Proposal.pdf (5 pages, 203925 bytes).
+Output written on Proposal.pdf (9 pages, 223911 bytes).
 PDF statistics:
- 203 PDF objects out of 1000 (max. 8388607)
- 27 named destinations out of 1000 (max. 500000)
+ 250 PDF objects out of 1000 (max. 8388607)
+ 48 named destinations out of 1000 (max. 500000)
  37905 words of extra memory for PDF output out of 42996 (max. 10000000)
 
