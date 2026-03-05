@@ -149,9 +149,21 @@ Example equation:
     y = f(x; \theta)
 \end{equation}
 
+The dataset exhibits a severe class imbalance which is one of the challenges being faced.
+Out of the 229,788 observations, only 458 are defective, while 229,330 are non-defective.
+As illustrated in figure 1 below, this disparity often causes classifiers to favor the majority class.
+This can result in misleadingly high accuracy that masks manufacturing defects. Given that false negatives (missing a defect)
+are significantly more costly than false positives, precision and recall are the primary metrics for evaluating this process. 
 
+The modeling pipeline incorporates four class imbalance handling strategies:
 
-% Experiments Design (20%)
+\begin{enumerate}
+    \item Random Oversampling.
+    \item Random Undersampling
+    \item Synthetic Minority Oversampling Technique (SMOTE)
+    \item Class weighted Training
+\end{enumerate}
+%Experiments Design (20%)The model
 % It should contain a list of to-do experiments (e.g., each experiment takes one subsection). One
 % should clearly describe reasons of the experiments. One should also put placeholder figures and
 % tables (with specifically designed axes, rows, columns, and so on). At last, one should write
