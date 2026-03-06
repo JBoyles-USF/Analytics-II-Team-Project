@@ -74,10 +74,55 @@
 % understandable to anyone in the course.
 \newpage
 \begin{abstract}
-Briefly summarize the problem, the proposed method, and the main findings.
-Keep it concise (typically 150–250 words). Daniel volunteered to do this section.
-\end{abstract}
+Manufacturing defect detection plays a crucial role in maintaining product
+quality and reliability in industrial systems. In ball bearing manufacturing,
+defective components can lead to the following if not detected early in the
+production process:
 
+\begin{enumerate}
+    \item equipment failures
+    \item increased maintenance
+    \item potential safety risks
+\end{enumerate}
+
+This project investigates the use of machine learning techniques
+to predict defective ball bearings using historical manufacturing data
+obtained from destructive and non-destructive testing procedures.
+
+The dataset contains approximately 229,788 observations with 30 numerical
+predictor variables representing sensor readings or process measurements,
+along with a binary classification label indicating whether a bearing is
+defective or non-defective. A major challenge associated with this dataset
+is the severe class imbalance, as only 458 observations---approximately
+0.2\% of the dataset---are labeled as defective. In such cases, traditional
+metrics such as overall accuracy can be misleading because models may
+achieve high accuracy by predicting the majority class while failing to
+detect rare defects.
+
+To address this issue, this project focuses on evaluation metrics that
+better reflect performance on the minority class. Specifically, recall,
+precision, F1-minority score, and the Area Under the Precision--Recall
+Curve (PR-AUC) will be used to evaluate model performance, since missing
+a defective component is significantly more costly than incorrectly
+flagging a non-defective one.
+
+Several techniques will be explored to mitigate class imbalance during
+model training, including random oversampling, random undersampling,
+Synthetic Minority Oversampling Technique (SMOTE), and class-weighted
+learning methods. Multiple machine learning models will be evaluated,
+including Logistic Regression, Decision Trees, Random Forests, and
+boosting methods such as AdaBoost or gradient-boosted trees.
+
+The experimental design includes model benchmarking, ablation studies of
+imbalance-handling strategies, and sensitivity analysis across different
+data split ratios. In addition, interpretability methods such as feature
+importance analysis and SHAP values will be used to identify which
+predictors contribute most strongly to defect detection.
+
+The goal of this project is to develop a reliable and interpretable
+machine learning framework that improves defect detection while
+providing actionable insights for manufacturing quality control.
+\end{abstract}
 
 
 % Introduction (15%)
