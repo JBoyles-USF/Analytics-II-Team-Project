@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.4)  5 MAR 2026 19:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.4)  5 MAR 2026 19:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -477,8 +477,11 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 
 
 {C:/Users/Zebbi/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}] [2] [3] [4] [5]
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 273.
- (C:\Users\Zebbi\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 274.
+(C:\Users\Zebbi\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 ) [6] [7] [8] [9]
 Package microtype Info: Loading generic protrusion settings for font family
@@ -486,7 +489,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-Overfull \hbox (4.04196pt too wide) in paragraph at lines 452--452
+Overfull \hbox (4.04196pt too wide) in paragraph at lines 453--453
 []\T1/cmtt/m/n/9 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, stratify=y,[] 
  []
 
@@ -496,20 +499,20 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
 Package rerunfilecheck Info: File `Proposal.out' has not changed.
-(rerunfilecheck)             Checksum: BA114D75FAD0E492544F0F75D3BC9458;338.
+(rerunfilecheck)             Checksum: 7F1CFDCC9992C33ECE6B75ABDFC0DA3B;421.
  ) 
 Here is how much of TeX's memory you used:
- 13376 strings out of 467867
- 209945 string characters out of 5418335
- 664941 words of memory out of 5000000
- 41812 multiletter control sequences out of 15000+600000
- 664412 words of font info for 206 fonts, out of 8000000 for 9000
+ 13383 strings out of 467867
+ 209929 string characters out of 5418335
+ 665941 words of memory out of 5000000
+ 41809 multiletter control sequences out of 15000+600000
+ 664802 words of font info for 212 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,9n,79p,1093b,536s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,9n,79p,1093b,544s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Zebbi\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0900.pk><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Proposal.pdf (11 pages, 234201 bytes).
+Output written on Proposal.pdf (11 pages, 234507 bytes).
 PDF statistics:
- 278 PDF objects out of 1000 (max. 8388607)
- 58 named destinations out of 1000 (max. 500000)
- 37913 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 282 PDF objects out of 1000 (max. 8388607)
+ 59 named destinations out of 1000 (max. 500000)
+ 37921 words of extra memory for PDF output out of 42996 (max. 10000000)
 
