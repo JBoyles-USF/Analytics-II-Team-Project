@@ -180,49 +180,51 @@ Building on these findings, our project systematically compares interpretable an
 
 
 \section{Model and Method}
-
+ 
 \subsection*{Class Imbalance - Preferred Metrics}
 The dataset comprises 229,788 ball-bearing test records featuring 30 numerical predictors and a binary response variable. With only 458 defective samples, standard classifiers tend to favor the majority class; yielding high accuracy that can be misleading. In manufacturing, false negatives are more costly than false positives, as they can lead to diminished customer confidence, expensive product recalls, or liability lawsuits. Consequently, accuracy is not an appropriate metric. Instead, recall, precision, F1 Score, and the Area Under the Precision-Recall Curve (PR-AUC) are the primary metrics.
-
+ 
 Because the defective class represents only 0.2\% of the dataset, using Receiver Operating Characteristic Area Under Curve (ROC AUC) can overly estimate the performance. A study was conducted and proved that ROC AUC is not dependable if the true positive sample is less than 3\% of the total \cite{imani2026roc}. PR AUC is preferred because it summarizes the precision and recall tradeoff across thresholds and reflects performance exclusively on the defective class, suitable for the case of missing a defect is far more consequential than flagging a non defective part. However, ROC AUC could still be considered to gauge the performance of baseline models.
-
+ 
 Using regular F1 score as a metric combines performance across all classes, which causes the majority class to dominate the result in imbalanced datasets, shown by this formula:
 $$F1_{regular} = 2 \cdot \frac{P_{overall} \cdot R_{overall}}{P_{overall} + R_{overall}}$$
 where $P_{overall}$ and $R_{overall}$ are precision and recall across both classes. Because these aggregated values are driven primarily by the majority class, a model can achieve a high regular F1 score even while performing poorly on the defective class.
 F1 per class, especially F1 minority avoids this masking effect by computing precision and recall only for the defective class:
 $$F1_{minority} = 2 \cdot \frac{P_{minority} \cdot R_{minority}}{P_{minority} + R_{minority}}$$
-The criticality of using F1 to detect the minority class in classification serves to aid in anomaly detection and identify the imbalance of the data set and its analysis \cite{sciencedirect_minority}. Classification trained on imbalanced data is weak at predicting samples within the minority class. 
-
+The criticality of using F1 to detect the minority class in classification serves to aid in anomaly detection and identify the imbalance of the data set and its analysis \cite{sciencedirect_minority}. Classification trained on imbalanced data is weak at predicting samples within the minority class.
+ 
 \subsection*{Class Imbalance - Modification on Training Data}
 To address the imbalance, four manipulation strategies are employed, each with its distinct trade-offs. Random Oversampling duplicates minority samples to improve recall, though it risks overfitting. Random Undersampling removes majority samples to balance the classes but may lead to information loss. Synthetic Minority Oversampling Technique (SMOTE) generates synthetic defective samples by interpolation to refine decision boundaries but may introduce noise if the minority class has high variance. Finally, Class-Weighted training adjusts the learning objective to penalize minority-class errors more heavily, shifting the decision boundary without altering the dataset. These methods are systematically evaluated by comparing performance metrics across the experimental design combinations.
-
+ 
 \subsection*{Model Considerations}
 We plan to evaluate four primary models, which are logistic regression, Decision Tree, Random Forest, and AdaBoost/XGBoost. By comparing these simple and complex models, performance trade-offs between interpretability and prediction results can be measured.
-
+ 
 \subsubsection*{Logistic Regression}
 Logistic Regression is a sensible model to explore as it is suitable for binary classification problems. Logistic Regression models the probability that a bearing is defective as a smooth function of the readings:
 $$P(defective|x) = \sigma(\beta_{0} + \beta^{\top}x) = \frac{1}{1 + e^{-(\beta_{0} + \beta^{\top}x)}}$$
 Here, $x$ is the vector of reading values, $\beta$ is the vector of coefficients, and $\sigma(\cdot)$ is the logistic (sigmoid) function that maps any real number to a probability between 0 and 1. Each coefficient $\beta_i$ represents the change in the log-odds of a defect associated with a one-unit increase in reading $x_i$, holding other predictors constant. This makes Logistic Regression highly interpretable as engineers can directly see which predictors increase or decrease defect risk and by how much.
-
+ 
 \subsubsection*{Decision Trees}
 Decision Trees provide transparency by sorting data through a series of logical, binary splits. At each step, the model identifies the sensor threshold that best separates defective bearings from healthy ones, reducing impurity until a homogeneous classification is reached. This visual approach allows us to see exactly which predictor values trigger a defect alert. To determine the best possible split, the algorithm calculates a purity score at each step. This is done using Gini Impurity, which measures the probability of a specific sensor reading being incorrectly classified if it were labeled randomly. A lower Gini value indicates a more pure or successful separation of defective bearings from healthy ones. Gini is calculated as follows:
 $$Gini(S) = \sum_{k \in \{0,1\}} p_{k}(1 - p_{k})$$
 where $p_k$ is the proportion of class $k$ in node $S$. A split into left and right child nodes $S_L$ and $S_R$ is evaluated by:
 $$\Delta = Gini(S) - \left(\frac{|S_{L}|}{|S|}Gini(S_{L}) + \frac{|S_{R}|}{|S|}Gini(S_{R})\right)$$
-The algorithm selects the split with the largest $\Delta$, the greatest reduction in impurity. 
-Gini impurity is used instead of entropy because it is computationally simpler by not 
-using logarithms and tends to be more numerically stable under extreme class imbalance. 
-As the defective class is severely smaller, tiny fluctuations in estimated probabilities 
-can cause large changes in entropy, potentially amplifying noise. Gini provides smoother 
-behavior, leading to more stable splits and more reliable rankings of feature importance. 
-For this project, Decision Tree models serve as an interpretable nonlinear model that 
+The algorithm selects the split with the largest $\Delta$, the greatest reduction in impurity.
+Gini impurity is used instead of entropy because it is computationally simpler by not
+using logarithms and tends to be more numerically stable under extreme class imbalance.
+As the defective class is severely smaller, tiny fluctuations in estimated probabilities
+can cause large changes in entropy, potentially amplifying noise. Gini provides smoother
+behavior, leading to more stable splits and more reliable rankings of feature importance.
+For this project, Decision Tree models serve as an interpretable nonlinear model that
 can capture simple interactions between predictors, and as a base learner for ensemble methods.
-
+ 
 \subsubsection*{Random Forest}
 Random Forest extends Decision Trees by aggregating many trees trained on different subsets of the data and features. Each tree is trained on a bootstrap sample of the training data, and at each split, a random subset of features is considered. The final prediction is obtained by majority vote:
 $$\hat{y} = mode\{\hat{y}^{(1)}, \hat{y}^{(2)}, \dots, \hat{y}^{(N)}\}$$
 where $\hat{y}^{(n)}$ is the prediction of tree $n$, and $N$ is the number of trees. The ensemble model determines the best prediction by calculating the mode across the results of each individual tree. To address class imbalance, the Balanced Random Forest variant is used: for each tree, all defective samples are included, and an equal number of non-defective samples are randomly drawn to form a balanced bootstrap sample. This ensures that each tree is trained on a dataset where the defective class is not overwhelmed by the majority class, improving the model's ability to learn splits that separate defects from non-defects and thereby improving recall. Random Forests also provide feature importance scores (e.g., based on impurity reduction or permutation importance), which are valuable for manufacturing engineers who need to understand which sensors consistently contribute to defect detection across many trees.
-
+ 
+While Balanced RF handles imbalance by rsampling the data for each tree, cost-sensitive RF address the same issue by applying class weighted impurity so that errors on defective samples receive higher penalties (One application of the Class weighted strategy). Evaluating both RF variants allows us to compare the best model for detection performance.
+ 
 \subsubsection*{Boosting}
 Adaptive Boosting (AdaBoost) builds an ensemble of weak learners by repeatedly reweighting the training samples so that each new classifier focuses on the mistakes of the previous ones. The misclassified samples get their weights $w_j^i$ increased, correctly classified ones decreased, and then they all get normalized by the normalization constant. Over time, this forces the ensemble to concentrate on high-error instances:
 $$\epsilon_i = \sum_{j} w_j^i \delta(C_i(x_j) \neq y_j)$$
@@ -231,21 +233,23 @@ $$\alpha_{t} = \frac{1}{2} \ln\left(\frac{1 - \epsilon_{t}}{\epsilon_{t}}\right)
 The importance increases when the classifier performs better than chance and decreases when it performs poorly. After each iteration, AdaBoost updates the sample weights:
 $$w_{j}^{i+1} = \frac{w_{j}^{l}}{Z_{i}} \times \begin{cases} e^{-\alpha_{i}}, & C_{i}(x_{j}) = y_{j} \\ e^{\alpha_{i}}, & C_{i}(x_{j}) \neq y_{j} \end{cases}$$
 The misclassified samples get their weights increased by $e^{\alpha_i}$, correctly classified ones decreased by $e^{-\alpha_i}$, and then they all get normalized by $Z_i$, the normalization constant. Over time, this forces the ensemble to concentrate on high error samples. This behavior is useful for classifying rare defective bearings in our data. As they are rare, they are often misclassified by early weak learners because they appear infrequently and have subtle patterns. AdaBoost naturally increases their weight, causing them to gain importance. This can improve defect detection without manually oversampling. However, AdaBoost is sensitive to noise; overemphasizing and overfitting if there is too much. For this reason, AdaBoost serves as a strong but potentially sensitive benchmark in the project timeline.
-
+ 
+AdaBoost will serve as our baseline boosting methods, providing a simple and interpretable reference for boosting model. From here, we plan to extend the analysis to more advanced gradient boosting models such as XGBoost, LightGBM, and CatBoost to gauge performance gains, interpretability, and process time. All boosting variants will be included in the model benchmark, with XGBoost being the prioritized model to be explored.
+ 
 \section*{Project Timeline}
-
+ 
 The following procedure outlines the structured progression from data preparation to advanced ensemble modeling, ensuring that the extreme class imbalance is systematically addressed.
-
+ 
 \begin{enumerate}
-    \item \textbf{Data Inspection (1--2 hours):} Load the dataset and analyze the distribution.
-    \item \textbf{Exploratory Data Analysis (4--6 hours):} Identify sensor ranges, correlations, and outliers across the 30 numerical predictors to understand baseline behavior.
-    \item \textbf{Partitioning (1--2 hours):} Split data into training (80\%), validation (10\%), and test sets (10\%).
-    \item \textbf{Imbalance Handling (3--5 hours):} Apply strategies including Random Oversampling, Undersampling, SMOTE, and Class-Weighted training within cross-validation folds to prevent data leakage.
-    \item \textbf{Simple Modeling (4--6 hours):} Train Logistic Regression and Decision Trees to establish interpretable reference performance and identify primary predictors.
-    \item \textbf{Ensemble Modeling (8--12 hours):} Train Random Forest (using the Balanced variant) and Boosting methods (AdaBoost/XGBoost) to capture complex non-linear interactions.
-    \item \textbf{Performance Evaluation (3--5 hours):} Assess all models using metrics that reflect the high cost of false negatives: Precision, Recall, F1-minority, and PR-AUC.
-    \item \textbf{Ablation Study (6--8 hours):} Conduct a systematic comparison by "swapping out" imbalance strategies to identify which method provides the most stable defect detection.
-    \item \textbf{Interpretability Analysis (4--6 hours):} Research and utilize SHAP values and permutation importance to rank the most influential sensors and explain model decisions to maintenance teams.
+    \item \textbf{Data Inspection:} Load the dataset and analyze the distribution.
+    \item \textbf{Exploratory Data Analysis:} Identify sensor ranges, correlations, and outliers across the 30 numerical predictors to understand baseline behavior.
+    \item \textbf{Partitioning:} Split data into training (80\%), validation (10\%), and test sets (10\%).
+    \item \textbf{Imbalance Handling:} Apply strategies including Random Oversampling, Undersampling, SMOTE, and Class-Weighted training within cross-validation folds to prevent data leakage.
+    \item \textbf{Simple Modeling:} Train Logistic Regression and Decision Trees to establish interpretable reference performance and identify primary predictors.
+    \item \textbf{Ensemble Modeling:} Train Random Forest (using the Balanced variant) and Boosting methods (AdaBoost/XGBoost) to capture complex non-linear interactions.
+    \item \textbf{Performance Evaluation:} Assess all models using metrics that reflect the high cost of false negatives: Precision, Recall, F1-minority, and PR-AUC.
+    \item \textbf{Ablation Study:} Conduct a systematic comparison by "swapping out" imbalance strategies to identify which method provides the most stable defect detection.
+    \item \textbf{Interpretability Analysis:} Research and utilize SHAP values and permutation importance to rank the most influential sensors and explain model decisions to maintenance teams.
   \end{enumerate}
 \begin{table}[h]
     \centering
@@ -259,47 +263,47 @@ The following procedure outlines the structured progression from data preparatio
         Imbalance Handling & 3--5 \\
         Simple Modeling & 4--6 \\
         Ensemble Modeling & 8--12 \\
-        Performance Evaluation & 3--5 \\ 
+        Performance Evaluation & 3--5 \\
         Ablation Study & 6--8 \\
         Interpretability Analysis & 4--6 \\ \hline
         \textbf{Total Estimated Time} & \textbf{24--38 hours} \\ \hline
     \end{tabular}
 \end{table}
-
+ 
 \section*{Experimental Design}
-
+ 
 The experimental phase is structured into three distinct components to ensure a robust evaluation of the model.
-
+ 
 \begin{itemize}
     \item \textbf{Model Benchmark:} A comparison of simple and complex models to determine the best performing model; with consideration of interpretability vs. predictive performance.
-    
+   
     \item \textbf{Class Imbalance Strategy Ablation:} A systematic evaluation of various dataset manipulation strategies to address the class imbalance problem.
-    
+   
     \item \textbf{Data Split Comparison:} A test of model stability and generalization across different training, validation, and test ratios.
 \end{itemize}
-
+ 
 \subsection*{Main Benchmark Analysis}
-
+ 
 \textbf{Objective:} Evaluate candidate models under realistic manufacturing constraints to identify the optimal balance between predictive power and model transparency. This benchmark compares the interpretability vs. performance of models and is often as critical as its accuracy in industrial maintenance environments.
 We prioritize Recall and F1-minority to ensure rare defects are not overlooked.
-
+ 
 \subsection*{Evaluation Focus:}
-
+ 
 \begin{itemize}
-    \item \textbf{Minority Class Sensitivity:} Prioritizing \textbf{Recall} and \textbf{F1-minority} to ensure rare defects are not overlooked.
-    
-    \item \textbf{Metric Integrity:} Using \textbf{PR-AUC} to provide a truthful assessment, as \textbf{ROC-AUC} tends to be overly optimistic when the minority class is <3\% \cite{imani2026roc}.
-    
-    \item \textbf{Architectural Complexity:} Quantifying the "cost" of transparency using specific indicators:
+    \item \textbf{Minority Class Sensitivity:} Prioritizing Recall and F1-minority to ensure rare defects are not overlooked.
+   
+    \item \textbf{Metric Integrity:} Using PR-AUC to provide a truthful assessment, as ROC-AUC tends to be overly optimistic when the minority class is <3\% \cite{imani2026roc}.
+   
+    \item \textbf{Architectural Complexity:} Quantifying the cost of interpretability using specific indicators:
     \begin{itemize}
         \item \textbf{Linear Models:} Number of non-zero coefficients (Sparsity).
         \item \textbf{Tree Models:} Maximum tree depth and leaf count.
-        \item \textbf{Ensembles:} Number of estimators and feature importance stability.
+        \item \textbf{Ensembles:} Number of estimators, feature importance stability, and process times.
     \end{itemize}
-    
-    \item \textbf{Economic Impact:} Tracking \textbf{False Negatives (FN)} as a direct proxy for the cost of manufacturing failure.
+   
+    \item \textbf{Economic Impact:} Tracking False Negatives (FN) as a  proxy for the cost of manufacturing failure, while process times for complex models will reflect process resource costs.
 \end{itemize}
-
+ 
 \begin{table}[h]
 \centering
 \resizebox{\textwidth}{!}{
@@ -313,33 +317,44 @@ XGBoost/LightGBM & & & & & \# Estimators & & \\ \hline
 \end{tabular}}
 \caption{Benchmark Results Placeholder}
 \end{table}
-
+ 
 \subsubsection*{Expected Outcomes:}
-
+ 
 \begin{itemize}
-    \item \textbf{Superiority of Ensembles:} Boosting and Forest-based methods are expected to yield the highest PR-AUC, revealing significant performance gaps that ROC-AUC may obscure.
-    \item \textbf{Diminishing Returns:} We anticipate a curve where complex boosting methods provide only marginal gains over Balanced Random Forests, but at the cost of significantly higher complexity and potential brittleness to noisy minority samples.
-    \item \textbf{Interpretability:} Baseline models will likely provide the highest transparency but lower recall, serving as the essential "control group" for the study.
+    \item \textbf{Superiority of Ensembles:} Boosting and Forest based methods are expected to yield the highest PR-AUC.
+    \item \textbf{Diminishing Returns:} We anticipate a curve where complex boosting methods provide only marginal gains over Balanced Random Forests, but at the cost of significantly higher complexity and problems due to noisy minority samples.
+    \item \textbf{Interpretability:} Baseline (Simple) models will likely provide the highest interpretability but lower recall, serving as the essential control group for the study.
 \end{itemize}
-
+ 
 \subsection*{Class Imbalance Strategy Ablation}
-
+ 
 \textbf{Objective:} Quantify the impact of various sampling and weighting strategies on the decision boundary. Each of the strategies will be tested to each of the model selection, creating 16 experimental combinations.
-
+ 
 \begin{itemize}
-    \item \textbf{Oversampling/SMOTE:} Testing if synthetic minority generation improves recall without introducing excessive noise.
-    \item \textbf{Undersampling:} Assessing if reducing the majority class leads to a critical loss of "normal" state information.
+    \item \textbf{Oversampling} Check whether duplicating some minority samples boost recall without overfitting.
+    \item \textbf{Undersampling:} Check whether removing some majority samples improves performance and interpretability balance without severely losing information.
+    \item \textbf{SMOTE:} Testing if synthetic minority generation improves recall without introducing excessive noise.
     \item \textbf{Cost-Sensitive Learning:} Evaluating if class weighting offers a cleaner alternative to data manipulation.
+    \begin{itemize}
+    \item \textbf{Logistic Regression (Class-Weighted Loss)}: Applies class weights inside the weighted cross-entropy objective so that misclassifying defective samples incurs a higher penalty.
+ 
+    \item \textbf{Decision Tree (Class-Weighted Impurity)}: Uses class-weighted Gini impurity, causing splits to favor isolating minority-class samples.
+ 
+    \item \textbf{Random Forest (Cost-Sensitive RF)}: Implements class weighting through weighted impurity across all trees; this is the Random-Forest-specific form of class-weighted learning.
+ 
+    \item \textbf{Boosting (AdaBoost/XGBoost) with Class Weights}: Adjusts sample weights or uses parameters such as \texttt{scale\_pos\_weight} (multiplying training loss to increase minority class influence).
 \end{itemize}
-
+ 
+\end{itemize}
+ 
 \subsubsection*{Expected Outcome:}
-
+ 
 Class weighting and Balanced Random Forest (internal undersampling) are expected to provide the most stable results, whereas SMOTE may increase False Positives by creating unrealistic defective signatures.
-
+ 
 \subsubsection*{Data Split Comparison}
-
-This test is to Determine if the model’s performance is an artifact of a specific data split, especially given the limited minority sample size. The baseline data split will use 80/10/10 of training, validation, and test data, respectively.
-
+ 
+This test is to determine if the model’s performance is affected by a specific data split, especially given the limited minority sample size. The baseline data split will use 80/10/10 of training, validation, and test data, respectively.
+ 
 \begin{table}[h]
 \centering
 \small
