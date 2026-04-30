@@ -30,7 +30,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 
-\title{Spring 2026 Analytics II Team Project Proposal Report}
+\title{Spring 2026 Analytics II Team Project Final Report}
 
 % List the group and authors
 \author{
@@ -42,8 +42,8 @@
   Sebastian Hajdu
 }
 
-% Set the date manually (March 8, 2026)
-%\date{March 8, 2026}
+% Set the date manually 
+%\date{May 1, 2026}
 
 %\author{
 %  First Author \\
@@ -67,7 +67,13 @@
 % Add professor's name below title page (separate from authors)
 \vspace{2em}  % Adds vertical space between the authors and professor's name
 \begin{center}
-  \textbf{Professor:} Dr. Kaixun Hua
+  \textbf{Professor:}\\[0.5em] Dr. Kaixun Hua
+\end{center}
+
+\vspace{2em}
+\begin{center}
+  {\textbf{Date:}}\\[0.5em]
+  May 1, 2026
 \end{center}
 
 % Abstract (15%)
@@ -237,41 +243,8 @@ The misclassified samples get their weights increased by $e^{\alpha_i}$, correct
  
 AdaBoost will serve as our baseline boosting methods, providing a simple and interpretable reference for boosting model. From here, we plan to extend the analysis to more advanced gradient boosting models such as XGBoost, LightGBM, and CatBoost to gauge performance gains, interpretability, and process time. All boosting variants will be included in the model benchmark, with XGBoost being the prioritized model to be explored.
  
-\section*{Project Timeline}
- 
-The following procedure outlines the structured progression from data preparation to advanced ensemble modeling, ensuring that the extreme class imbalance is systematically addressed.
- 
-\begin{enumerate}
-    \item \textbf{Data Inspection:} Load the dataset and analyze the distribution.
-    \item \textbf{Exploratory Data Analysis:} Identify sensor ranges, correlations, and outliers across the 30 numerical predictors to understand baseline behavior.
-    \item \textbf{Partitioning:} Split data into training (80\%), validation (10\%), and test sets (10\%).
-    \item \textbf{Imbalance Handling:} Apply strategies including Random Oversampling, Undersampling, SMOTE, and Class-Weighted training within cross-validation folds to prevent data leakage.
-    \item \textbf{Simple Modeling:} Train Logistic Regression and Decision Trees to establish interpretable reference performance and identify primary predictors.
-    \item \textbf{Ensemble Modeling:} Train Random Forest (using the Balanced variant) and Boosting methods (AdaBoost/XGBoost) to capture complex non-linear interactions.
-    \item \textbf{Performance Evaluation:} Assess all models using metrics that reflect the high cost of false negatives: Precision, Recall, F1-minority, and PR-AUC.
-    \item \textbf{Ablation Study:} Conduct a systematic comparison by "swapping out" imbalance strategies to identify which method provides the most stable defect detection.
-    \item \textbf{Interpretability Analysis:} Research and utilize SHAP values and permutation importance to rank the most influential sensors and explain model decisions to maintenance teams.
-  \end{enumerate}
-\begin{table}[h]
-    \centering
-    \caption{Estimated Time Allocation per Phase}
-    \begin{tabular}{lr}
-        \hline
-        \textbf{Phase} & \textbf{Estimated Hours} \\ \hline
-        Data Inspection & 1--2 \\
-        Exploratory Data Analysis & 4--6 \\
-        Partitioning & 1--2 \\
-        Imbalance Handling & 3--5 \\
-        Simple Modeling & 4--6 \\
-        Ensemble Modeling & 8--12 \\
-        Performance Evaluation & 3--5 \\
-        Ablation Study & 6--8 \\
-        Interpretability Analysis & 4--6 \\ \hline
-        \textbf{Total Estimated Time} & \textbf{24--38 hours} \\ \hline
-    \end{tabular}
-\end{table}
-\clearpage
-\section*{Experimental Design}
+
+\section{Experimental Design}
  
 The experimental phase is structured into three distinct components to ensure a robust evaluation of the model.
  
@@ -369,7 +342,9 @@ $90/05/05$ & & & & & & \\ \hline
 \caption{Model Stability Across Split Ratios}
 \end{table}
 
+\section{Results}
 
+\section{Conclusion and Future Work }
 
 
 %Bibliography
