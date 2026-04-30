@@ -258,39 +258,13 @@ The experimental phase is structured into three distinct components to ensure a 
  
 \subsection*{Main Benchmark Analysis}
  
-\textbf{Objective:} Evaluate candidate models under realistic manufacturing constraints to identify the optimal balance between predictive power and model transparency. This benchmark compares the interpretability vs. performance of models and is often as critical as its accuracy in industrial maintenance environments.
-We prioritize Recall and F1-minority to ensure rare defects are not overlooked.
+\textbf{Objective:} Evaluate candidate models... identify the optimal balance between predictive power and model transparency... This benchmark compares the interpretability vs. performance of models... and is often as critical as its accuracy in industrial maintenance environments.
+Something about focus on false negative rates and false positive rates?
  
 \subsection*{Evaluation Focus:}
  
-\begin{itemize}
-    \item \textbf{Minority Class Sensitivity:} Prioritizing Recall and F1-minority to ensure rare defects are not overlooked.
-   
-    \item \textbf{Metric Integrity:} Using PR-AUC to provide a truthful assessment, as ROC-AUC tends to be overly optimistic when the minority class is <3\% \cite{imani2026roc}.
-   
-    \item \textbf{Architectural Complexity:} Quantifying the cost of interpretability using specific indicators:
-    \begin{itemize}
-        \item \textbf{Linear Models:} Number of non-zero coefficients (Sparsity).
-        \item \textbf{Tree Models:} Maximum tree depth and leaf count.
-        \item \textbf{Ensembles:} Number of estimators, feature importance stability, and process times.
-    \end{itemize}
-   
-    \item \textbf{Economic Impact:} Tracking False Negatives (FN) as a  proxy for the cost of manufacturing failure, while process times for complex models will reflect process resource costs.
-\end{itemize}
+something about the scoring system...
  
-\begin{table}[h]
-\centering
-\resizebox{\textwidth}{!}{
-\begin{tabular}{|l|c|c|c|c|l|c|c|}
-\hline
-\textbf{Model Family} & \textbf{Recall} & \textbf{F1-Min.} & \textbf{PR-AUC} & \textbf{ROC-AUC} & \textbf{Complexity Indicator} & \textbf{FN} & \textbf{FP} \\ \hline
-Logistic Regression & & & & & \# Coefficients & & \\ \hline
-Decision Tree & & & & & Tree Depth & & \\ \hline
-Balanced RF & & & & & \# Trees / Depth & & \\ \hline
-XGBoost/LightGBM & & & & & \# Estimators & & \\ \hline
-\end{tabular}}
-\caption{Benchmark Results Placeholder}
-\end{table}
  
 \subsubsection*{Expected Outcomes:}
  
@@ -329,22 +303,59 @@ Class weighting and Balanced Random Forest (internal undersampling) are expected
  
 This test is to determine if the model’s performance is affected by a specific data split, especially given the limited minority sample size. The baseline data split will use 80/10/10 of training, validation, and test data, respectively.
  
-\begin{table}[h]
-\centering
-\small
-\begin{tabular}{|l|c|c|c|c|c|c|}
-\hline
-\textbf{Split Ratio} & \textbf{Recall} & \textbf{Precision} & \textbf{F1-Minority} & \textbf{PR-AUC} & \textbf{FN} & \textbf{FP} \\ \hline
-$70/15/15$ & & & & & & \\ \hline
-$80/10/10$ & & & & & & \\ \hline
-$90/05/05$ & & & & & & \\ \hline
-\end{tabular}
-\caption{Model Stability Across Split Ratios}
-\end{table}
+Remember to add the other splits!!!!!
 
 \section{Results}
 
+\section*{Boosting Models Experiment}
+
+The first complete run of the experiment was done with default parameters for all boosting models. A second run was made with the tuned hyperparameters of boosting models determined by a 5-Fold Cross Validation on the 80/20 baseline split resulting in:
+
+\begin{table}[h!]
+\centering
+\caption{Boosting Models Hyperparameters: Default vs Tuned}
+\begin{tabular}{l l l l}
+\hline
+\textbf{Model} & \textbf{Parameter} & \textbf{Default} & \textbf{Tuned} \\
+\hline
+AdaBoost & n\_estimators & 50 & 200 \\
+         & learning\_rate & 1.0 & 1.5 \\
+XGBoost  & n\_estimators & 100 & 300 \\
+         & learning\_rate & 0.3 & 0.05 \\
+LightGBM & n\_estimators & 100 & 300 \\
+CatBoost & iterations & 1000 & 300 \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Ablation Analysis}
+
+The data split ratio has only minor effects on aggregate performance. The class imbalance treatment is the overwhelming driver of performance, especially on the precision-recall tradeoff.
+
+\paragraph{Random Undersampling:} There is a severe overfit / distribution mismatch. Nearly all four models hit train precision of exactly 1.0 but have less than 10\% test precision, with recall mostly above 70\%. This indicates overfitting as the model memorizes a balanced but artificially shrunk training distribution, then encounters the natural imbalance at test time and floods predictions toward the minority class. This may also indicate a fundamental mismatch between training and deployment distributions.
+
+\paragraph{Baseline (Unweighted):} XGBoost and CatBoost both perform strongly. Train and test precision align closely (\~96–100\% test), recall sits around 70–80\%, and ROC AUC stays above 0.98 — a genuinely stable result with minimal overfit. AdaBoost behaves similarly but with lower recall (57–70\%), suggesting it is conservative rather than overfit. LightGBM is the outlier: performance degrades dramatically as the training set shrinks, going from near-collapse at 70/30 (test precision 10.8\%, recall 15.9\%, ROC AUC 0.58) to merely mediocre at 90/10. LightGBM without any balancing strategy appears sensitive to the combination of severe class imbalance and limited training data.
+
+\paragraph{Class-Weighted:} AdaBoost does not respond. For XGBoost, CatBoost, and LightGBM, class-weighting produces a meaningful lift in recall (\~76–80\%) while keeping test precision above 92\%, making it a clean, low-complexity improvement over the unweighted baseline. However, AdaBoost's class-weighted results are bit-for-bit identical to its unweighted baseline across all three splits — scikit-learn's AdaBoostClassifier does not accept a \texttt{class\_weight} parameter, so the two configurations are effectively running the same model twice.
+
+\paragraph{SMOTE:} XGBoost, CatBoost, and LightGBM all achieve a reasonable middle ground under SMOTE: train precision near 1.0 with test precision in the 60–94\% range and recall around 75–85\%. The train-test precision gap (roughly 30–40 points) signals moderate overfitting to synthetic samples, but F1 scores are still competitive. AdaBoost is an outlier: test precision collapses to \~9\% while runtime balloons to 255–449 seconds — over 100× slower than CatBoost or XGBoost under the same conditions.
+
+\paragraph{Random Oversampling:} XGBoost, LightGBM, and CatBoost achieve the best overall F1 scores, with test precision of 93–100\% and recall of 73–84\%. Train precision is 1.0 for all, and test precision remains high, with a small distribution shift compared to SMOTE. AdaBoost again lags substantially (21–37\% test precision), showing poor response to any resampling that inflates training set size.
+
+
+
 \section{Conclusion and Future Work }
+
+\subsection{From Boosting Summary...}
+
+The clearest takeaways are: 
+\begin{enumerate}
+    \item Sampler choice is what matters, not how the data is split.
+    \item Random undersampling produces a consistent overfit / distribution-mismatch signature across all four models.
+    \item XGBoost and CatBoost are robust across all strategies.
+    \item LightGBM should not be used without a balancing strategy given its baseline instability.
+    \item AdaBoost largely fails to benefit from class-weighting, degrades under SMOTE and oversampling, and is by far the slowest — making it the weakest option among the four boosters evaluated here.
+\end{enumerate}
 
 
 %Bibliography
@@ -393,76 +404,22 @@ ScienceDirect.
 %Appendix
 \newpage
 \section*{Appendix}
-\subsection*{A. Beginning of Python Implementation}
-\begin{small}
-\begin{verbatim}
-import pandas as pd                                     # Import
-from sklearn.model_selection import train_test_split
-from imblearn.pipeline import Pipeline
-from imblearn.over_sampling import SMOTE
-from sklearn.linear_model import LogisticRegression
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
-from sklearn.metrics import classification_report, average_precision_score
-import shap
+\subsection*{A. Detailed Results}
 
-# --- PART 1: STRATIFIED DATA SPLIT ---
-# Preserves the 0.2% minority class ratio across splits
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, stratify=y, 
-random_state=42)
-
-# --- PART 2: MODEL INITIALIZATION ---
-# Define the models to be evaluated in the pipeline
-models = {"Logistic Regression": LogisticRegression(class_weight='balanced', 
-max_iter=1000),
-    "Decision Tree": DecisionTreeClassifier(class_weight='balanced'),
-    "Random Forest": RandomForestClassifier(n_estimators=100, 
-class_weight='balanced_subsample'),
-    "AdaBoost": AdaBoostClassifier(n_estimators=100)}
-
-# --- PART 3: PIPELINE EXECUTION (SMOTE + MODEL) ---
-# Wrapping the sampler and model in a Pipeline prevents data leakage
-for name, model in models.items():
-    pipeline = Pipeline([
-        ('sampler', SMOTE(random_state=42)),            # Imbalance Strategy
-        ('classifier', model)])                         # The Model
-    pipeline.fit(X_train, y_train)                      # Train
-    y_pred = pipeline.predict(X_test)                   # Predict
-    y_probs = pipeline.predict_proba(X_test)[:, 1]
-
-# --- PART 4: EVALUATION ---
-    print(f"REPORT FOR {name}:")
-    print(classification_report(y_test, y_pred))
-    print(f"PR-AUC Score: {average_precision_score(y_test, y_probs):.4f}\n")
-
-# --- PART 5: INTERPRETABILITY (SHAP Example for Random Forest) ---
-# Interpreting which sensors influence the defective class
-rf_model = models["Random Forest"].fit(X_train, y_train)
-explainer = shap.TreeExplainer(rf_model)
-shap_values = explainer.shap_values(X_test)
-shap.summary_plot(shap_values, X_test)
-\end{verbatim}
-\end{small}
-
-\newpage
-\subsection*{B. Project Progress Tracking Template}
-Table 1:
 \begin{table}[h]
 \centering
-\small
-\begin{tabular}{|c|l|c|c|c|}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|p{3cm}|l|l|l|l|l|l|l|l|l|l|l|}
 \hline
-\textbf{\#} & \textbf{Task Description} & \textbf{Est. Hours} & \textbf{Act. Hours} & \textbf{Status} \\ \hline
-1 & Data Loading \& Inspection & 1-2 & & \\ \hline
-2 & Exploratory Data Analysis (EDA) & 4-6 & & \\ \hline
-3 & Stratified Data Partitioning & 1-2 & & \\ \hline
-4 & Imbalance Handling Implementation & 3-5 & & \\ \hline
-5 & Baseline Model Training & 4-6 & & \\ \hline
-6 & Advanced Model Training (Ensembles) & 8-12 & & \\ \hline
-7 & Performance Evaluation \& Metrics & 3-5 & & \\ \hline
-8 & Ablation Study Comparison & 6-8 & & \\ \hline
-9 & SHAP \& Interpretability Analysis & 4-6 & & \\ \hline
-\end{tabular}
+\textbf{Model Type (w/ Best Hyper Parameters)} & \textbf{Split Ratio} & \textbf{FNR} & \textbf{FPR} & \textbf{FN Weight} & \textbf{"FN \& FP Score"} & \textbf{Recall} & \textbf{Precision} & \textbf{F1} & \textbf{F1-Minority} & \textbf{AUC} & \textbf{PR-AUC} \\ \hline
+Logistic Regression & & & & & & & & & \\ \hline
+Logistic Regression & & & & & & & & & \\ \hline
+Logistic Regression & & & & & & & & & \\ \hline
+Decision Tree & & & & & & & & & \\ \hline
+Balanced RF & & & & & & & & & \\ \hline
+XGBoost/LightGBM & & & & & & & & & \\ \hline
+\end{tabular}}
+\caption{Benchmark Results Placeholder}
 \end{table}
 
 \end{document}
