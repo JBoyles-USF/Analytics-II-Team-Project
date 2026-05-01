@@ -261,8 +261,9 @@ CatBoost            & max\_depth     & 6    & 6    \\
 \subsection{Model Selection Criteria}
 We evaluate simple models alongside complex ensembles to consider the trade-off between interpretability and predictive performance.
 Our experimental phase primarily evaluates 120 unique scenarios via our custom "FN \& FP Score" System, as well as secondary evaluation with other relevant metrics in the case that predictive ability (according to our custom scoring system) and interpretability do not significantly emphasize a best choice model.
+Our experimental phase evaluates 720 unique scenarios (incorporating 8 models, 5 sampling techniques, 3 train/test splits, and 6 custom weight profiles) via our custom "FN \& FP Score" System. We also conduct secondary evaluations with other relevant metrics (such as PR-AUC and F1-minority score) in the event that predictive ability and interpretability do not significantly emphasize a clear best-choice model.
 
-Conceptual model transparency and interpretability are considered for final model suggestion/recommendation.
+Conceptual model transparency and interpretability are also heavily considered for final model suggestion/recommendation.
   
 \subsection{"FN \& FP Score" System for Evaluating Model Prediction Ability}
 
@@ -299,29 +300,44 @@ The "FN \& FP" Score allows ranking models according to their performance while 
 By varying FN weighting (e.g., 50\%, 60\%, …, 100\%), we can evaluate model performance under different prioritization schemes.
 
 
-This approach provides a flexible and interpretable framework for model selection, emphasizing the trade-off between FN and FP according to domain-specific requirements.
+This approach provides a flexible and interpretable framework for model selection, emphasizing the trade-off between FN and FP according to domain-specific or safetyrequirements.
  
 \paragraph{Subjectivity of FN Weighting}
 
-The FN weighting metric is subject to change with added bias. For example, bias against false negatives (e.g., incorporating ethics of producing a defect) could increase this weighting, whereas a completely unbiased (but potentially unethical) way of calculating FN weighting could be a follows:
+The FN weighting metric is subject to change based on organizational priorities. For example, incorporating the severe ethical or safety consequences of missing a defect could heavily increase the FN weighting. A completely unbiased, cost-based method for calculating the FN weighting is as follows:
 
 \begin{equation}
 \text{FN weighting} = \frac{\text{Cost of FN}}{\text{Cost of FN} + \text{Cost of FP}}
 \end{equation}
 
-In this case, each respective cost could result from labor costs, material costs, increased public relations costs the company, etc.
+In this case, the respective costs could represent labor, material waste, system downtime, or reputational damage to the company. 
 
 \subsection{Other Relevant Metrics}
-Due to the extreme class imbalance, accuracy and ROC AUC can be misleading metrics \cite{imani2026roc}. Instead, recall, precision, Area Under the Precision-Recall Curve (PR-AUC), and the F1-minority score can be used as secondary metrics to evaluate our models.
-Summary tables of these metrics are embedded within our attached Juptyer Notebook. Theses metrics serve as secondary evaluative criteria of our models in the case that predictive ability (according to our custom scoring system) and interpretability do not significantly emphasize a best choice model.
+Due to the extreme class imbalance (99.8\% non-defective to 0.2\% defective), standard accuracy and ROC AUC can be highly misleading \cite{imani2026roc}. Instead, recall, precision, Area Under the Precision-Recall Curve (PR-AUC), and the F1-minority score are used as secondary metrics to evaluate our models.
+Summary visualizations of these metrics are embedded within our attached Jupyter Notebook. These metrics serve as a vital secondary evaluative criteria to ensure the models aren't achieving high recall simply by blindly flagging every item as a defect.
 
 \section{Results}
 
-\subsection{Comparing Predicitve Ability}
+\subsection{Comparing Predictive Ability}
 
-REFERENCE APPENDICES!!!
+To determine the best predictive models, we extracted the top-performing algorithms across our 6 distinct FN weighting profiles (0.5 through 1.0). The comprehensive ranking table can be referenced in the Appendix.
+
+Analysis of the 720 evaluated scenarios yielded several consistent trends:
+\begin{itemize}
+    \item \textbf{Dominance of CatBoost:} The \textbf{CatBoost} algorithm was unequivocally our best predictive model. Paired with a 90/10 train-test split and Random Undersampling, CatBoost secured the \#1 rank across \textit{every single weighting score}, consistently producing the lowest "FN \& FP Score" of any combination.
+    \item \textbf{AdaBoost and Logistic Regression as Strong Runners-Up:} As the penalty for False Negatives increased (weightings 0.6 to 1.0), \textbf{AdaBoost} firmly held the \#2 overall spot. Interestingly, at a balanced 0.5 weighting, \textbf{Logistic Regression} (using Class-Weighting or Random Oversampling) overtook AdaBoost to claim the \#2 and \#3 ranks, making it highly competitive at lower FN penalties. 
+    \item \textbf{Optimal Data Treatment:} The \textbf{90/10 data split} was highly prevalent among the top-tier models, suggesting that maximizing the training data volume was crucial for this heavily imbalanced set. Additionally, \textbf{Random Undersampling} proved to be the most effective data manipulation strategy, utilized by almost all top-3 models across the higher weighting thresholds.
+\end{itemize}
 
 \subsection{Comparing Interpretability}
+
+While predictive ability is paramount for defect detection, model interpretability dictates how easily engineers can trust, debug, and learn from the system.
+
+Our \#1 predictive model, \textbf{CatBoost} (alongside AdaBoost), is a complex gradient-boosting ensemble. It operates essentially as a "black box." While we can extract general feature importance to see \textit{which} sensors matter most globally, we cannot easily see \textit{how} the thresholds interact mathematically to produce a decision for a single component. 
+
+Conversely, \textbf{Logistic Regression}—which proved to be a remarkably strong runner-up, holding the \#3 rank across the 0.7 to 1.0 weighting profiles and the \#2 rank at 0.5—is a highly transparent linear model. It provides exact equations and odds ratios, allowing engineers to directly quantify how a 1-unit change in a specific sensor's reading shifts the mathematical probability of a defect. 
+
+\textbf{Final Recommendation:} If absolute maximum defect detection is required regardless of system opacity, \textbf{CatBoost (Random Undersampled, 90/10 split)} is the clear choice. However, if stakeholders require a transparent, explainable algorithm to guide manufacturing adjustments and understand system failures, \textbf{Logistic Regression} is a stellar alternative that sacrifices only a fractional margin of predictive ability for complete interpretability.
 
 
 \section{Conclusion and Future Work}
