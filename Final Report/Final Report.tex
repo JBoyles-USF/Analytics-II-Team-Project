@@ -324,9 +324,9 @@ To determine the best predictive models, we extracted the top-performing algorit
 
 Analysis of the 720 evaluated scenarios yielded several consistent trends:
 \begin{itemize}
-    \item \textbf{Dominance of CatBoost:} The \textbf{CatBoost} algorithm was unequivocally our best predictive model. Paired with a 90/10 train-test split and Random Undersampling, CatBoost secured the \#1 rank across \textit{every single weighting score}, consistently producing the lowest "FN \& FP Score" of any combination.
-    \item \textbf{AdaBoost and Logistic Regression as Strong Runners-Up:} As the penalty for False Negatives increased (weightings 0.6 to 1.0), \textbf{AdaBoost} firmly held the \#2 overall spot. Interestingly, at a balanced 0.5 weighting, \textbf{Logistic Regression} (using Class-Weighting or Random Oversampling) overtook AdaBoost to claim the \#2 and \#3 ranks, making it highly competitive at lower FN penalties. 
-    \item \textbf{Optimal Data Treatment:} The \textbf{90/10 data split} was highly prevalent among the top-tier models, suggesting that maximizing the training data volume was crucial for this heavily imbalanced set. Additionally, \textbf{Random Undersampling} proved to be the most effective data manipulation strategy, utilized by almost all top-3 models across the higher weighting thresholds.
+    \item \textbf{High FN Penalties (0.7 - 1.0):} As the penalty for False Negatives increased, \textbf{AdaBoost (Random Undersampled, 90/10 split)} secured the unequivocal \#1 rank across the higher weight brackets, consistently producing the lowest "FN \& FP Score."
+    \item \textbf{Balanced Penalties (0.5 - 0.6):} Interestingly, at a more balanced penalty weighting, \textbf{Logistic Regression (Class-Weighted, 80/20 split)} overtook the complex ensembles to claim the \#1 spot, proving highly efficient when FP rates are given equal or near-equal consideration.
+    \item \textbf{Optimal Data Treatment:} The \textbf{90/10 data split} was highly prevalent among the top-tier models, suggesting that maximizing the training data volume was crucial for this heavily imbalanced set. Additionally, \textbf{Random Undersampling} and \textbf{Class-Weighting} proved to be the most effective strategies for balancing the minority class without injecting the noise of synthetic data.
 \end{itemize}
 
 \subsection{Comparing Interpretability}
@@ -437,66 +437,66 @@ FN Weight & Rank & Scenario & "FN \& FP Score" & FNR & FPR \\
 \bottomrule
 \endlastfoot
 
-0.5 & 1 & 90/10 | Random Undersampling | CatBoost & 0.034292137 & 0.045454545 & 0.023129728 \\
-0.5 & 2 & 90/10 | Random Oversampling | Logistic Regression & 0.044256621 & 0.068181818 & 0.020331424 \\
-0.5 & 3 & 90/10 | Class-Weighted | Logistic Regression & 0.044322207 & 0.068181818 & 0.020462595 \\
-0.5 & 4 & 80/20 | SMOTE | Logistic Regression & 0.045513672 & 0.068181818 & 0.022845525 \\
-0.5 & 5 & 90/10 | SMOTE | Logistic Regression & 0.045524603 & 0.068181818 & 0.022867387 \\
-0.5 & 6 & 90/10 | Random Undersampling | AdaBoost & 0.046884502 & 0.045454545 & 0.048314459 \\
-0.5 & 7 & 90/10 | Random Undersampling | LightGBM & 0.047186095 & 0.068181818 & 0.026190372 \\
-0.5 & 8 & 90/10 | Random Undersampling | XGBoost & 0.047448436 & 0.068181818 & 0.026715054 \\
-0.5 & 9 & 80/20 | Random Undersampling | Logistic Regression & 0.047538119 & 0.056818182 & 0.038258056 \\
-0.5 & 10 & 90/10 | Random Undersampling | Logistic Regression & 0.047907533 & 0.068181818 & 0.027633247 \\
-0.6 & 1 & 90/10 | Random Undersampling | CatBoost & 0.036524618 & 0.045454545 & 0.023129728 \\
+0.5 & 1 & 80/20 | Class-Weighted | Logistic Regression & 0.041515208 & 0.056818182 & 0.026212234 \\
+0.5 & 2 & 90/10 | Class-Weighted | Logistic Regression & 0.043644492 & 0.068181818 & 0.019107166 \\
+0.5 & 3 & 90/10 | Random Oversampling | Logistic Regression & 0.044191036 & 0.068181818 & 0.020200254 \\
+0.5 & 4 & 90/10 | Random Undersampling | CatBoost & 0.045174814 & 0.068181818 & 0.022167811 \\
+0.5 & 5 & 90/10 | SMOTE | Logistic Regression & 0.045459017 & 0.068181818 & 0.022736216 \\
+0.5 & 6 & 80/20 | SMOTE | Logistic Regression & 0.04549181 & 0.068181818 & 0.022801801 \\
+0.5 & 7 & 90/10 | Random Undersampling | AdaBoost & 0.046884502 & 0.045454545 & 0.048314459 \\
+0.5 & 8 & 80/20 | Random Undersampling | CatBoost & 0.047295404 & 0.068181818 & 0.02640899 \\
+0.5 & 9 & 90/10 | Random Undersampling | XGBoost & 0.047645192 & 0.068181818 & 0.027108565 \\
+0.5 & 10 & 90/10 | Random Undersampling | LightGBM & 0.047776362 & 0.068181818 & 0.027370906 \\
+0.6 & 1 & 80/20 | Class-Weighted | Logistic Regression & 0.044575803 & 0.056818182 & 0.026212234 \\
 0.6 & 2 & 90/10 | Random Undersampling | AdaBoost & 0.046598511 & 0.045454545 & 0.048314459 \\
-0.6 & 3 & 90/10 | Random Oversampling | Logistic Regression & 0.04904166 & 0.068181818 & 0.020331424 \\
-0.6 & 4 & 90/10 | Class-Weighted | Logistic Regression & 0.049094129 & 0.068181818 & 0.020462595 \\
-0.6 & 5 & 80/20 | Random Undersampling | Logistic Regression & 0.049394132 & 0.056818182 & 0.038258056 \\
-0.6 & 6 & 80/20 | SMOTE | Logistic Regression & 0.050047301 & 0.068181818 & 0.022845525 \\
-0.6 & 7 & 90/10 | SMOTE | Logistic Regression & 0.050056046 & 0.068181818 & 0.022867387 \\
-0.6 & 8 & 90/10 | Random Undersampling | LightGBM & 0.05138524 & 0.068181818 & 0.026190372 \\
-0.6 & 9 & 90/10 | Random Undersampling | XGBoost & 0.051595112 & 0.068181818 & 0.026715054 \\
-0.6 & 10 & 90/10 | Random Undersampling | Logistic Regression & 0.05196239 & 0.068181818 & 0.027633247 \\
-0.7 & 1 & 90/10 | Random Undersampling | CatBoost & 0.0387571 & 0.045454545 & 0.023129728 \\
-0.7 & 2 & 90/10 | Random Undersampling | AdaBoost & 0.046312519 & 0.045454545 & 0.048314459 \\
-0.7 & 3 & 80/20 | Random Undersampling | Logistic Regression & 0.051250144 & 0.056818182 & 0.038258056 \\
-0.7 & 4 & 90/10 | Random Oversampling | Logistic Regression & 0.0538267 & 0.068181818 & 0.020331424 \\
-0.7 & 5 & 90/10 | Class-Weighted | Logistic Regression & 0.053866051 & 0.068181818 & 0.020462595 \\
-0.7 & 6 & 80/20 | SMOTE | Logistic Regression & 0.05458093 & 0.068181818 & 0.022845525 \\
-0.7 & 7 & 90/10 | SMOTE | Logistic Regression & 0.054587489 & 0.068181818 & 0.022867387 \\
-0.7 & 8 & 90/10 | Random Undersampling | LightGBM & 0.055584384 & 0.068181818 & 0.026190372 \\
-0.7 & 9 & 90/10 | Random Undersampling | XGBoost & 0.055741789 & 0.068181818 & 0.026715054 \\
-0.7 & 10 & 90/10 | Random Undersampling | Logistic Regression & 0.056017247 & 0.068181818 & 0.027633247 \\
-0.8 & 1 & 90/10 | Random Undersampling | CatBoost & 0.040989582 & 0.045454545 & 0.023129728 \\
-0.8 & 2 & 90/10 | Random Undersampling | AdaBoost & 0.046026528 & 0.045454545 & 0.048314459 \\
-0.8 & 3 & 80/20 | Random Undersampling | Logistic Regression & 0.053106157 & 0.056818182 & 0.038258056 \\
-0.8 & 4 & 90/10 | Random Oversampling | Logistic Regression & 0.058611739 & 0.068181818 & 0.020331424 \\
-0.8 & 5 & 90/10 | Class-Weighted | Logistic Regression & 0.058637973 & 0.068181818 & 0.020462595 \\
-0.8 & 6 & 80/20 | SMOTE | Logistic Regression & 0.059114559 & 0.068181818 & 0.022845525 \\
-0.8 & 7 & 90/10 | SMOTE | Logistic Regression & 0.059118932 & 0.068181818 & 0.022867387 \\
-0.8 & 8 & 90/10 | Random Undersampling | LightGBM & 0.059783529 & 0.068181818 & 0.026190372 \\
-0.8 & 9 & 90/10 | Random Undersampling | XGBoost & 0.059888465 & 0.068181818 & 0.026715054 \\
-0.8 & 10 & 90/10 | Random Undersampling | Logistic Regression & 0.060072104 & 0.068181818 & 0.027633247 \\
-0.9 & 1 & 90/10 | Random Undersampling | CatBoost & 0.043222063 & 0.045454545 & 0.023129728 \\
-0.9 & 2 & 90/10 | Random Undersampling | AdaBoost & 0.045740536 & 0.045454545 & 0.048314459 \\
-0.9 & 3 & 80/20 | Random Undersampling | Logistic Regression & 0.054962169 & 0.056818182 & 0.038258056 \\
-0.9 & 4 & 90/10 | Random Oversampling | Logistic Regression & 0.063396779 & 0.068181818 & 0.020331424 \\
-0.9 & 5 & 90/10 | Class-Weighted | Logistic Regression & 0.063409896 & 0.068181818 & 0.020462595 \\
-0.9 & 6 & 80/20 | SMOTE | Logistic Regression & 0.063648189 & 0.068181818 & 0.022845525 \\
-0.9 & 7 & 90/10 | SMOTE | Logistic Regression & 0.063650375 & 0.068181818 & 0.022867387 \\
-0.9 & 8 & 90/10 | Random Undersampling | LightGBM & 0.063982673 & 0.068181818 & 0.026190372 \\
-0.9 & 9 & 90/10 | Random Undersampling | XGBoost & 0.064035142 & 0.068181818 & 0.026715054 \\
-0.9 & 10 & 90/10 | Random Undersampling | Logistic Regression & 0.064126961 & 0.068181818 & 0.027633247 \\
-1 & 1 & 90/10 | Random Undersampling | CatBoost & 0.045454545 & 0.045454545 & 0.023129728 \\
-1 & 2 & 90/10 | Random Undersampling | AdaBoost & 0.045454545 & 0.045454545 & 0.048314459 \\
-1 & 3 & 80/20 | Random Undersampling | Logistic Regression & 0.056818182 & 0.056818182 & 0.038258056 \\
-1 & 4 & 80/20 | Random Undersampling | CatBoost & 0.068181818 & 0.068181818 & 0.027720694 \\
-1 & 5 & 80/20 | Random Undersampling | LightGBM & 0.068181818 & 0.068181818 & 0.030693892 \\
-1 & 6 & 90/10 | Random Oversampling | Logistic Regression & 0.068181818 & 0.068181818 & 0.020331424 \\
-1 & 7 & 90/10 | Random Undersampling | LightGBM & 0.068181818 & 0.068181818 & 0.026190372 \\
-1 & 8 & 90/10 | SMOTE | Logistic Regression & 0.068181818 & 0.068181818 & 0.022867387 \\
-1 & 9 & 80/20 | SMOTE | Logistic Regression & 0.068181818 & 0.068181818 & 0.022845525 \\
-1 & 10 & 90/10 | Class-Weighted | Logistic Regression & 0.068181818 & 0.068181818 & 0.020462595 \\
+0.6 & 3 & 90/10 | Class-Weighted | Logistic Regression & 0.048551957 & 0.068181818 & 0.019107166 \\
+0.6 & 4 & 90/10 | Random Oversampling | Logistic Regression & 0.048989192 & 0.068181818 & 0.020200254 \\
+0.6 & 5 & 90/10 | Random Undersampling | CatBoost & 0.049776215 & 0.068181818 & 0.022167811 \\
+0.6 & 6 & 90/10 | SMOTE | Logistic Regression & 0.049995539 & 0.068181818 & 0.022736216 \\
+0.6 & 7 & 80/20 | SMOTE | Logistic Regression & 0.050027798 & 0.068181818 & 0.022801801 \\
+0.6 & 8 & 80/20 | Random Undersampling | CatBoost & 0.051463556 & 0.068181818 & 0.02640899 \\
+0.6 & 9 & 90/10 | Random Undersampling | XGBoost & 0.051723215 & 0.068181818 & 0.027108565 \\
+0.6 & 10 & 90/10 | Random Undersampling | LightGBM & 0.051854385 & 0.068181818 & 0.027370906 \\
+0.7 & 1 & 90/10 | Random Undersampling | AdaBoost & 0.046312519 & 0.045454545 & 0.048314459 \\
+0.7 & 2 & 80/20 | Class-Weighted | Logistic Regression & 0.047636398 & 0.056818182 & 0.026212234 \\
+0.7 & 3 & 90/10 | Class-Weighted | Logistic Regression & 0.053459423 & 0.068181818 & 0.019107166 \\
+0.7 & 4 & 90/10 | Random Oversampling | Logistic Regression & 0.053787349 & 0.068181818 & 0.020200254 \\
+0.7 & 5 & 90/10 | Random Undersampling | CatBoost & 0.054377616 & 0.068181818 & 0.022167811 \\
+0.7 & 6 & 90/10 | SMOTE | Logistic Regression & 0.054532061 & 0.068181818 & 0.022736216 \\
+0.7 & 7 & 80/20 | SMOTE | Logistic Regression & 0.054563785 & 0.068181818 & 0.022801801 \\
+0.7 & 8 & 80/20 | Random Undersampling | CatBoost & 0.055631707 & 0.068181818 & 0.02640899 \\
+0.7 & 9 & 90/10 | Random Undersampling | XGBoost & 0.055801238 & 0.068181818 & 0.027108565 \\
+0.7 & 10 & 90/10 | Random Undersampling | LightGBM & 0.055932408 & 0.068181818 & 0.027370906 \\
+0.8 & 1 & 90/10 | Random Undersampling | AdaBoost & 0.046026528 & 0.045454545 & 0.048314459 \\
+0.8 & 2 & 80/20 | Class-Weighted | Logistic Regression & 0.050696993 & 0.056818182 & 0.026212234 \\
+0.8 & 3 & 90/10 | Class-Weighted | Logistic Regression & 0.058366889 & 0.068181818 & 0.019107166 \\
+0.8 & 4 & 90/10 | Random Oversampling | Logistic Regression & 0.058585505 & 0.068181818 & 0.020200254 \\
+0.8 & 5 & 90/10 | Random Undersampling | CatBoost & 0.058979016 & 0.068181818 & 0.022167811 \\
+0.8 & 6 & 90/10 | SMOTE | Logistic Regression & 0.059068582 & 0.068181818 & 0.022736216 \\
+0.8 & 7 & 80/20 | SMOTE | Logistic Regression & 0.059099773 & 0.068181818 & 0.022801801 \\
+0.8 & 8 & 80/20 | Random Undersampling | CatBoost & 0.059799859 & 0.068181818 & 0.02640899 \\
+0.8 & 9 & 90/10 | Random Undersampling | XGBoost & 0.059879261 & 0.068181818 & 0.027108565 \\
+0.8 & 10 & 90/10 | Random Undersampling | LightGBM & 0.060010431 & 0.068181818 & 0.027370906 \\
+0.9 & 1 & 90/10 | Random Undersampling | AdaBoost & 0.045740536 & 0.045454545 & 0.048314459 \\
+0.9 & 2 & 80/20 | Class-Weighted | Logistic Regression & 0.053757588 & 0.056818182 & 0.026212234 \\
+0.9 & 3 & 90/10 | Class-Weighted | Logistic Regression & 0.063274354 & 0.068181818 & 0.019107166 \\
+0.9 & 4 & 90/10 | Random Oversampling | Logistic Regression & 0.063383661 & 0.068181818 & 0.020200254 \\
+0.9 & 5 & 90/10 | Random Undersampling | CatBoost & 0.063580417 & 0.068181818 & 0.022167811 \\
+0.9 & 6 & 90/10 | SMOTE | Logistic Regression & 0.063605104 & 0.068181818 & 0.022736216 \\
+0.9 & 7 & 80/20 | SMOTE | Logistic Regression & 0.06363576 & 0.068181818 & 0.022801801 \\
+0.9 & 8 & 80/20 | Random Undersampling | CatBoost & 0.06396801 & 0.068181818 & 0.02640899 \\
+0.9 & 9 & 90/10 | Random Undersampling | XGBoost & 0.063957284 & 0.068181818 & 0.027108565 \\
+0.9 & 10 & 90/10 | Random Undersampling | LightGBM & 0.064088454 & 0.068181818 & 0.027370906 \\
+1 & 1 & 90/10 | Random Undersampling | AdaBoost & 0.045454545 & 0.045454545 & 0.048314459 \\
+1 & 2 & 80/20 | Class-Weighted | Logistic Regression & 0.056818182 & 0.056818182 & 0.026212234 \\
+1 & 3 & 90/10 | Class-Weighted | Logistic Regression & 0.068181818 & 0.068181818 & 0.019107166 \\
+1 & 4 & 90/10 | Random Oversampling | Logistic Regression & 0.068181818 & 0.068181818 & 0.020200254 \\
+1 & 5 & 90/10 | Random Undersampling | CatBoost & 0.068181818 & 0.068181818 & 0.022167811 \\
+1 & 6 & 90/10 | SMOTE | Logistic Regression & 0.068181818 & 0.068181818 & 0.022736216 \\
+1 & 7 & 80/20 | SMOTE | Logistic Regression & 0.068181818 & 0.068181818 & 0.022801801 \\
+1 & 8 & 80/20 | Random Undersampling | CatBoost & 0.068181818 & 0.068181818 & 0.02640899 \\
+1 & 9 & 90/10 | Random Undersampling | XGBoost & 0.068181818 & 0.068181818 & 0.027108565 \\
+1 & 10 & 90/10 | Random Undersampling | LightGBM & 0.068181818 & 0.068181818 & 0.027370906 \\
 
 \end{longtable}
 
