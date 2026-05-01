@@ -1,4 +1,4 @@
-% Guideline & Policy for Project Proposal
+%Guideline & Policy for Project Proposal
 % Only one project proposal needs to be submitted per group. The idea behind this proposal is
 % that I can give you feedback and suggestions to make you come up with a feasible plan for the
 % project. You don’t have to do exactly what you say in your proposal and can even completely
@@ -269,7 +269,7 @@ Conceptual model transparency and interpretability are also heavily considered f
 
 In many classification tasks, reducing false negatives (FN) is often more critical than reducing false positives (FP). To systematically evaluate models with this consideration, we propose a weighted scoring system that incorporates both the false negative rate (FNR) and false positive rate (FPR).
 
-\paragraph{Weighted Score Definition}
+\subsubsection{Weighted Score Definition}
 We define the \textbf{"FN \& FP Score"} for a model as a weighted sum of the FN Rate and FP Rate:
 
 \begin{equation}
@@ -278,14 +278,14 @@ We define the \textbf{"FN \& FP Score"} for a model as a weighted sum of the FN 
 
 where \(\text{FN weighting}\) and \(\text{FP weighting}\) are non-negative weights reflecting the relative importance of reducing false negatives versus false positives.
 
-\paragraph{Auxiliary Equation}
+\subsubsection{Auxiliary Equation}
 Assuming the weights are complementary, we can express the FP weighting in terms of the FN weighting:
 
 \begin{equation}
 \text{FP weighting} = 1 - \text{FN weighting}
 \end{equation}
 
-\paragraph{Equivalent Equation}
+\subsubsection{Equivalent Equation}
 Substituting the complementary weighting into the score formula yields:
 
 \begin{equation}
@@ -295,14 +295,14 @@ Substituting the complementary weighting into the score formula yields:
 This equivalent equation shows that the score is a function of three components: FN weighting, FNR, and FPR.
 
 
-\paragraph{Model Ranking Using the "FN \& FP Score"}
+\subsubsection{Model Ranking Using the "FN \& FP Score"}
 The "FN \& FP" Score allows ranking models according to their performance while prioritizing reduction of false negatives. For a given FN weighting, the \textbf{lowest score} indicates the \textbf{best model} at that weighting.
 By varying FN weighting (e.g., 50\%, 60\%, …, 100\%), we can evaluate model performance under different prioritization schemes.
 
 
 This approach provides a flexible and interpretable framework for model selection, emphasizing the trade-off between FN and FP according to domain-specific or safetyrequirements.
  
-\paragraph{Subjectivity of FN Weighting}
+\subsubsection{Subjectivity of FN Weighting}
 
 The FN weighting metric is subject to change based on organizational priorities. For example, incorporating the severe ethical or safety consequences of missing a defect could heavily increase the FN weighting. A completely unbiased, cost-based method for calculating the FN weighting is as follows:
 
