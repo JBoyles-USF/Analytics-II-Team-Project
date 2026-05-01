@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1777591380.98724 "c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Final Report/Final Report.tex" "Final Report.pdf" "Final Report" 1777591383.66937 0
+["pdflatex"] 1777593805.69483 "c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Final Report/Final Report.tex" "Final Report.pdf" "Final Report" 1777593809.3386 0
   "C:/Users/Joshua/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1772648574 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/Joshua/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ectt1000.pk" 1772648579 20028 748a3c5b06dbb22132f38da0957569a8 ""
   "C:/Users/Joshua/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1772647969 13333970 0e67918d4f2f76e2330703e2c99fc585 ""
@@ -99,14 +99,15 @@
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/psnfss/ts1ptm.fd" 1585253778 653 96f56dc5d1ef1fe1121f1cfeec70ee0c ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/refcount/refcount.sty" 1576433952 9878 9e94e8fa600d95f9c7731bb21dfb67a4 ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/rerunfilecheck/rerunfilecheck.sty" 1751104012 9684 a33a14b82ce60d6e77cb9be689d79ee6 ""
+  "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/tools/longtable.sty" 1761901070 16014 dfa4b4d4e04a78a3f05a90c19711737a ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/trimspaces/trimspaces.sty" 1253169183 1380 971a51b00a14503ddf754cab24c3f209 ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/units/nicefrac.sty" 1469029150 4163 0462ee5ab265cf59dc15a41a3b883101 ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "Final Report.aux" 1777591383 2439 fa21085020eaab08091e09642fb2278a "pdflatex"
-  "Final Report.out" 1777591383 1075 fe78495391bf4994619f379fa7c841f6 "pdflatex"
-  "Final Report.tex" 1777591380 30962 7dfd2cd9653bc19857a126817a6db70f ""
-  "c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Final Report/Final Report.tex" 1777591380 30962 7dfd2cd9653bc19857a126817a6db70f ""
+  "Final Report.aux" 1777593808 2647 c989a3a8735d7f0e8c7888fdb94f76f7 "pdflatex"
+  "Final Report.out" 1777593808 1075 fe78495391bf4994619f379fa7c841f6 "pdflatex"
+  "Final Report.tex" 1777593799 36531 e72f079ee5ef266a0bfc7972bc8c6bba ""
+  "c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Final Report/Final Report.tex" 1777593799 36531 e72f079ee5ef266a0bfc7972bc8c6bba ""
   "neurips_2021.sty" 1772757296 11926 d18f419fd491be5d557e02acf3e7311b ""
   (generated)
   "Final Report.aux"
