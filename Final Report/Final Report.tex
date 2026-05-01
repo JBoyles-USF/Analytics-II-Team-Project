@@ -170,11 +170,13 @@ Building on these findings, our project systematically compares interpretable an
 The dataset comprises 229,999 test records with only 458 defective samples (0.2\%). In manufacturing, missing a defect (false negative) is significantly more costly than incorrectly flagging a healthy part. Consequently, accuracy and ROC AUC can be misleading metrics for severe class imbalance \cite{imani2026roc}. Instead, we prioritize recall, precision, Area Under the Precision-Recall Curve (PR-AUC), and the F1-minority score.
  
 Using the regular F1 score masks minority class performance because the majority class dominates the aggregation:
-$$F1_{regular} = 2 \cdot \frac{P_{overall} \cdot R_{overall}}{P_{overall} + R_{overall}}$$
- 
+\begin{equation}
+F1_{regular} = 2 \cdot \frac{P_{overall} \cdot R_{overall}}{P_{overall} + R_{overall}}
+\end{equation}
 Computing precision and recall exclusively for the defective class avoids this masking effect \cite{sciencedirect_minority}:
-$$F1_{minority} = 2 \cdot \frac{P_{minority} \cdot R_{minority}}{P_{minority} + R_{minority}}$$
- 
+\begin{equation}
+F1_{minority} = 2 \cdot \frac{P_{minority} \cdot R_{minority}}{P_{minority} + R_{minority}}
+\end{equation}
 \subsection*{Class Imbalance Strategies}
 To address the imbalance, we evaluate four dataset manipulation techniques: Random Oversampling (duplicating minority samples), Random Undersampling (removing majority samples), SMOTE (synthetic sample generation), and Class-Weighted training (adjusting learning objectives to penalize minority-class errors).
  
@@ -183,31 +185,41 @@ We evaluate simple models alongside complex ensembles to measure the trade-off b
  
 \subsubsection*{Logistic Regression}
 Logistic Regression provides high interpretability, modeling defect probability as a smooth function of sensor readings so engineers can quantify feature impact:
-$$P(defective|x) = \sigma(\beta_{0} + \beta^{\top}x) = \frac{1}{1 + e^{-(\beta_{0} + \beta^{\top}x)}}$$
- 
+\begin{equation}
+P(defective|x) = \sigma(\beta_{0} + \beta^{\top}x) = \frac{1}{1 + e^{-(\beta_{0} + \beta^{\top}x)}}
+\end{equation}
 \subsubsection*{Decision Trees}
 Decision Trees sort data through binary splits based on sensor thresholds. We use Gini Impurity, as it is numerically stable under extreme class imbalance:
-$$Gini(S) = \sum_{k \in \{0,1\}} p_{k}(1 - p_{k})$$
+\begin{equation}
+Gini(S) = \sum_{k \in \{0,1\}} p_{k}(1 - p_{k})
+\end{equation}
 Splits are evaluated by their reduction in impurity:
-$$\Delta = Gini(S) - \left(\frac{|S_{L}|}{|S|}Gini(S_{L}) + \frac{|S_{R}|}{|S|}Gini(S_{R})\right)$$
+\begin{equation}
+\Delta = Gini(S) - \left(\frac{|S_{L}|}{|S|}Gini(S_{L}) + \frac{|S_{R}|}{|S|}Gini(S_{R})\right)
+\end{equation}
 Based on 5-Fold Cross Validation, the optimal maximum depth was set to 5 to prevent overfitting.
  
 \subsubsection*{Random Forest}
 Random Forest aggregates multiple trees trained on bootstrap samples and random feature subsets,
 yielding a majority vote prediction:
-\[
+\begin{equation}
 \hat{y} = \mathrm{mode}\{\hat{y}^{(1)}, \hat{y}^{(2)}, \ldots, \hat{y}^{(N)}\}
-\]
-
+\end{equation}
 We evaluate both Balanced Random Forest and Cost-Sensitive Random Forest to address the severe class imbalance in the dataset. Balanced Random Forest uses internal undersampling for each tree, meaning each bootstrap sample is adjusted so that the defective class is better represented during training. Cost-Sensitive Random Forest keeps the original training distribution but applies class-weighted impurity, giving higher penalty to mistakes on defective samples. Comparing both approaches allows us to test whether defect detection improves more from changing the sample distribution or from changing the cost of minority-class errors.
  
 \subsubsection*{Boosting (AdaBoost, XGBoost, LightGBM, CatBoost)}
 Boosting builds an ensemble by repeatedly reweighting samples to focus on previous mistakes. For our baseline, AdaBoost, the error is:
-$$\epsilon_i = \sum_{j} w_j^i \delta(C_i(x_j) \neq y_j)$$
+\begin{equation}
+\epsilon_i = \sum_{j} w_j^i \delta(C_i(x_j) \neq y_j)
+\end{equation}
 Classifier importance:
-$$\alpha_{t} = \frac{1}{2} \ln\left(\frac{1 - \epsilon_{t}}{\epsilon_{t}}\right)$$
+\begin{equation}
+\alpha_{t} = \frac{1}{2} \ln\left(\frac{1 - \epsilon_{t}}{\epsilon_{t}}\right)
+\end{equation}
 Sample weights update:
-$$w_{j}^{i+1} = \frac{w_{j}^{i}}{Z_{i}} \times \begin{cases} e^{-\alpha_{i}}, & C_{i}(x_{j}) = y_{j} \\ e^{\alpha_{i}}, & C_{i}(x_{j}) \neq y_{j} \end{cases}$$
+\begin{equation}
+w_{j}^{i+1} = \frac{w_{j}^{i}}{Z_{i}} \times \begin{cases} e^{-\alpha_{i}}, & C_{i}(x_{j}) = y_{j} \\ e^{\alpha_{i}}, & C_{i}(x_{j}) \neq y_{j} \end{cases}
+\end{equation}
 We extend our analysis to advanced gradient boosting frameworks (XGBoost, LightGBM, and CatBoost) to gauge performance gains and processing efficiency against the AdaBoost baseline.
  
 \section{Experimental Design}
