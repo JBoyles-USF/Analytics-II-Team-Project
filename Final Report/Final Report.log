@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.4)  1 MAY 2026 19:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.4)  1 MAY 2026 19:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -502,27 +502,27 @@ File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 Underfull \vbox (badness 1189) has occurred while \output is active []
 
  [7] [8] [9]
-Overfull \hbox (28.46497pt too wide) in alignment at lines 416--423
+Overfull \hbox (28.46497pt too wide) in alignment at lines 416--421
  [] [] [] [] [] [] 
  []
 
 
-Overfull \hbox (28.46497pt too wide) in alignment at lines 423--429
+Overfull \hbox (28.46497pt too wide) in alignment at lines 421--427
  [] [] [] [] [] [] 
  []
 
 
-Overfull \hbox (28.46497pt too wide) in alignment at lines 429--434
+Overfull \hbox (28.46497pt too wide) in alignment at lines 427--432
  [] [] [] [] [] [] 
  []
 
 
-Overfull \hbox (28.46497pt too wide) in alignment at lines 434--438
+Overfull \hbox (28.46497pt too wide) in alignment at lines 432--436
  [] [] [] [] [] [] 
  []
 
 
-Overfull \hbox (28.46497pt too wide) in alignment at lines 438--501
+Overfull \hbox (28.46497pt too wide) in alignment at lines 436--499
  [] [] [] [] [] [] 
  []
 
@@ -532,7 +532,7 @@ ignored: Infinite glue shrinkage found in box being split [11] [12]
 <figures/Results.png, id=194, 715.17188pt x 766.36313pt>
 File: figures/Results.png Graphic file (type png)
 <use figures/Results.png>
-Package pdftex.def Info: figures/Results.png  used on input line 509.
+Package pdftex.def Info: figures/Results.png  used on input line 507.
 (pdftex.def)             Requested size: 397.48499pt x 425.94466pt.
  [13 <./figures/Results.png>] (Final Report.aux)
  ***********
@@ -545,13 +545,13 @@ Package rerunfilecheck Info: File `"Final Report".out' has not changed.
 Here is how much of TeX's memory you used:
  13461 strings out of 467867
  211763 string characters out of 5418335
- 699705 words of memory out of 5000000
+ 698536 words of memory out of 5000000
  41914 multiletter control sequences out of 15000+600000
  658096 words of font info for 179 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,79p,1101b,597s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/Zebbi/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on "Final Report.pdf" (13 pages, 424590 bytes).
+Output written on "Final Report.pdf" (13 pages, 424536 bytes).
 PDF statistics:
  276 PDF objects out of 1000 (max. 8388607)
  69 named destinations out of 1000 (max. 500000)
