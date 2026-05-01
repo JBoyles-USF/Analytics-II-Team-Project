@@ -290,21 +290,20 @@ Summary tables of these metrics are embedded within our attached Juptyer Noteboo
  
 
  
-\subsection*{Ablation Analysis}
+\subsection{Comparing Predicitve Ability}
+
+\subsection{Comparing Interpretability}
 
 
-\section{Conclusion and Future Work }
+\section{Conclusion and Future Work}
 
-\subsection{From Boosting Summary...}
+\subsection{Our Recommended Model}
 
-The clearest takeaways are: 
-\begin{enumerate}
-    \item Sampler choice is what matters, not how the data is split.
-    \item Random undersampling produces a consistent overfit / distribution-mismatch signature across all four models.
-    \item XGBoost and CatBoost are robust across all strategies.
-    \item LightGBM should not be used without a balancing strategy given its baseline instability.
-    \item AdaBoost largely fails to benefit from class-weighting, degrades under SMOTE and oversampling, and is by far the slowest — making it the weakest option among the four boosters evaluated here.
-\end{enumerate}
+\subsection{Limitations of Our Study}
+
+\subsection{Potential Future Improvements}
+
+
 
 
 %Bibliography
