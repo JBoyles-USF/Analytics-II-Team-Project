@@ -275,20 +275,7 @@ CatBoost & iterations & 1000 & 300 \\
 \end{table}
  
 \subsection*{Ablation Analysis}
-Data split ratios had minimal effect on aggregate performance. The class imbalance treatment was the overwhelming driver of the precision-recall tradeoff.
- 
-\paragraph{Random Undersampling:} This strategy caused severe distribution mismatch. All models hit a training precision of 1.0 but dropped below 10\% test precision. Memorizing an artificially shrunk training distribution caused predictions to flood toward the minority class upon encountering natural test imbalance.
- 
-\paragraph{Baseline (Unweighted):} XGBoost and CatBoost performed strongly without manipulation, yielding high train-test precision alignment ($\sim$96–100\% test) and 70–80\% recall. LightGBM, however, demonstrated severe instability, degrading dramatically on smaller (70/30) training sets.
- 
-\paragraph{Class-Weighted:} For XGBoost, CatBoost, and LightGBM, class-weighting provided a clean, low-complexity lift in recall ($\sim$76–80\%) while maintaining $>92\%$ test precision. AdaBoost failed to respond to class weighting.
- 
-\paragraph{SMOTE \& Random Oversampling:} XGBoost, LightGBM, and CatBoost achieved their best overall F1 scores under Random Oversampling, with 93–100\% test precision and 73–84\% recall. Under SMOTE, models showed a moderate train-test precision gap (signaling slight overfit to synthetic data) but remained competitive.
- 
-\paragraph{AdaBoost Limitations:} Across all resampling techniques that inflated training size (SMOTE, Oversampling), AdaBoost's test precision collapsed (9–37\%) while runtimes ballooned to over 100$\times$ slower than CatBoost or XGBoost.
- 
-\subsection*{Conclusion}
-Sampler choice, rather than data split, dictates performance. XGBoost and CatBoost proved to be the most robust algorithms across all strategies. LightGBM requires an active balancing strategy to function reliably, and Random Undersampling broadly leads to overfitting. Ultimately, class-weighted or oversampled gradient boosting models provide the optimal balance for minimizing false negatives in highly imbalanced manufacturing data.
+
 
 \section{Conclusion and Future Work }
 
@@ -430,6 +417,7 @@ FN Weight & Rank & Scenario & "FN \& FP Score" & FNR & FPR \\
 
 \newpage
 \subsection*{B. Figures}
+The following bar charts include the top 10 scoring models for each False Negative weight (50\%-100\%), along with their "FN \& FP Scores".
 
 \begin{figure}[h]
     \centering
