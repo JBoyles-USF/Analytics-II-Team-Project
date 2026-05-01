@@ -83,54 +83,33 @@
 \newpage
 \begin{abstract}
 %\section{Abstract}
-Manufacturing defect detection plays a crucial role in maintaining product
-quality and reliability in industrial systems. In ball bearing manufacturing,
-defective components can lead to the following if not detected early in the
-production process:
+Manufacturing defect detection is critical for maintaining product quality,
+reliability, and safety in industrial systems. In manufacturing, undetected
+defective components can lead to equipment failures, increased maintenance
+costs, scrap, rework, and potential safety risks. This project applies
+machine learning techniques to predict defective parts using historical
+manufacturing test data.
 
-\begin{enumerate}
-    \item equipment failures
-    \item increased maintenance
-    \item potential safety risks
-\end{enumerate}
+The dataset contains 229,999 observations, including 850 duplicate records,
+0 missing values, and 30 numerical predictor variables representing sensor
+readings or process measurements. The target variable is a binary defect
+label, where Class 1 represents defective parts. Only 458 samples are
+defective, giving a defect rate of 0.1991\%. This creates a severe
+imbalanced classification problem, where traditional metrics such as
+accuracy can be misleading because a model may achieve high accuracy while
+failing to identify rare defects.
 
-This project investigates the use of machine learning techniques
-to predict defective ball bearings using historical manufacturing data
-obtained from destructive and non-destructive testing procedures.
-
-The dataset contains approximately 229,788 observations with 30 numerical
-predictor variables representing sensor readings or process measurements,
-along with a binary classification label indicating whether a bearing is
-defective or non-defective. A major challenge associated with this dataset
-is the severe class imbalance, as only 458 observations---approximately
-0.2\% of the dataset---are labeled as defective. In such cases, traditional
-metrics such as overall accuracy can be misleading because models may
-achieve high accuracy by predicting the majority class while failing to
-detect rare defects.
-
-To address this issue, this project focuses on evaluation metrics that
-better reflect performance on the minority class. Specifically, recall,
-precision, F1-minority score, and the Area Under the Precision--Recall
-Curve (PR-AUC) will be used to evaluate model performance, since missing
-a defective component is significantly more costly than incorrectly
-flagging a non-defective one.
-
-Several techniques will be explored to mitigate class imbalance during
-model training, including random oversampling, random undersampling,
-Synthetic Minority Oversampling Technique (SMOTE), and class-weighted
-learning methods. Multiple machine learning models will be evaluated,
-including Logistic Regression, Decision Trees, Random Forests, and
-boosting methods such as AdaBoost or gradient-boosted trees.
-
-The experimental design includes model benchmarking, ablation studies of
-imbalance-handling strategies, and sensitivity analysis across different
-data split ratios. In addition, interpretability methods such as feature
-importance analysis and SHAP values will be used to identify which
-predictors contribute most strongly to defect detection.
-
-The goal of this project is to develop a reliable and interpretable
-machine learning framework that improves defect detection while
-providing actionable insights for manufacturing quality control.
+To address this challenge, this project evaluates the predictive models chosen using a custom
+FN \& FP Score that combines the false negative rate and false positive
+rate with adjustable weights. This scoring system allows model rankings to
+reflect the manufacturing tradeoff between missed defects and false alarms.
+Multiple imbalance-handling strategies are compared, including random
+oversampling, random undersampling, Synthetic Minority Oversampling
+Technique (SMOTE), and class-weighted learning. Several machine learning
+models are evaluated, including Logistic Regression, Decision Trees,
+Random Forests, and boosting models. The goal is to develop a reliable
+defect detection framework that improves minority-class prediction and
+supports manufacturing quality control.
 \end{abstract}
 
 
@@ -139,34 +118,36 @@ providing actionable insights for manufacturing quality control.
 % From ChatGPT: Introduce the research problem, motivation, and contributions of the paper.
 \section{Introduction}
 
-This project aims to utilize historical ball bearing manufacturing data to predict 
-defectiveness of manufactured parts and to understand which combinations of control 
-settings typically lead to defective production. The goal is to create an interpretable 
-model that accurately predicts whether a ball bearing will be classified as defective 
-after several destructive and non-destructive tests, based on a set of predictor variables.
+Manufacturing defect detection plays an important role in improving product
+quality, reducing waste, and preventing costly failures. In manufacturing,
+defective components can contribute to equipment damage, increased maintenance,
+production delays, customer dissatisfaction, and potential safety risks if they
+are not detected early. As manufacturing systems collect more process and test
+data, machine learning provides an opportunity to identify defect patterns that
+may not be obvious through manual inspection alone.
 
-The dataset contains approximately 230,000 samples with 30 predictor variables. Each sample 
-is labeled as defective (class 1) or non-defective (class 0), which is the target variable 
-we aim to predict. By understanding the factors that contribute to defects, corrective 
-action can be taken on controllable system inputs to reduce future defects. Reduced defect 
-rates directly lower scrap, rework, resource, and labor costs in the manufacturing process.
+This project uses historical manufacturing data to predict whether a manufactured part is defective. Of the full dataset, only 0.1991\% of samples are labeled as defective. This makes the problem a severe imbalanced classification task
 
-However, this problem presents several challenges: the dataset is large and high-dimensional, 
-the classes are severely imbalanced (only around 0.2\% of samples defective), and manufacturing 
-processes can involve complex, nonlinear interactions between variables. Additionally, 
-interpretability is critical, as predictions must provide actionable insights for engineers 
-and management.
+The main challenge is that the defective class is extremely rare. This project first compares several machine learning models on this unbalanced data.
+Because the defective class is extremely rare, each model is tested with
+different imbalance-handling strategies, including oversampling, undersampling,
+SMOTE, and class-weighted learning. Different data splits are also compared to
+check whether performance remains stable. Finally, models are ranked using a custom FN \& FP Score based on false
+negative and false positive rates, since overall accuracy can appear high even
+when rare defects are missed. 
 
-In this project, we aim to:
+The objectives of this project are to:
 
 \begin{enumerate}
-    \item Develop an interpretable predictive model for classifying defective ball bearings.
-    \item Identify and analyze key process variables that most strongly influence defect rates.
-    \item Explore how the model’s insights can guide corrective actions to reduce defects and improve manufacturing efficiency.
+    \item Develop a predictive model for classifying defective parts.
+    \item Evaluate model performance under severe class imbalance using the custom FN \& FP Score.
+    \item Identify key process variables associated with defective production.
+    \item Provide insights that can support manufacturing quality control and process improvement.
 \end{enumerate}
 
-Together, these aims outline a plan to leverage historical manufacturing data for 
-actionable defect prediction and process improvement.
+Together, these objectives outline a framework for using historical manufacturing
+data to improve defect detection.
+
 
 
 % Related Work (15%)
