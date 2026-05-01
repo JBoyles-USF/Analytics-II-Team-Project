@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.4)  1 MAY 2026 09:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.4)  1 MAY 2026 09:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -491,35 +491,30 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 ) [1
 
 
-{C:/Users/Joshua/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}] [2] [3]
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 219.
- (C:\Users\Joshua\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
-File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-)
+{C:/Users/Joshua/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}] [2] [3] [4]
+Underfull \vbox (badness 1127) has occurred while \output is active []
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[4] [5] [6] [7]
-Overfull \hbox (28.46497pt too wide) in alignment at lines 361--366
+ [5] [6] [7]
+Overfull \hbox (28.46497pt too wide) in alignment at lines 359--364
  [] [] [] [] [] [] 
  []
 
 
-Overfull \hbox (28.46497pt too wide) in alignment at lines 366--370
+Overfull \hbox (28.46497pt too wide) in alignment at lines 364--368
  [] [] [] [] [] [] 
  []
 
 
-Overfull \hbox (28.46497pt too wide) in alignment at lines 370--432
+Overfull \hbox (28.46497pt too wide) in alignment at lines 368--430
  [] [] [] [] [] [] 
  []
 
-c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Final Report/Final Report.tex:432: ignored error: Infinite glue shrinkage found in box being split [8]
-c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Final Report/Final Report.tex:432: ignored error: Infinite glue shrinkage found in box being split [9] [10]
-<figures/Results.png, id=164, 715.17188pt x 766.36313pt>
+c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Final Report/Final Report.tex:430: ignored error: Infinite glue shrinkage found in box being split [8]
+c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Final Report/Final Report.tex:430: ignored error: Infinite glue shrinkage found in box being split [9] [10]
+<figures/Results.png, id=168, 715.17188pt x 766.36313pt>
 File: figures/Results.png Graphic file (type png)
 <use figures/Results.png>
-Package pdftex.def Info: figures/Results.png  used on input line 441.
+Package pdftex.def Info: figures/Results.png  used on input line 439.
 (pdftex.def)             Requested size: 397.48499pt x 425.94466pt.
  [11 <./figures/Results.png>] (Final Report.aux)
  ***********
@@ -527,20 +522,20 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
 Package rerunfilecheck Info: File `"Final Report".out' has not changed.
-(rerunfilecheck)             Checksum: 4A9ACA9496BA72B3D551C390C56CA236;2938.
+(rerunfilecheck)             Checksum: A64C3861E749693CB129CDB86D0447B1;3107.
  ) 
 Here is how much of TeX's memory you used:
- 13415 strings out of 467871
- 211468 string characters out of 5417893
- 699195 words of memory out of 5000000
- 41901 multiletter control sequences out of 15000+600000
- 656510 words of font info for 156 fonts, out of 8000000 for 9000
+ 13386 strings out of 467871
+ 210959 string characters out of 5417893
+ 699119 words of memory out of 5000000
+ 41876 multiletter control sequences out of 15000+600000
+ 656270 words of font info for 155 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,79p,1108b,657s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on "Final Report.pdf" (11 pages, 411676 bytes).
+Output written on "Final Report.pdf" (11 pages, 411644 bytes).
 PDF statistics:
- 244 PDF objects out of 1000 (max. 8388607)
- 64 named destinations out of 1000 (max. 500000)
- 32398 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 248 PDF objects out of 1000 (max. 8388607)
+ 65 named destinations out of 1000 (max. 500000)
+ 30358 words of extra memory for PDF output out of 35830 (max. 10000000)
 

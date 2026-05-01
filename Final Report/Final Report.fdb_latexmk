@@ -1,11 +1,10 @@
 # Fdb version 4
-["pdflatex"] 1777640735.31998 "c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Final Report/Final Report.tex" "Final Report.pdf" "Final Report" 1777640737.88342 0
+["pdflatex"] 1777641350.04922 "c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Final Report/Final Report.tex" "Final Report.pdf" "Final Report" 1777641352.28263 0
   "C:/Users/Joshua/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1772648574 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/Joshua/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1772647969 13333970 0e67918d4f2f76e2330703e2c99fc585 ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/times/ptmb8r.tfm" 1136790254 4524 6bce29db5bc272ba5f332261583fee9c ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/times/ptmb8t.tfm" 1136790254 6880 f19b8995b61c334d78fc734065f6b4d4 ""
-  "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/times/ptmr8c.tfm" 1136790254 1352 fa28a7e6d323c65ce7d13d5342ff6be2 ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/times/ptmr8r.tfm" 1136790254 4408 25b74d011a4c66b7f212c0cc3c90061b ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/times/ptmr8t.tfm" 1136790254 6672 e3ab9e37e925f3045c9005e6d1473d56 ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/times/ptmri8r.tfm" 1136790254 4640 532ca3305aad10cc01d769f3f91f1029 ""
@@ -31,7 +30,6 @@
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb" 1136871348 46026 687528a208fbfc1f00832bb96cccebbb ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb" 1136871348 45458 504e2b06fa82109d168c7a0afb09e145 ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/vf/adobe/times/ptmb8t.vf" 1136790254 2340 df9c920cc5688ebbf16a93f45ce7bdd3 ""
-  "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/vf/adobe/times/ptmr8c.vf" 1136790254 3556 8a9a6dcbcd146ef985683f677f4758a6 ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/vf/adobe/times/ptmr8t.vf" 1136790254 2348 91706c542228501c410c266421fbe30c ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/vf/adobe/times/ptmri8t.vf" 1136790254 2328 6cd7df782b09b29cfc4d93e55b6b9a59 ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/context/base/mkii/supp-pdf.mkii" 1580390158 71627 94eb9990bed73c364d7f53f960cc8c5b ""
@@ -94,7 +92,6 @@
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/microtype/mt-ptm.cfg" 1752015111 12427 78d94d2b9d095b6021a1cc87fb6d8cd7 ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/natbib/natbib.sty" 1292249081 46712 1c8843383c0bd05870c45fa0ebea6cc2 ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/psnfss/t1ptm.fd" 1585253778 817 61d7da1e9f9e74989b196d147e623736 ""
-  "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/psnfss/ts1ptm.fd" 1585253778 653 96f56dc5d1ef1fe1121f1cfeec70ee0c ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/refcount/refcount.sty" 1576433952 9878 9e94e8fa600d95f9c7731bb21dfb67a4 ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/rerunfilecheck/rerunfilecheck.sty" 1751104012 9684 a33a14b82ce60d6e77cb9be689d79ee6 ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/tools/longtable.sty" 1761901070 16014 dfa4b4d4e04a78a3f05a90c19711737a ""
@@ -102,10 +99,10 @@
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/units/nicefrac.sty" 1469029150 4163 0462ee5ab265cf59dc15a41a3b883101 ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/Joshua/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "Final Report.aux" 1777640737 4027 b2b9ae873f7e517380c6af77e9ba131b "pdflatex"
-  "Final Report.out" 1777640737 2938 4a9aca9496ba72b3d551c390c56ca236 "pdflatex"
-  "Final Report.tex" 1777640734 24520 d06835d6d92161b78140e96bb59a6828 ""
-  "c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Final Report/Final Report.tex" 1777640734 24520 d06835d6d92161b78140e96bb59a6828 ""
+  "Final Report.aux" 1777641351 4155 507922e45ada01dbf6d642cc7b936e21 "pdflatex"
+  "Final Report.out" 1777641351 3107 a64c3861e749693cb129cdb86d0447b1 "pdflatex"
+  "Final Report.tex" 1777641346 24346 50847fd14145a8f1a76f4f66f5e7a592 ""
+  "c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Final Report/Final Report.tex" 1777641346 24346 50847fd14145a8f1a76f4f66f5e7a592 ""
   "figures/Results.png" 1777602204 337638 d14644a051a020418ad0057700c8a336 ""
   "neurips_2021.sty" 1772757296 11926 d18f419fd491be5d557e02acf3e7311b ""
   (generated)

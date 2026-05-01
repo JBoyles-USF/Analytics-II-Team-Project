@@ -168,7 +168,7 @@ Building on these findings, our project systematically compares interpretable an
 \section{Model and Method}
 
 \subsection{Class Imbalance Strategies}
-The dataset comprises 229,999 test records with only 458 defective samples (0.2\%). To address the imbalance, we evaluate four dataset manipulation techniques: Random Oversampling (duplicating minority samples), Random Undersampling (removing majority samples), SMOTE (synthetic sample generation), and Class-Weighted training (adjusting learning objectives to penalize minority-class errors).
+The dataset comprises 229,999 test records with only 458 defective samples (0.2\%). To address the imbalance, we evaluate four dataset manipulation techniques: Random Oversampling (duplicating minority samples), Random Undersampling (removing majority samples), SMOTE (synthetic sample generation), and Class-Weighted training (adjusting learning objectives to penalize minority-class errors). Each data sampling method was tested on every considered model type.
  
 
 \subsection{Considered Model Types}
@@ -211,15 +211,8 @@ w_{j}^{i+1} = \frac{w_{j}^{i}}{Z_{i}} \times \begin{cases} e^{-\alpha_{i}}, & C_
 \end{equation}
 We extend our analysis to advanced gradient boosting frameworks (XGBoost, LightGBM, and CatBoost) to gauge performance gains and processing efficiency against the AdaBoost baseline.
  
-\subsection{Model Selection}
-We evaluate simple models alongside complex ensembles to measure the trade-off between interpretability and predictive performance.
- 
-Our experimental phase evaluates 120 unique scenarios across three components:
-\begin{itemize}
-    \item \textbf{Model Benchmark:} Comparing algorithms across predictive power and transparency.
-    \item \textbf{Class Imbalance Strategy Ablation:} Quantifying the impact of the four sampling and weighting strategies on the decision boundary.
-    \item \textbf{Data Split Comparison:} Testing model generalization across 90/10, 80/20, and 70/30 train/test split ratios.
-\end{itemize}
+\subsection{Data Split Comparison}
+Testing model generalization across 90/10, 80/20, and 70/30 train/test split ratios.
 
 \subsection{Hyperparameter Tuning}
  A 5-Fold Cross Validation method was done to tune the hyperparameters for each model type on the baseline 80/20 split:
@@ -246,6 +239,11 @@ CatBoost & iterations & 1000 & 300 \\
 \section{Experimental Design}
 
 
+\subsection{Model Selection}
+We evaluate simple models alongside complex ensembles to measure the trade-off between interpretability and predictive performance.
+ 
+Our experimental phase evaluates 120 unique scenarios by comparing algorithms across predictive power and transparency.
+  
 \subsection{"FN \& FP Score" System for Evaluating Model Prediction Ability}
 
 In many classification tasks, reducing false negatives (FN) is often more critical than reducing false positives (FP). To systematically evaluate models with this consideration, we propose a weighted scoring system that incorporates both the false negative rate (FNR) and false positive rate (FPR).
