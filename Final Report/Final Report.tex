@@ -220,14 +220,9 @@ To evaluate this trade-off, we compare three stratified train/test split ratios:
 The purpose of the split comparison is not only to identify the split with the best score, but also to determine whether model rankings remain stable across different evaluation conditions. If a model performs well only under one split ratio, its performance may be dependent on a favorable partition of rare defective samples. However, if a model remains competitive across multiple splits, this provides stronger evidence that it generalizes to unseen manufacturing data. For this reason, split sensitivity is treated as part of the model evaluation process rather than only a preprocessing decision.
 
 \subsection{Hyperparameter Tuning}
-Each model underwent hyperparameter tuning using 5-fold cross-validation, guided by a
-
-customized penalty function that evaluated the trade-off between FN and FP weights. Table~\ref{tab:hyperparams} summarizes the default and tuned
-
+Each model underwent hyperparameter tuning using 5-fold cross-validation, utilizing a customized penalty function that evaluated the trade-off between FN and FP weights. Table~\ref{tab:hyperparams} summarizes the default and tuned
 hyperparameters across all models. Notably, the optimal hyperparameters remained consistent
-
 across all FN weight values (0.5--1.0), suggesting that the models' best configurations are
-
 robust regardless of how aggresive the scoring weight is penalizing rates of FN (FNR)
 
 \begin{table}[h!]
@@ -258,7 +253,6 @@ CatBoost            & max\_depth     & 6    & 6    \\
 \hline
 \end{tabular}
 \end{table}
-\newpage
  
 
 \section{Experimental Design}
