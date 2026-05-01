@@ -239,10 +239,11 @@ CatBoost & iterations & 1000 & 300 \\
 \section{Experimental Design}
 
 
-\subsection{Model Selection}
-We evaluate simple models alongside complex ensembles to measure the trade-off between interpretability and predictive performance.
- 
-Our experimental phase evaluates 120 unique scenarios by comparing algorithms across predictive power and transparency.
+\subsection{Model Selection Criteria}
+We evaluate simple models alongside complex ensembles to consider the trade-off between interpretability and predictive performance.
+Our experimental phase primarily evaluates 120 unique scenarios via our custom "FN \& FP Score" System, as well as secondary evaluation with other relevant metrics in the case that predictive ability and interpretability do not significantly emphasize a best choice model.
+
+Conceptual model transparency and interpretability are considered for final model suggestion/recommendation.
   
 \subsection{"FN \& FP Score" System for Evaluating Model Prediction Ability}
 
