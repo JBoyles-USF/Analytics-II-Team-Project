@@ -254,7 +254,7 @@ Conceptual model transparency and interpretability are considered for final mode
 
 In many classification tasks, reducing false negatives (FN) is often more critical than reducing false positives (FP). To systematically evaluate models with this consideration, we propose a weighted scoring system that incorporates both the false negative rate (FNR) and false positive rate (FPR).
 
-\paragraph{Weighted Score Definition.}
+\paragraph{Weighted Score Definition}
 We define the \textbf{"FN \& FP Score"} for a model as a weighted sum of the FN Rate and FP Rate:
 
 \begin{equation}
@@ -263,14 +263,14 @@ We define the \textbf{"FN \& FP Score"} for a model as a weighted sum of the FN 
 
 where \(\text{FN weighting}\) and \(\text{FP weighting}\) are non-negative weights reflecting the relative importance of reducing false negatives versus false positives.
 
-\paragraph{Auxiliary Equation.}
+\paragraph{Auxiliary Equation}
 Assuming the weights are complementary, we can express the FP weighting in terms of the FN weighting:
 
 \begin{equation}
 \text{FP weighting} = 1 - \text{FN weighting}
 \end{equation}
 
-\paragraph{Equivalent Equation.}
+\paragraph{Equivalent Equation}
 Substituting the complementary weighting into the score formula yields:
 
 \begin{equation}
@@ -279,13 +279,24 @@ Substituting the complementary weighting into the score formula yields:
 
 This equivalent equation shows that the score is a function of three components: FN weighting, FNR, and FPR.
 
-\paragraph{Model Ranking Using the "FN \& FP Score".}
-The "FN \& FP" Score allows ranking models according to their performance while prioritizing false negatives. For a given FN weighting, the \textbf{lowest score} indicates the \textbf{best model} at that weighting.
+
+\paragraph{Model Ranking Using the "FN \& FP Score"}
+The "FN \& FP" Score allows ranking models according to their performance while prioritizing reduction of false negatives. For a given FN weighting, the \textbf{lowest score} indicates the \textbf{best model} at that weighting.
 By varying FN weighting (e.g., 50\%, 60\%, …, 100\%), we can evaluate model performance under different prioritization schemes.
 
 
 This approach provides a flexible and interpretable framework for model selection, emphasizing the trade-off between FN and FP according to domain-specific requirements.
  
+\paragraph{Subjectivity of FN Weighting}
+
+The FN weighting metric is subject to change with added bias. For example, bias against false negatives (e.g., incorporating ethics of producing a defect) could increase this weighting, whereas a completely unbiased (but potentially unethical) way of calculating FN weighting could be a follows:
+
+\begin{equation}
+\text{FN weighting} = \frac{\text{Cost of FN}}{\text{Cost of FN} + \text{Cost of FP}}
+\end{equation}
+
+In this case, each respective cost could result from labor costs, material costs, increased public relations costs the company, etc.
+
 \subsection{Other Relevant Metrics}
 Due to the extreme class imbalance, accuracy and ROC AUC can be misleading metrics \cite{imani2026roc}. Instead, recall, precision, Area Under the Precision-Recall Curve (PR-AUC), and the F1-minority score can be used as secondary metrics to evaluate our models.
 Summary tables of these metrics are embedded within our attached Juptyer Notebook. Theses metrics serve as secondary evaluative criteria of our models in the case that predictive ability and interpretability do not significantly emphasize a best choice model.
