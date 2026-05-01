@@ -124,12 +124,11 @@ are not detected early. As manufacturing systems collect more process and test
 data, machine learning provides an opportunity to identify defect patterns that
 may not be obvious through manual inspection alone.
 
-This project uses historical manufacturing data to predict whether a manufactured part is defective. Of the full dataset, only 0.1991\% of samples are labeled as defective. This makes the problem a severe imbalanced classification task
+This project uses historical manufacturing data to predict whether a manufactured part is defective. Of the full dataset, only 0.1991\% of samples are labeled as defective. This makes the problem a severe imbalanced classification task.
 
 The main challenge is that the defective class is extremely rare. This project first compares several machine learning models on this unbalanced data.
 Because the defective class is extremely rare, each model is tested with
-different imbalance-handling strategies, including oversampling, undersampling,
-SMOTE, and class-weighted learning. Different data splits are also compared to
+different imbalance-handling strategies. Different data splits are also compared to
 check whether performance remains stable. Finally, models are ranked using a custom FN \& FP Score based on false
 negative and false positive rates, since overall accuracy can appear high even
 when rare defects are missed. 
