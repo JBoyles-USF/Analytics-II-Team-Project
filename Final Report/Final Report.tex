@@ -261,13 +261,45 @@ The experimental phase is structured into three distinct components to ensure a 
  
 \textbf{Objective:} Evaluate candidate models... identify the optimal balance between predictive power and model transparency... This benchmark compares the interpretability vs. performance of models... and is often as critical as its accuracy in industrial maintenance environments.
 Something about focus on false negative rates and false positive rates?
+
+\subsection{"FN \& FP Score" System for Model Evaluation}
+
+In many classification tasks, reducing false negatives (FN) is often more critical than reducing false positives (FP). To systematically evaluate models with this consideration, we propose a weighted scoring system that incorporates both the false negative rate (FNR) and false positive rate (FPR).
+
+\paragraph{Weighted Score Definition.}
+We define the \textbf{"FN \& FP Score"} for a model as a weighted sum of the FN Rate and FP Rate:
+
+\begin{equation}
+\text{FN \& FP Score} = (\text{FN weighting}) \times (\text{FN Rate}) + (\text{FP weighting}) \times (\text{FP Rate})
+\end{equation}
+
+where \(\text{FN weighting}\) and \(\text{FP weighting}\) are non-negative weights reflecting the relative importance of reducing false negatives versus false positives.
+
+\paragraph{Auxiliary Equation.}
+Assuming the weights are complementary, we can express the FP weighting in terms of the FN weighting:
+
+\begin{equation}
+\text{FP weighting} = 1 - \text{FN weighting}
+\end{equation}
+
+\paragraph{Equivalent Equation.}
+Substituting the complementary weighting into the score formula yields:
+
+\begin{equation}
+\text{FN \& FP Score} = (\text{FN weighting}) \times (\text{FN Rate}) + (1 - \text{FN weighting}) \times (\text{FP Rate})
+\end{equation}
+
+This equivalent equation shows that the score is a function of three components: FN weighting, FNR, and FPR.
+
+\paragraph{Model Ranking Using the "FN \& FP Score".}
+The "FN \& FP" Score allows ranking models according to their performance while prioritizing false negatives. For a given FN weighting, the \textbf{lowest score} indicates the \textbf{best model} at that weighting.
+By varying FN weighting (e.g., 50\%, 60\%, …, 100\%), we can evaluate model performance under different prioritization schemes.
+
+
+This approach provides a flexible and interpretable framework for model selection, emphasizing the trade-off between FN and FP according to domain-specific requirements.
  
-\subsection*{Evaluation Focus:}
- 
-something about the scoring system...
-"FN \& FP Score"
- 
- 
+\newpage
+
 \subsubsection*{Expected Outcomes:}
  
 \begin{itemize}
