@@ -99,17 +99,15 @@ imbalanced classification problem, where traditional metrics such as
 accuracy can be misleading because a model may achieve high accuracy while
 failing to identify rare defects.
 
-To address this challenge, this project evaluates the predictive models chosen using a custom
-FN \& FP Score that combines the false negative rate and false positive
-rate with adjustable weights. This scoring system allows model rankings to
-reflect the manufacturing tradeoff between missed defects and false alarms.
-Multiple imbalance-handling strategies are compared, including random
-oversampling, random undersampling, Synthetic Minority Oversampling
-Technique (SMOTE), and class-weighted learning. Several machine learning
-models are evaluated, including Logistic Regression, Decision Trees,
-Random Forests, and boosting models. The goal is to develop a reliable
-defect detection framework that improves minority-class prediction and
-supports manufacturing quality control.
+To address this challenge, this project first compares several machine learning models.
+Because the defective class is extremely rare, each model is tested with
+different imbalance-handling strategies, including oversampling, undersampling,
+SMOTE, and class-weighted learning. Different data splits are also compared to 
+check whether performance remains stable. 
+Finally, models are ranked using a custom FN \& FP Score based on false
+negative and false positive rates, since overall accuracy can appear high even
+when rare defects are missed.
+
 \end{abstract}
 
 
