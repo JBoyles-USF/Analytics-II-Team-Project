@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.4)  1 MAY 2026 09:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.4)  1 MAY 2026 10:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -496,26 +496,26 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [4] [5] [6] [7]
-Overfull \hbox (28.46497pt too wide) in alignment at lines 376--381
+Overfull \hbox (28.46497pt too wide) in alignment at lines 382--387
  [] [] [] [] [] [] 
  []
 
 
-Overfull \hbox (28.46497pt too wide) in alignment at lines 381--385
+Overfull \hbox (28.46497pt too wide) in alignment at lines 387--391
  [] [] [] [] [] [] 
  []
 
 
-Overfull \hbox (28.46497pt too wide) in alignment at lines 385--447
+Overfull \hbox (28.46497pt too wide) in alignment at lines 391--453
  [] [] [] [] [] [] 
  []
 
-c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Final Report/Final Report.tex:447: ignored error: Infinite glue shrinkage found in box being split [8]
-c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Final Report/Final Report.tex:447: ignored error: Infinite glue shrinkage found in box being split [9] [10]
+c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Final Report/Final Report.tex:453: ignored error: Infinite glue shrinkage found in box being split [8]
+c:/Users/Joshua/Documents/Local Analytics II Team Project/Analytics-II-Team-Project/Final Report/Final Report.tex:453: ignored error: Infinite glue shrinkage found in box being split [9] [10]
 <figures/Results.png, id=170, 715.17188pt x 766.36313pt>
 File: figures/Results.png Graphic file (type png)
 <use figures/Results.png>
-Package pdftex.def Info: figures/Results.png  used on input line 456.
+Package pdftex.def Info: figures/Results.png  used on input line 462.
 (pdftex.def)             Requested size: 397.48499pt x 425.94466pt.
  [11 <./figures/Results.png>] (Final Report.aux)
  ***********
@@ -526,15 +526,15 @@ Package rerunfilecheck Info: File `"Final Report".out' has not changed.
 (rerunfilecheck)             Checksum: 01721EB420CF26413595701E0BFEC94A;3155.
  ) 
 Here is how much of TeX's memory you used:
- 13398 strings out of 467871
- 211074 string characters out of 5417893
- 699104 words of memory out of 5000000
+ 13401 strings out of 467871
+ 211101 string characters out of 5417893
+ 699137 words of memory out of 5000000
  41876 multiletter control sequences out of 15000+600000
- 656726 words of font info for 162 fonts, out of 8000000 for 9000
+ 656856 words of font info for 164 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,79p,1108b,657s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/Joshua/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on "Final Report.pdf" (11 pages, 414286 bytes).
+Output written on "Final Report.pdf" (11 pages, 416010 bytes).
 PDF statistics:
  251 PDF objects out of 1000 (max. 8388607)
  67 named destinations out of 1000 (max. 500000)

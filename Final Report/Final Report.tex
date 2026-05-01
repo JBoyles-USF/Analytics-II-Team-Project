@@ -316,9 +316,15 @@ Summary tables of these metrics are embedded within our attached Juptyer Noteboo
 \subsection{Our Recommended Model}
 
 \subsection{Limitations of Our Study}
+This study has several limitations that are relevant within the report. First, the dataset is extremely imbalanced, with only 458 defective samples out of nearly 230,000 observations. While various imbalance-handling strategies were applied, such a low defect rate makes it difficult for models to fully learn the characteristics of the minority class, potentially limiting generalization to new data.
+The dataset consists of numerical input features without detailed contextual information. While models such as Logistic Regression can provide coefficients, translating these into practical insights may require additional domain knowledge.
+Additionally, the evaluation framework in terms of the cost-weighted error metric may possibly go off on false negative and false positive rates. Although this metric reflects practical manufacturing priorities, the choice of weighting is subjective and may vary depending on specific operational requirements.
+Finally, the models were trained and evaluated on a static dataset and do not account for real-time production variability or changes in process conditions over time. As a result, model performance in a live manufacturing environment may differ from the results observed in this study.
 
 \subsection{Potential Future Improvements}
-
+Several improvements can be made for this study in future work. First, incorporating additional defective sample data would help address the extreme class imbalance and allow models to better learn minority class patterns. Collecting data across different operating conditions may also improve model generalization.
+Also, the evaluation framework could be extended by exploring alternative cost-sensitive metrics or optimizing the weighting scheme based on specific manufacturing objectives. This would allow the model selection process to better reflect real-world priorities.
+Finally, future work could involve deploying models in a real-time or streaming environment to evaluate performance under changing production conditions. This would provide insight into how models perform over time and whether periodic retraining or adaptation is necessary.
 
 
 
