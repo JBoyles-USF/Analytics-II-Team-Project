@@ -212,9 +212,6 @@ w_{j}^{i+1} = \frac{w_{j}^{i}}{Z_{i}} \times \begin{cases} e^{-\alpha_{i}}, & C_
 We extend our analysis to advanced gradient boosting frameworks (XGBoost, LightGBM, and CatBoost) to gauge performance gains and processing efficiency against the AdaBoost baseline.
  
 \subsection{Data Split Comparison}
-Testing model generalization across 90/10, 80/20, and 70/30 train/test split ratios.
-
-\subsection{Data Split Comparison}
 
 Because the defective class represents only a very small portion of the dataset, model performance may be sensitive to how the data are divided into training and testing sets. A split with a larger training portion, such as 90/10, gives the model more examples to learn from, including more rare defective samples. However, it also leaves fewer defective samples in the test set, which can make metrics more sensitive to small changes in the number of false negatives. In contrast, a 70/30 split provides a larger test set and a more stable estimate of generalization performance, but it reduces the number of defective samples available during training.
 
@@ -222,7 +219,10 @@ To evaluate this trade-off, we compare three stratified train/test split ratios:
 
 The purpose of the split comparison is not only to identify the split with the best score, but also to determine whether model rankings remain stable across different evaluation conditions. If a model performs well only under one split ratio, its performance may be dependent on a favorable partition of rare defective samples. However, if a model remains competitive across multiple splits, this provides stronger evidence that it generalizes to unseen manufacturing data. For this reason, split sensitivity is treated as part of the model evaluation process rather than only a preprocessing decision.
  
-\begin{table}[h!]
+\subsection{Hyperparameter Tuning}
+ A 5-Fold Cross Validation method was done to tune the hyperparameters for each model type on the baseline 80/20 split:
+
+ \begin{table}[h!]
 \centering
 \caption{Boosting Models Hyperparameters: Default vs Tuned}
 \begin{tabular}{l l l l}
