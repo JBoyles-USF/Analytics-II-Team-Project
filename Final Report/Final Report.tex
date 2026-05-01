@@ -193,9 +193,13 @@ $$\Delta = Gini(S) - \left(\frac{|S_{L}|}{|S|}Gini(S_{L}) + \frac{|S_{R}|}{|S|}G
 Based on 5-Fold Cross Validation, the optimal maximum depth was set to 5 to prevent overfitting.
  
 \subsubsection*{Random Forest}
-Random Forest aggregates multiple trees trained on bootstrap samples and random feature subsets, yielding a majority vote prediction:
-$$\hat{y} = mode\{\hat{y}^{(1)}, \hat{y}^{(2)}, \dots, \hat{y}^{(N)}\}$$
-We evaluate both Balanced Random Forest (internal undersampling per tree) and Cost-Sensitive Random Forest (class-weighted impurity).
+Random Forest aggregates multiple trees trained on bootstrap samples and random feature subsets,
+yielding a majority vote prediction:
+\[
+\hat{y} = \mathrm{mode}\{\hat{y}^{(1)}, \hat{y}^{(2)}, \ldots, \hat{y}^{(N)}\}
+\]
+
+We evaluate both Balanced Random Forest and Cost-Sensitive Random Forest to address the severe class imbalance in the dataset. Balanced Random Forest uses internal undersampling for each tree, meaning each bootstrap sample is adjusted so that the defective class is better represented during training. Cost-Sensitive Random Forest keeps the original training distribution but applies class-weighted impurity, giving higher penalty to mistakes on defective samples. Comparing both approaches allows us to test whether defect detection improves more from changing the sample distribution or from changing the cost of minority-class errors.
  
 \subsubsection*{Boosting (AdaBoost, XGBoost, LightGBM, CatBoost)}
 Boosting builds an ensemble by repeatedly reweighting samples to focus on previous mistakes. For our baseline, AdaBoost, the error is:
