@@ -218,28 +218,48 @@ Because the defective class represents only a very small portion of the dataset,
 To evaluate this trade-off, we compare three stratified train/test split ratios: 90/10, 80/20, and 70/30. Stratification is used so that each split preserves approximately the same defective/non-defective class proportion as the full dataset. This is especially important for this project because random splitting without stratification could produce a test set with too few defective examples, making recall, false negative rate, and the FN \& FP Score unreliable.
 
 The purpose of the split comparison is not only to identify the split with the best score, but also to determine whether model rankings remain stable across different evaluation conditions. If a model performs well only under one split ratio, its performance may be dependent on a favorable partition of rare defective samples. However, if a model remains competitive across multiple splits, this provides stronger evidence that it generalizes to unseen manufacturing data. For this reason, split sensitivity is treated as part of the model evaluation process rather than only a preprocessing decision.
- 
-\subsection{Hyperparameter Tuning}
-Each model underwent hyperparameter tuning with 5-fold Cross Validation. This process utilized a customized penalty function evaluating the trade off between FN and FP weights.
 
- \begin{table}[h!]
+\subsection{Hyperparameter Tuning}
+Each model underwent hyperparameter tuning using 5-fold cross-validation, guided by a
+
+customized penalty function that evaluated the trade-off between FN and FP weights. Table~\ref{tab:hyperparams} summarizes the default and tuned
+
+hyperparameters across all models. Notably, the optimal hyperparameters remained consistent
+
+across all FN weight values (0.5--1.0), suggesting that the models' best configurations are
+
+robust regardless of how aggresive the scoring weight is penalizing rates of FN (FNR)
+
+\begin{table}[h!]
 \centering
-\caption{Boosting Models Hyperparameters: Default vs Tuned}
+\caption{Model Hyperparameters: Default vs.\ Tuned (Consistent Across All FN Weights)}
+\label{tab:hyperparams}
 \begin{tabular}{l l l l}
 \hline
 \textbf{Model} & \textbf{Parameter} & \textbf{Default} & \textbf{Tuned} \\
 \hline
-Decision Tree & max\_depth & 5 & 5 \\
-AdaBoost & n\_estimators & 50 & 200 \\
-& learning\_rate & 1.0 & 1.5 \\
-XGBoost  & n\_estimators & 100 & 300 \\
-& learning\_rate & 0.3 & 0.05 \\
-LightGBM & n\_estimators & 100 & 300 \\
-CatBoost & iterations & 1000 & 300 \\
+Logistic Regression & C              & 1.0  & 0.1  \\
+                    & l1\_ratio      & 0.5  & 1    \\
+Decision Tree       & max\_depth     & 5    & 5    \\
+                    & min\_leaf      & 1    & 1    \\
+Balanced RF         & max\_depth     & None & 10   \\
+                    & n\_estimators  & 100  & 100  \\
+Cost-Sensitive RF   & max\_depth     & None & 5    \\
+                    & n\_estimators  & 100  & 300  \\
+XGBoost             & max\_depth     & 6    & 3    \\
+                    & learning\_rate & 0.3  & 0.05 \\
+                    & n\_estimators  & 100  & 300  \\
+LightGBM            & max\_depth     & -1   & 3    \\
+                    & learning\_rate & 0.1  & 0.05 \\
+                    & n\_estimators  & 100  & 100  \\
+CatBoost            & max\_depth     & 6    & 6    \\
+                    & learning\_rate & 0.03 & 0.05 \\
+                    & iterations     & 1000 & 300  \\
 \hline
 \end{tabular}
 \end{table}
 \newpage
+ 
 
 \section{Experimental Design}
 
