@@ -188,79 +188,53 @@ Building on these findings, our project systematically compares interpretable an
 
 
 \section{Model and Method}
+\subsection*{Preferred Metrics}
+The dataset comprises 229,999 test records with only 458 defective samples (0.2\%). In manufacturing, missing a defect (false negative) is significantly more costly than incorrectly flagging a healthy part. Consequently, accuracy and ROC AUC can be misleading metrics for severe class imbalance \cite{imani2026roc}. Instead, we prioritize recall, precision, Area Under the Precision-Recall Curve (PR-AUC), and the F1-minority score.
  
-\subsection*{Class Imbalance - Preferred Metrics}
-The dataset comprises 229,788 ball-bearing test records featuring 30 numerical predictors and a binary response variable. With only 458 defective samples, standard classifiers tend to favor the majority class; yielding high accuracy that can be misleading. In manufacturing, false negatives are more costly than false positives, as they can lead to diminished customer confidence, expensive product recalls, or liability lawsuits. Consequently, accuracy is not an appropriate metric. Instead, recall, precision, F1 Score, and the Area Under the Precision-Recall Curve (PR-AUC) are the primary metrics.
- 
-Because the defective class represents only 0.2\% of the dataset, using Receiver Operating Characteristic Area Under Curve (ROC AUC) can overly estimate the performance. A study was conducted and proved that ROC AUC is not dependable if the true positive sample is less than 3\% of the total \cite{imani2026roc}. PR AUC is preferred because it summarizes the precision and recall tradeoff across thresholds and reflects performance exclusively on the defective class, suitable for the case of missing a defect is far more consequential than flagging a non defective part. However, ROC AUC could still be considered to gauge the performance of baseline models.
- 
-Using regular F1 score as a metric combines performance across all classes, which causes the majority class to dominate the result in imbalanced datasets, shown by this formula:
+Using the regular F1 score masks minority class performance because the majority class dominates the aggregation:
 $$F1_{regular} = 2 \cdot \frac{P_{overall} \cdot R_{overall}}{P_{overall} + R_{overall}}$$
-where $P_{overall}$ and $R_{overall}$ are precision and recall across both classes. Because these aggregated values are driven primarily by the majority class, a model can achieve a high regular F1 score even while performing poorly on the defective class.
-F1 per class, especially F1 minority avoids this masking effect by computing precision and recall only for the defective class:
+ 
+Computing precision and recall exclusively for the defective class avoids this masking effect \cite{sciencedirect_minority}:
 $$F1_{minority} = 2 \cdot \frac{P_{minority} \cdot R_{minority}}{P_{minority} + R_{minority}}$$
-The criticality of using F1 to detect the minority class in classification serves to aid in anomaly detection and identify the imbalance of the data set and its analysis \cite{sciencedirect_minority}. Classification trained on imbalanced data is weak at predicting samples within the minority class.
  
-\subsection*{Class Imbalance - Modification on Training Data}
-To address the imbalance, four manipulation strategies are employed, each with its distinct trade-offs. Random Oversampling duplicates minority samples to improve recall, though it risks overfitting. Random Undersampling removes majority samples to balance the classes but may lead to information loss. Synthetic Minority Oversampling Technique (SMOTE) generates synthetic defective samples by interpolation to refine decision boundaries but may introduce noise if the minority class has high variance. Finally, Class-Weighted training adjusts the learning objective to penalize minority-class errors more heavily, shifting the decision boundary without altering the dataset. These methods are systematically evaluated by comparing performance metrics across the experimental design combinations.
+\subsection*{Class Imbalance Strategies}
+To address the imbalance, we evaluate four dataset manipulation techniques: Random Oversampling (duplicating minority samples), Random Undersampling (removing majority samples), SMOTE (synthetic sample generation), and Class-Weighted training (adjusting learning objectives to penalize minority-class errors).
  
-\subsection*{Model Considerations}
-We plan to evaluate four primary models, which are logistic regression, Decision Tree, Random Forest, and AdaBoost/XGBoost. By comparing these simple and complex models, performance trade-offs between interpretability and prediction results can be measured.
+\subsection*{Model Selection}
+We evaluate simple models alongside complex ensembles to measure the trade-off between interpretability and predictive performance.
  
 \subsubsection*{Logistic Regression}
-Logistic Regression is a sensible model to explore as it is suitable for binary classification problems. Logistic Regression models the probability that a bearing is defective as a smooth function of the readings:
+Logistic Regression provides high interpretability, modeling defect probability as a smooth function of sensor readings so engineers can quantify feature impact:
 $$P(defective|x) = \sigma(\beta_{0} + \beta^{\top}x) = \frac{1}{1 + e^{-(\beta_{0} + \beta^{\top}x)}}$$
-Here, $x$ is the vector of reading values, $\beta$ is the vector of coefficients, and $\sigma(\cdot)$ is the logistic (sigmoid) function that maps any real number to a probability between 0 and 1. Each coefficient $\beta_i$ represents the change in the log-odds of a defect associated with a one-unit increase in reading $x_i$, holding other predictors constant. This makes Logistic Regression highly interpretable as engineers can directly see which predictors increase or decrease defect risk and by how much.
  
 \subsubsection*{Decision Trees}
-Decision Trees provide transparency by sorting data through a series of logical, binary splits. At each step, the model identifies the sensor threshold that best separates defective bearings from healthy ones, reducing impurity until a homogeneous classification is reached. This visual approach allows us to see exactly which predictor values trigger a defect alert. To determine the best possible split, the algorithm calculates a purity score at each step. This is done using Gini Impurity, which measures the probability of a specific sensor reading being incorrectly classified if it were labeled randomly. A lower Gini value indicates a more pure or successful separation of defective bearings from healthy ones. Gini is calculated as follows:
+Decision Trees sort data through binary splits based on sensor thresholds. We use Gini Impurity, as it is numerically stable under extreme class imbalance:
 $$Gini(S) = \sum_{k \in \{0,1\}} p_{k}(1 - p_{k})$$
-where $p_k$ is the proportion of class $k$ in node $S$. A split into left and right child nodes $S_L$ and $S_R$ is evaluated by:
+Splits are evaluated by their reduction in impurity:
 $$\Delta = Gini(S) - \left(\frac{|S_{L}|}{|S|}Gini(S_{L}) + \frac{|S_{R}|}{|S|}Gini(S_{R})\right)$$
-The algorithm selects the split with the largest $\Delta$, the greatest reduction in impurity.
-Gini impurity is used instead of entropy because it is computationally simpler by not
-using logarithms and tends to be more numerically stable under extreme class imbalance.
-As the defective class is severely smaller, tiny fluctuations in estimated probabilities
-can cause large changes in entropy, potentially amplifying noise. Gini provides smoother
-behavior, leading to more stable splits and more reliable rankings of feature importance.
-For this project, Decision Tree models serve as an interpretable nonlinear model that
-can capture simple interactions between predictors, and as a base learner for ensemble methods.
+Based on 5-Fold Cross Validation, the optimal maximum depth was set to 5 to prevent overfitting.
  
 \subsubsection*{Random Forest}
-Random Forest extends Decision Trees by aggregating many trees trained on different subsets of the data and features. Each tree is trained on a bootstrap sample of the training data, and at each split, a random subset of features is considered. The final prediction is obtained by majority vote:
+Random Forest aggregates multiple trees trained on bootstrap samples and random feature subsets, yielding a majority vote prediction:
 $$\hat{y} = mode\{\hat{y}^{(1)}, \hat{y}^{(2)}, \dots, \hat{y}^{(N)}\}$$
-where $\hat{y}^{(n)}$ is the prediction of tree $n$, and $N$ is the number of trees. The ensemble model determines the best prediction by calculating the mode across the results of each individual tree. To address class imbalance, the Balanced Random Forest variant is used: for each tree, all defective samples are included, and an equal number of non-defective samples are randomly drawn to form a balanced bootstrap sample. This ensures that each tree is trained on a dataset where the defective class is not overwhelmed by the majority class, improving the model's ability to learn splits that separate defects from non-defects and thereby improving recall. Random Forests also provide feature importance scores (e.g., based on impurity reduction or permutation importance), which are valuable for manufacturing engineers who need to understand which sensors consistently contribute to defect detection across many trees.
+We evaluate both Balanced Random Forest (internal undersampling per tree) and Cost-Sensitive Random Forest (class-weighted impurity).
  
-While Balanced RF handles imbalance by resampling the data for each tree, cost-sensitive RF addresses the same issue by applying class weighted impurity so that errors on defective samples receive higher penalties (One application of the Class weighted strategy). Evaluating both RF variants allows us to compare the best model for detection performance.
- 
-\subsubsection*{Boosting}
-Adaptive Boosting (AdaBoost) builds an ensemble of weak learners by repeatedly reweighting the training samples so that each new classifier focuses on the mistakes of the previous ones. The misclassified samples get their weights $w_j^i$ increased, correctly classified ones decreased, and then they all get normalized by the normalization constant. Over time, this forces the ensemble to concentrate on high-error instances:
+\subsubsection*{Boosting (AdaBoost, XGBoost, LightGBM, CatBoost)}
+Boosting builds an ensemble by repeatedly reweighting samples to focus on previous mistakes. For our baseline, AdaBoost, the error is:
 $$\epsilon_i = \sum_{j} w_j^i \delta(C_i(x_j) \neq y_j)$$
-This quantity measures how much weight the current classifier assigns to its mistakes. The classifier’s importance weight is then computed as:
+Classifier importance:
 $$\alpha_{t} = \frac{1}{2} \ln\left(\frac{1 - \epsilon_{t}}{\epsilon_{t}}\right)$$
-The importance increases when the classifier performs better than chance and decreases when it performs poorly. After each iteration, AdaBoost updates the sample weights:
+Sample weights update:
 $$w_{j}^{i+1} = \frac{w_{j}^{i}}{Z_{i}} \times \begin{cases} e^{-\alpha_{i}}, & C_{i}(x_{j}) = y_{j} \\ e^{\alpha_{i}}, & C_{i}(x_{j}) \neq y_{j} \end{cases}$$
-The misclassified samples get their weights increased by $e^{\alpha_i}$, correctly classified ones decreased by $e^{-\alpha_i}$, and then they all get normalized by $Z_i$, the normalization constant. Over time, this forces the ensemble to concentrate on high error samples. This behavior is useful for classifying rare defective bearings in our data. As they are rare, they are often misclassified by early weak learners because they appear infrequently and have subtle patterns. AdaBoost naturally increases their weight, causing them to gain importance. This can improve defect detection without manually oversampling. However, AdaBoost is sensitive to noise; overemphasizing and overfitting if there is too much. For this reason, AdaBoost serves as a strong but potentially sensitive benchmark in the project timeline.
+We extend our analysis to advanced gradient boosting frameworks (XGBoost, LightGBM, and CatBoost) to gauge performance gains and processing efficiency against the AdaBoost baseline.
  
-AdaBoost will serve as our baseline boosting methods, providing a simple and interpretable reference for boosting model. From here, we plan to extend the analysis to more advanced gradient boosting models such as XGBoost, LightGBM, and CatBoost to gauge performance gains, interpretability, and process time. All boosting variants will be included in the model benchmark, with XGBoost being the prioritized model to be explored.
- 
-
 \section{Experimental Design}
- 
-The experimental phase is structured into three distinct components to ensure a robust evaluation of the model.
- 
+Our experimental phase evaluates 120 unique scenarios across three components:
 \begin{itemize}
-    \item \textbf{Model Benchmark:} A comparison of simple and complex models to determine the best performing model; with consideration of interpretability vs. predictive performance.
-   
-    \item \textbf{Class Imbalance Strategy Ablation:} A systematic evaluation of various dataset manipulation strategies to address the class imbalance problem.
-   
-    \item \textbf{Data Split Comparison:} A test of model stability and generalization across different training, validation, and test ratios.
+    \item \textbf{Model Benchmark:} Comparing algorithms across predictive power and transparency.
+    \item \textbf{Class Imbalance Strategy Ablation:} Quantifying the impact of the four sampling and weighting strategies on the decision boundary.
+    \item \textbf{Data Split Comparison:} Testing model generalization across 90/10, 80/20, and 70/30 train/test split ratios.
 \end{itemize}
- 
-\subsection*{Main Benchmark Analysis}
- 
-\textbf{Objective:} Evaluate candidate models... identify the optimal balance between predictive power and model transparency... This benchmark compares the interpretability vs. performance of models... and is often as critical as its accuracy in industrial maintenance environments.
-Something about focus on false negative rates and false positive rates?
 
 \subsection{"FN \& FP Score" System for Model Evaluation}
 
@@ -300,51 +274,11 @@ This approach provides a flexible and interpretable framework for model selectio
  
 \newpage
 
-\subsubsection*{Expected Outcomes:}
- 
-\begin{itemize}
-    \item \textbf{Superiority of Ensembles:} Boosting and Forest based methods are expected to yield the highest PR-AUC.
-    \item \textbf{Diminishing Returns:} We anticipate a curve where complex boosting methods provide only marginal gains over Balanced Random Forests, but at the cost of significantly higher complexity and problems due to noisy minority samples.
-    \item \textbf{Interpretability:} Baseline (Simple) models will likely provide the highest interpretability but lower recall, serving as the essential control group for the study.
-\end{itemize}
- 
-\subsection*{Class Imbalance Strategy Ablation}
- 
-\textbf{Objective:} Quantify the impact of various sampling and weighting strategies on the decision boundary. Each of the strategies will be tested to each of the model selection, creating 16 experimental combinations.
- 
-\begin{itemize}
-    \item \textbf{Oversampling} Check whether duplicating some minority samples boost recall without overfitting.
-    \item \textbf{Undersampling:} Check whether removing some majority samples improves performance and interpretability balance without severely losing information.
-    \item \textbf{SMOTE:} Testing if synthetic minority generation improves recall without introducing excessive noise.
-    \item \textbf{Cost-Sensitive Learning:} Evaluating if class weighting offers a cleaner alternative to data manipulation.
-    \begin{itemize}
-    \item \textbf{Logistic Regression (Class-Weighted Loss)}: Applies class weights inside the weighted cross-entropy objective so that misclassifying defective samples incurs a higher penalty.
- 
-    \item \textbf{Decision Tree (Class-Weighted Impurity)}: Uses class-weighted Gini impurity, causing splits to favor isolating minority-class samples.
- 
-    \item \textbf{Random Forest (Cost-Sensitive RF)}: Implements class weighting through weighted impurity across all trees; this is the Random-Forest-specific form of class-weighted learning.
- 
-    \item \textbf{Boosting (AdaBoost/XGBoost) with Class Weights}: Adjusts sample weights or uses parameters such as \texttt{scale\_pos\_weight} (multiplying training loss to increase minority class influence).
-\end{itemize}
- 
-\end{itemize}
- 
-\subsubsection*{Expected Outcome:}
- 
-Class weighting and Balanced Random Forest (internal undersampling) are expected to provide the most stable results, whereas SMOTE may increase False Positives by creating unrealistic defective signatures.
- 
-\subsubsection*{Data Split Comparison}
- 
-This test is to determine if the model’s performance is affected by a specific data split, especially given the limited minority sample size. The baseline data split will use 80/10/10 of training, validation, and test data, respectively.
- 
-Remember to add the other splits!!!!!
-
 \section{Results}
-
-\section*{Boosting Models Experiment}
-
-The first complete run of the experiment was done with default parameters for all boosting models. A second run was made with the tuned hyperparameters of boosting models determined by a 5-Fold Cross Validation on the 80/20 baseline split resulting in:
-
+ 
+\subsection*{Hyperparameter Tuning}
+The initial benchmark utilized default parameters. A secondary run utilized hyperparameters tuned via 5-Fold Cross Validation on the baseline 80/20 split:
+ 
 \begin{table}[h!]
 \centering
 \caption{Boosting Models Hyperparameters: Default vs Tuned}
@@ -353,30 +287,30 @@ The first complete run of the experiment was done with default parameters for al
 \textbf{Model} & \textbf{Parameter} & \textbf{Default} & \textbf{Tuned} \\
 \hline
 AdaBoost & n\_estimators & 50 & 200 \\
-         & learning\_rate & 1.0 & 1.5 \\
+& learning\_rate & 1.0 & 1.5 \\
 XGBoost  & n\_estimators & 100 & 300 \\
-         & learning\_rate & 0.3 & 0.05 \\
+& learning\_rate & 0.3 & 0.05 \\
 LightGBM & n\_estimators & 100 & 300 \\
 CatBoost & iterations & 1000 & 300 \\
 \hline
 \end{tabular}
 \end{table}
-
-\subsection{Ablation Analysis}
-
-The data split ratio has only minor effects on aggregate performance. The class imbalance treatment is the overwhelming driver of performance, especially on the precision-recall tradeoff.
-
-\paragraph{Random Undersampling:} There is a severe overfit / distribution mismatch. Nearly all four models hit train precision of exactly 1.0 but have less than 10\% test precision, with recall mostly above 70\%. This indicates overfitting as the model memorizes a balanced but artificially shrunk training distribution, then encounters the natural imbalance at test time and floods predictions toward the minority class. This may also indicate a fundamental mismatch between training and deployment distributions.
-
-\paragraph{Baseline (Unweighted):} XGBoost and CatBoost both perform strongly. Train and test precision align closely (\~96–100\% test), recall sits around 70–80\%, and ROC AUC stays above 0.98 — a genuinely stable result with minimal overfit. AdaBoost behaves similarly but with lower recall (57–70\%), suggesting it is conservative rather than overfit. LightGBM is the outlier: performance degrades dramatically as the training set shrinks, going from near-collapse at 70/30 (test precision 10.8\%, recall 15.9\%, ROC AUC 0.58) to merely mediocre at 90/10. LightGBM without any balancing strategy appears sensitive to the combination of severe class imbalance and limited training data.
-
-\paragraph{Class-Weighted:} AdaBoost does not respond. For XGBoost, CatBoost, and LightGBM, class-weighting produces a meaningful lift in recall (\~76–80\%) while keeping test precision above 92\%, making it a clean, low-complexity improvement over the unweighted baseline. However, AdaBoost's class-weighted results are bit-for-bit identical to its unweighted baseline across all three splits — scikit-learn's AdaBoostClassifier does not accept a \texttt{class\_weight} parameter, so the two configurations are effectively running the same model twice.
-
-\paragraph{SMOTE:} XGBoost, CatBoost, and LightGBM all achieve a reasonable middle ground under SMOTE: train precision near 1.0 with test precision in the 60–94\% range and recall around 75–85\%. The train-test precision gap (roughly 30–40 points) signals moderate overfitting to synthetic samples, but F1 scores are still competitive. AdaBoost is an outlier: test precision collapses to \~9\% while runtime balloons to 255–449 seconds — over 100× slower than CatBoost or XGBoost under the same conditions.
-
-\paragraph{Random Oversampling:} XGBoost, LightGBM, and CatBoost achieve the best overall F1 scores, with test precision of 93–100\% and recall of 73–84\%. Train precision is 1.0 for all, and test precision remains high, with a small distribution shift compared to SMOTE. AdaBoost again lags substantially (21–37\% test precision), showing poor response to any resampling that inflates training set size.
-
-
+ 
+\subsection*{Ablation Analysis}
+Data split ratios had minimal effect on aggregate performance. The class imbalance treatment was the overwhelming driver of the precision-recall tradeoff.
+ 
+\paragraph{Random Undersampling:} This strategy caused severe distribution mismatch. All models hit a training precision of 1.0 but dropped below 10\% test precision. Memorizing an artificially shrunk training distribution caused predictions to flood toward the minority class upon encountering natural test imbalance.
+ 
+\paragraph{Baseline (Unweighted):} XGBoost and CatBoost performed strongly without manipulation, yielding high train-test precision alignment ($\sim$96–100\% test) and 70–80\% recall. LightGBM, however, demonstrated severe instability, degrading dramatically on smaller (70/30) training sets.
+ 
+\paragraph{Class-Weighted:} For XGBoost, CatBoost, and LightGBM, class-weighting provided a clean, low-complexity lift in recall ($\sim$76–80\%) while maintaining $>92\%$ test precision. AdaBoost failed to respond to class weighting.
+ 
+\paragraph{SMOTE \& Random Oversampling:} XGBoost, LightGBM, and CatBoost achieved their best overall F1 scores under Random Oversampling, with 93–100\% test precision and 73–84\% recall. Under SMOTE, models showed a moderate train-test precision gap (signaling slight overfit to synthetic data) but remained competitive.
+ 
+\paragraph{AdaBoost Limitations:} Across all resampling techniques that inflated training size (SMOTE, Oversampling), AdaBoost's test precision collapsed (9–37\%) while runtimes ballooned to over 100$\times$ slower than CatBoost or XGBoost.
+ 
+\subsection*{Conclusion}
+Sampler choice, rather than data split, dictates performance. XGBoost and CatBoost proved to be the most robust algorithms across all strategies. LightGBM requires an active balancing strategy to function reliably, and Random Undersampling broadly leads to overfitting. Ultimately, class-weighted or oversampled gradient boosting models provide the optimal balance for minimizing false negatives in highly imbalanced manufacturing data.
 
 \section{Conclusion and Future Work }
 
