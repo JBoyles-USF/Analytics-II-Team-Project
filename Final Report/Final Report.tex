@@ -166,23 +166,12 @@ Building on these findings, our project systematically compares interpretable an
 
 
 \section{Model and Method}
-\subsection*{Preferred Metrics}
-The dataset comprises 229,999 test records with only 458 defective samples (0.2\%). In manufacturing, missing a defect (false negative) is significantly more costly than incorrectly flagging a healthy part. Consequently, accuracy and ROC AUC can be misleading metrics for severe class imbalance \cite{imani2026roc}. Instead, we prioritize recall, precision, Area Under the Precision-Recall Curve (PR-AUC), and the F1-minority score.
+
+\subsection{Class Imbalance Strategies}
+The dataset comprises 229,999 test records with only 458 defective samples (0.2\%). To address the imbalance, we evaluate four dataset manipulation techniques: Random Oversampling (duplicating minority samples), Random Undersampling (removing majority samples), SMOTE (synthetic sample generation), and Class-Weighted training (adjusting learning objectives to penalize minority-class errors).
  
-Using the regular F1 score masks minority class performance because the majority class dominates the aggregation:
-\begin{equation}
-F1_{regular} = 2 \cdot \frac{P_{overall} \cdot R_{overall}}{P_{overall} + R_{overall}}
-\end{equation}
-Computing precision and recall exclusively for the defective class avoids this masking effect \cite{sciencedirect_minority}:
-\begin{equation}
-F1_{minority} = 2 \cdot \frac{P_{minority} \cdot R_{minority}}{P_{minority} + R_{minority}}
-\end{equation}
-\subsection*{Class Imbalance Strategies}
-To address the imbalance, we evaluate four dataset manipulation techniques: Random Oversampling (duplicating minority samples), Random Undersampling (removing majority samples), SMOTE (synthetic sample generation), and Class-Weighted training (adjusting learning objectives to penalize minority-class errors).
- 
-\subsection*{Model Selection}
-We evaluate simple models alongside complex ensembles to measure the trade-off between interpretability and predictive performance.
- 
+
+\subsection{Considered Model Types}
 \subsubsection*{Logistic Regression}
 Logistic Regression provides high interpretability, modeling defect probability as a smooth function of sensor readings so engineers can quantify feature impact:
 \begin{equation}
@@ -222,7 +211,9 @@ w_{j}^{i+1} = \frac{w_{j}^{i}}{Z_{i}} \times \begin{cases} e^{-\alpha_{i}}, & C_
 \end{equation}
 We extend our analysis to advanced gradient boosting frameworks (XGBoost, LightGBM, and CatBoost) to gauge performance gains and processing efficiency against the AdaBoost baseline.
  
-\section{Experimental Design}
+\subsection{Model Selection}
+We evaluate simple models alongside complex ensembles to measure the trade-off between interpretability and predictive performance.
+ 
 Our experimental phase evaluates 120 unique scenarios across three components:
 \begin{itemize}
     \item \textbf{Model Benchmark:} Comparing algorithms across predictive power and transparency.
@@ -230,7 +221,32 @@ Our experimental phase evaluates 120 unique scenarios across three components:
     \item \textbf{Data Split Comparison:} Testing model generalization across 90/10, 80/20, and 70/30 train/test split ratios.
 \end{itemize}
 
-\subsection{"FN \& FP Score" System for Model Evaluation}
+\subsection{Hyperparameter Tuning}
+The initial benchmark utilized default parameters. A secondary run utilized hyperparameters tuned via 5-Fold Cross Validation on the baseline 80/20 split:
+ 
+\begin{table}[h!]
+\centering
+\caption{Boosting Models Hyperparameters: Default vs Tuned}
+\begin{tabular}{l l l l}
+\hline
+\textbf{Model} & \textbf{Parameter} & \textbf{Default} & \textbf{Tuned} \\
+\hline
+Decision Tree & max\_depth & 5 & 5 \\
+AdaBoost & n\_estimators & 50 & 200 \\
+& learning\_rate & 1.0 & 1.5 \\
+XGBoost  & n\_estimators & 100 & 300 \\
+& learning\_rate & 0.3 & 0.05 \\
+LightGBM & n\_estimators & 100 & 300 \\
+CatBoost & iterations & 1000 & 300 \\
+\hline
+\end{tabular}
+\end{table}
+\newpage
+
+\section{Experimental Design}
+
+
+\subsection{"FN \& FP Score" System for Evaluating Model Prediction Ability}
 
 In many classification tasks, reducing false negatives (FN) is often more critical than reducing false positives (FP). To systematically evaluate models with this consideration, we propose a weighted scoring system that incorporates both the false negative rate (FNR) and false positive rate (FPR).
 
@@ -266,29 +282,13 @@ By varying FN weighting (e.g., 50\%, 60\%, …, 100\%), we can evaluate model pe
 
 This approach provides a flexible and interpretable framework for model selection, emphasizing the trade-off between FN and FP according to domain-specific requirements.
  
-\newpage
+\subsection{Other Relevant Metrics}
+Due to the extreme class imbalance, accuracy and ROC AUC can be misleading metrics \cite{imani2026roc}. Instead, recall, precision, Area Under the Precision-Recall Curve (PR-AUC), and the F1-minority score can be used as secondary metrics to evaluate our models.
+Summary tables of these metrics are embedded within our attached Juptyer Notebook.
 
 \section{Results}
  
-\subsection*{Hyperparameter Tuning}
-The initial benchmark utilized default parameters. A secondary run utilized hyperparameters tuned via 5-Fold Cross Validation on the baseline 80/20 split:
- 
-\begin{table}[h!]
-\centering
-\caption{Boosting Models Hyperparameters: Default vs Tuned}
-\begin{tabular}{l l l l}
-\hline
-\textbf{Model} & \textbf{Parameter} & \textbf{Default} & \textbf{Tuned} \\
-\hline
-AdaBoost & n\_estimators & 50 & 200 \\
-& learning\_rate & 1.0 & 1.5 \\
-XGBoost  & n\_estimators & 100 & 300 \\
-& learning\_rate & 0.3 & 0.05 \\
-LightGBM & n\_estimators & 100 & 300 \\
-CatBoost & iterations & 1000 & 300 \\
-\hline
-\end{tabular}
-\end{table}
+
  
 \subsection*{Ablation Analysis}
 
