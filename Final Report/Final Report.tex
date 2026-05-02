@@ -340,23 +340,10 @@ Our recommended model across all FN weights is Class-weighted Logistic Regressio
     \item \textbf{Interpretability:} Provides greater transparency and feature insight than AdaBoost, which is the only model to exceed its performance at weights $\ge 70\%$.
 \end{itemize}
 
-\subsection{Limitations of Our Study}
-This study has several limitations that are relevant within the report. First, the dataset is extremely imbalanced, with only 458 defective samples out of nearly 230,000 observations. While various imbalance-handling strategies were applied, such a low defect rate makes it difficult for models to fully learn the characteristics of the minority class, potentially limiting generalization to new data.
-
-The dataset also consists of numerical input features without detailed contextual information. While models such as Logistic Regression can provide coefficients, translating these into practical insights may require additional domain knowledge.
-
-Additionally, the evaluation framework in terms of the cost-weighted error metric may reflect practical manufacturing priorities, but the choice of weighting can be subjective and may vary depending on management personnel bias.
-
-Finally, the models were trained and evaluated on a static dataset and do not account for real-time production variability or changes in process conditions over time. As a result, model performance in a live manufacturing environment may differ from the results observed in this study.
-
-\subsection{Potential Future Improvements}
-Several improvements can be made for this study in future work. First, incorporating additional defective sample data would help address the extreme class imbalance and allow models to better learn minority class patterns. Collecting data across different operating conditions may also improve model generalization.
-
-Also, the evaluation framework could be extended by exploring alternative cost-sensitive metrics or optimizing the weighting scheme based on specific manufacturing objectives. This would allow the model selection process to better reflect real-world priorities.
-
-Finally, future work could involve deploying models in a real-time or streaming environment to evaluate performance under changing production conditions. This would provide insight into how models perform over time and whether periodic retraining or adaptation is necessary.
-
-
+\subsection{Limitations of Our Study} 
+This study has several methodological and practical limitations. We benchmarked our models across 720 scenarios to ensure robust validation. However, we encountered a structural limitation regarding the distinction between \textit{cost-sensitive learning} and \textit{cost-sensitive evaluation}. Because our custom weights were applied via \texttt{make\_scorer} in \texttt{GridSearchCV}, the formula acted purely as an external evaluator rather than being passed directly into the \texttt{.fit()} function. Consequently, the models used a default 50\% decision threshold on balanced data, resulting in hypersensitive predictions that flagged a large portion of the dataset to avoid false negatives. Despite this, our custom formula successfully standardized the selection process post-prediction, providing a robust platform to equally compare how well the algorithms handled imbalance while maintaining interpretability. Beyond the modeling architecture, the dataset itself presents challenges. It is extremely imbalanced (only 458 defects out of nearly 230,000 records) and consists of numerical features lacking contextual descriptions, limiting generalization and requiring domain knowledge for practical interpretation. Finally, the static nature of the dataset does not account for real-time production variability. 
+\subsection{Potential Future Improvements} 
+Future work should transition from post-training evaluation to true cost-sensitive optimization. Instead of retraining models for every weighting scenario, the pipeline should either dynamically inject weights directly into the algorithms during training (e.g., via \texttt{class\_weight}), or utilize post-training threshold tuning (sliding the defect trigger below 50\%) to optimize the decision boundary without redundant computation. Additionally, incorporating more defective sample data across different operating conditions will help the models better learn minority-class patterns. Finally, deploying the selected models in a real-time, streaming environment is necessary to evaluate their performance against production drift and determine periodic retraining intervals.
 
 
 %Bibliography

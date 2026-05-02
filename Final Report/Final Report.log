@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.4)  1 MAY 2026 20:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.4)  1 MAY 2026 21:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -498,38 +498,43 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 339.
  (C:\Users\davee\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-) [7] [8]
-Overfull \hbox (28.46497pt too wide) in alignment at lines 412--417
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `cmtt' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+ [7] [8]
+Overfull \hbox (28.46497pt too wide) in alignment at lines 399--404
  [] [] [] [] [] [] 
  []
 
 
-Overfull \hbox (28.46497pt too wide) in alignment at lines 417--423
+Overfull \hbox (28.46497pt too wide) in alignment at lines 404--410
  [] [] [] [] [] [] 
  []
 
 
-Overfull \hbox (28.46497pt too wide) in alignment at lines 423--428
+Overfull \hbox (28.46497pt too wide) in alignment at lines 410--415
  [] [] [] [] [] [] 
  []
 
 
-Overfull \hbox (28.46497pt too wide) in alignment at lines 428--432
+Overfull \hbox (28.46497pt too wide) in alignment at lines 415--419
  [] [] [] [] [] [] 
  []
 
 
-Overfull \hbox (28.46497pt too wide) in alignment at lines 432--495
+Overfull \hbox (28.46497pt too wide) in alignment at lines 419--482
  [] [] [] [] [] [] 
  []
 
 
 ignored: Infinite glue shrinkage found in box being split [9]
 ignored: Infinite glue shrinkage found in box being split [10] [11]
-<figures/Results.png, id=190, 1005.2757pt x 1057.3101pt>
+<figures/Results.png, id=191, 1005.2757pt x 1057.3101pt>
 File: figures/Results.png Graphic file (type png)
 <use figures/Results.png>
-Package pdftex.def Info: figures/Results.png  used on input line 503.
+Package pdftex.def Info: figures/Results.png  used on input line 490.
 (pdftex.def)             Requested size: 397.48499pt x 418.06046pt.
  [12 <./figures/Results.png>] (Final Report.aux)
  ***********
@@ -540,17 +545,17 @@ Package rerunfilecheck Info: File `"Final Report".out' has not changed.
 (rerunfilecheck)             Checksum: E2E5D806F43132164362423A31CE51A1;4185.
  ) 
 Here is how much of TeX's memory you used:
- 13437 strings out of 467867
- 211423 string characters out of 5418335
- 698535 words of memory out of 5000000
- 41914 multiletter control sequences out of 15000+600000
- 656972 words of font info for 163 fonts, out of 8000000 for 9000
+ 13446 strings out of 467867
+ 211557 string characters out of 5418335
+ 698544 words of memory out of 5000000
+ 41921 multiletter control sequences out of 15000+600000
+ 657401 words of font info for 165 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,8n,79p,1088b,597s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on "Final Report.pdf" (12 pages, 416886 bytes).
+ 75i,8n,79p,1465b,597s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\davee\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/davee/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
+Output written on "Final Report.pdf" (12 pages, 425335 bytes).
 PDF statistics:
- 271 PDF objects out of 1000 (max. 8388607)
+ 299 PDF objects out of 1000 (max. 8388607)
  68 named destinations out of 1000 (max. 500000)
- 32446 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 32958 words of extra memory for PDF output out of 35830 (max. 10000000)
 
