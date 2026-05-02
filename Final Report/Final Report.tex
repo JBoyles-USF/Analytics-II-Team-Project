@@ -319,30 +319,26 @@ Summary visualizations of these metrics are embedded within our attached Jupyter
 \section{Results}
 
 \subsection{Comparing Predictive Ability}
+Bar charts displaying the top 10 scoring models per FN weighting are provided in Appendix B. In this context, a lower score indicates superior predictive ability for defect detection at a specific weight. 
 
-To determine the best predictive models, we extracted the top-performing algorithms across our 6 distinct FN weighting profiles (0.5 through 1.0). The comprehensive ranking table can be referenced in the Appendix.
-
-Analysis of the 720 evaluated scenarios yielded several consistent trends:
-\begin{itemize}
-    \item \textbf{High FN Penalties (0.7 - 1.0):} As the penalty for False Negatives increased, \textbf{AdaBoost (Random Undersampled, 90/10 split)} secured the unequivocal \#1 rank across the higher weight brackets, consistently producing the lowest "FN \& FP Score."
-    \item \textbf{Balanced Penalties (0.5 - 0.6):} Interestingly, at a more balanced penalty weighting, \textbf{Logistic Regression (Class-Weighted, 80/20 split)} overtook the complex ensembles to claim the \#1 spot, proving highly efficient when FP rates are given equal or near-equal consideration.
-    \item \textbf{Optimal Data Treatment:} The \textbf{90/10 data split} was highly prevalent among the top-tier models, suggesting that maximizing the training data volume was crucial for this heavily imbalanced set. Additionally, \textbf{Random Undersampling} and \textbf{Class-Weighting} proved to be the most effective strategies for balancing the minority class without injecting the noise of synthetic data.
-\end{itemize}
+The results of our study demonstrate that a class-weighted logistic regression model with an 80/20 split outperforms all other tested models at 50\% and 60\% FN weightings, and ranks second best across all other weightings. For the 70\%, 80\%, 90\%, and 100\% FN weightings, a random undersampling AdaBoost model with a 90/10 split achieves the best predictive performance.
 
 \subsection{Comparing Interpretability}
 
-While predictive ability is paramount for defect detection, model interpretability dictates how easily engineers can trust, debug, and learn from the system.
+All models other than logistic regression that ranked within the top 10 for each weighting category utilize some form of boosting. While these ensemble techniques demonstrate strong predictive performance, the logistic regression model provides superior interpretability compared to its boosting-based counterparts. This high level of transparency is particularly advantageous for defect detection, as it allows stakeholders to easily interpret the influence of individual features on the model's output.
 
-Our \#1 predictive model, \textbf{CatBoost} (alongside AdaBoost), is a complex gradient-boosting ensemble. It operates essentially as a "black box." While we can extract general feature importance to see \textit{which} sensors matter most globally, we cannot easily see \textit{how} the thresholds interact mathematically to produce a decision for a single component. 
-
-Conversely, \textbf{Logistic Regression}—which proved to be a remarkably strong runner-up, holding the \#3 rank across the 0.7 to 1.0 weighting profiles and the \#2 rank at 0.5—is a highly transparent linear model. It provides exact equations and odds ratios, allowing engineers to directly quantify how a 1-unit change in a specific sensor's reading shifts the mathematical probability of a defect. 
-
-\textbf{Final Recommendation:} If absolute maximum defect detection is required regardless of system opacity, \textbf{CatBoost (Random Undersampled, 90/10 split)} is the clear choice. However, if stakeholders require a transparent, explainable algorithm to guide manufacturing adjustments and understand system failures, \textbf{Logistic Regression} is a stellar alternative that sacrifices only a fractional margin of predictive ability for complete interpretability.
-
+This clarity comes from the fact that logistic regression represents predictions as a weighted combination of input features, where each factor has a direct and interpretable contribution. In contrast, boosting models combine many decision rules across multiple trees, creating more complex interactions that are harder to interpret at a glance. While these models are often more powerful, their structure can obscure the overall reasoning process. By remaining relatively simple, logistic regression allows experts to more easily understand which factors influence defects, without relying heavily on additional interpretation tools.
 
 \section{Conclusion and Future Work}
 
 \subsection{Our Recommended Model}
+
+Our recommended model across all FN weights is Class-weighted Logistic Regression with a 80/20 split.
+
+\begin{itemize}
+    \item \textbf{Performance:} Consistently achieves top-tier results, ranking first for $50\%$ and $60\%$ weights and at least second across all other categories.
+    \item \textbf{Interpretability:} Provides greater transparency and feature insight than AdaBoost, which is the only model to exceed its performance at weights $\ge 70\%$.
+\end{itemize}
 
 \subsection{Limitations of Our Study}
 This study has several limitations that are relevant within the report. First, the dataset is extremely imbalanced, with only 458 defective samples out of nearly 230,000 observations. While various imbalance-handling strategies were applied, such a low defect rate makes it difficult for models to fully learn the characteristics of the minority class, potentially limiting generalization to new data.
