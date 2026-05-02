@@ -329,6 +329,13 @@ All models other than logistic regression that ranked within the top 10 for each
 
 This clarity comes from the fact that logistic regression represents predictions as a weighted combination of input features, where each factor has a direct and interpretable contribution. In contrast, boosting models combine many decision rules across multiple trees, creating more complex interactions that are harder to interpret at a glance. While these models are often more powerful, their structure can obscure the overall reasoning process. By remaining relatively simple, logistic regression allows experts to more easily understand which factors influence defects, without relying heavily on additional interpretation tools.
 
+\subsection{Secondary Metric Comparison}
+
+Secondary metrics were reviewed to confirm whether the top-ranked models under the FN \& FP Score also performed well under standard imbalanced-classification measures. Recall, precision, F1-minority, PR-AUC, and ROC-AUC comparisons are shown in Appendix B, Figures \ref{fig:recall_precision_tradeoff}--\ref{fig:peak_recall_model}.
+
+As shown in Figure \ref{fig:peak_recall_model}, AdaBoost with random undersampling achieved the highest peak recall at 0.9545. Class-weighted Logistic Regression followed closely at 0.9432, while LightGBM, XGBoost, and CatBoost each reached 0.9318 under their best configurations. This means the recommended Logistic Regression model gave up only about 0.0113 recall compared with the strongest recall model, while maintaining much stronger interpretability. The recall heatmap in Figure \ref{fig:recall_heatmap} also shows that random undersampling produced the strongest recall for several ensemble models, including AdaBoost, CatBoost, XGBoost, and LightGBM. However, Logistic Regression performed best with class weighting, suggesting that adjusting the learning penalty was more effective for the linear model than changing the sample distribution.
+
+The recall-versus-precision plot in Figure \ref{fig:recall_precision_tradeoff} shows why recall alone was not enough to select the final model. Several high-recall configurations had noticeably lower precision, meaning they detected many defective samples but also produced more false alarms. The strongest 80/20 class-weighted Logistic Regression configuration achieved recall of 0.9432, precision of 0.0647, F1-minority of 0.1212, PR-AUC of 0.8019, and ROC-AUC of 0.9880. A similar 90/10 class-weighted Logistic Regression configuration had slightly lower recall at 0.9318, but higher precision at 0.0858 and higher F1-minority at 0.1571. Overall, the secondary metrics support the final recommendation because Logistic Regression remained competitive across standard minority-class metrics while remaining easier to interpret than the strongest boosting models.
 \section{Conclusion and Future Work}
 
 \subsection{Our Recommended Model}
@@ -491,5 +498,35 @@ The following bar charts include the top 10 scoring models for each False Negati
     \caption{Model ranking results using the custom FN \& FP Score.}
     \label{fig:results}
 \end{figure}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/recall_vs_precision_scatter.png}
+    \caption{Recall and precision trade-off across model and sampling combinations. Higher recall indicates stronger defect detection, while lower precision indicates more false alarms.}
+    \label{fig:recall_precision_tradeoff}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.80\textwidth]{figures/radar_top4_metrics.png}
+    \caption{Multi-metric comparison of the top model configurations using recall, precision, F1-minority, PR-AUC, and ROC-AUC.}
+    \label{fig:radar_metrics}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.90\textwidth]{figures/recall_heatmap_model_sampler.png}
+    \caption{Recall heatmap by model type and sampling strategy. This figure highlights which model-sampler combinations were most effective at detecting defective samples.}
+    \label{fig:recall_heatmap}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/peak_recall_by_model.png}
+    \caption{Peak recall achieved by each model type across tested sampling strategies and split ratios.}
+    \label{fig:peak_recall_model}
+\end{figure}
+
 
 \end{document}
